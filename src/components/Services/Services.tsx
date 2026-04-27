@@ -56,13 +56,13 @@ const ServiceCard = ({
 }) => (
   <div
     data-gsap={gsap}
-    className="rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] min-h-56 lg:min-h-0"
+    className="rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] min-h-56 lg:min-h-64"
     style={{ height: '100%' }}
   >
     <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
       {title}
     </h3>
-    <p className="text-md lg:text-lg leading-[1.65] text-white/50 ">
+    <p className="text-md lg:text-lg leading-[1.65] text-white/50">
       {description}
     </p>
   </div>
@@ -80,8 +80,7 @@ const FeaturedCard = ({
   <div
     ref={cardRef}
     data-gsap="fade-up"
-    className="rounded-[20px] border border-gold/40 bg-gold w-full p-[22px_26px_28px] min-h-56 lg:min-h-0"
-    style={{ minHeight: '420px' }}
+    className="rounded-2xl border border-gold/40 bg-gold w-full p-[22px_26px_28px] min-h-0 md:min-h-105"
   >
     <div className="flex items-center gap-1.5 mb-2">
       <div className="w-5.5 h-5.5 rounded-full bg-green flex items-center justify-center text-gold">
@@ -94,7 +93,7 @@ const FeaturedCard = ({
     <h3 className="display-name text-xl tracking-[0.02em] text-green mb-2">
       {title}
     </h3>
-    <p className="text-md lg:text-lg leading-[1.65] text-white/50">
+    <p className="text-md lg:text-lg leading-[1.65] text-green/65">
       {description}
     </p>
   </div>
@@ -187,12 +186,11 @@ const Services = () => {
           </div>
           <h2
             data-gsap="fade-up"
-            className="display-lg text-green text-7xl"
+            className="display-lg text-green"
             style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)' }}
           >
             Nuestros <span className="text-gold">Servicios</span>
           </h2>
-
           <p
             data-gsap="fade-up"
             className="mt-4 text-green/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto"
@@ -203,6 +201,7 @@ const Services = () => {
           </p>
         </div>
 
+        {/* MOBILE */}
         <div className="lg:hidden flex flex-col gap-4">
           <div className="flex justify-center mb-2">
             <img
@@ -213,20 +212,23 @@ const Services = () => {
           </div>
           <FeaturedCard {...FEATURED} />
           {[...LEFT, ...RIGHT].map(s => (
-            <ServiceCard key={s.title} {...s} size="lg" gsap="fade-up" />
+            <ServiceCard key={s.title} {...s} gsap="fade-up" />
           ))}
         </div>
 
+        {/* DESKTOP — cols verdes usan flex con flex-1 para que las cards se estiren igual */}
         <div
           className="hidden lg:grid items-start"
           style={{ gridTemplateColumns: '1fr 320px 1fr', gap: '0 24px' }}
         >
+          {/* Col 1 — flex col con gap, cards se estiran */}
           <div className="flex flex-col gap-10">
             {LEFT.map(s => (
               <ServiceCard key={s.title} {...s} gsap="fade-right" />
             ))}
           </div>
 
+          {/* Col 2 — card dorada */}
           <div className="flex flex-col items-center">
             <FeaturedCard {...FEATURED} cardRef={cardRef} />
             <div style={{ height: '200px' }} />
@@ -235,6 +237,7 @@ const Services = () => {
             </p>
           </div>
 
+          {/* Col 3 */}
           <div className="flex flex-col gap-10">
             {RIGHT.map(s => (
               <ServiceCard key={s.title} {...s} gsap="fade-left" />
