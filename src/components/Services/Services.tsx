@@ -150,7 +150,7 @@ const Services = () => {
 
       <div
         ref={toothRef}
-        className="tooth-float hidden lg:block pointer-events-none z-50"
+        className="tooth-float hidden lg:block pointer-events-none z-20"
         style={{
           position: 'absolute',
           width: '300px',
