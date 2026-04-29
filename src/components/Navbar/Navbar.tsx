@@ -5,7 +5,6 @@ import logoBlanco from '../../assets/logo_blanco.svg'
 
 const LINKS = [
   { label: 'Servicios', href: '#servicios' },
-  { label: 'Nosotros', href: '#nosotros' },
   { label: 'Equipo', href: '#equipo' },
   { label: 'Testimonios', href: '#testimonios' },
   { label: 'Contacto', href: '#contacto' }
