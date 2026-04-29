@@ -19,7 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     gsap.fromTo(
       navRef.current,
-      { y: -100, opacity: 0 },
+      { y: -200, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, delay: 0.5, ease: 'power1.out' }
     )
   }, [])
