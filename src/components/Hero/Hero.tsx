@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
-import team from '../../assets/team.svg'
+import team from '../../assets/team.webp'
 
 const STATS = [
   { label: 'Pacientes satisfechos', value: 10000, suffix: '+', prefix: '' },
