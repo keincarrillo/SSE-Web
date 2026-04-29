@@ -1,6 +1,6 @@
 import { useRef, useEffect, type RefObject } from 'react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
-import tooth from '../../assets/tooth.svg'
+import tooth from '../../assets/tooth.webp'
 
 const LEFT = [
   {
