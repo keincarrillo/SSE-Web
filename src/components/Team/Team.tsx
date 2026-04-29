@@ -1,12 +1,11 @@
-// Team.tsx
 import type { RefObject } from 'react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
-import profesional1 from '../../assets/profesional1.svg'
-import profesional2 from '../../assets/profesional2.svg'
-import profesional3 from '../../assets/profesional3.svg'
-import profesional4 from '../../assets/profesional4.svg'
-import banner1 from '../../assets/banner1.svg'
-import banner2 from '../../assets/banner2.svg'
+import profesional1 from '../../assets/profesional1.webp'
+import profesional2 from '../../assets/profesional2.webp'
+import profesional3 from '../../assets/profesional3.webp'
+import profesional4 from '../../assets/profesional4.webp'
+import banner1 from '../../assets/banner1.webp'
+import banner2 from '../../assets/banner2.webp'
 
 const TEAM = [
   {
