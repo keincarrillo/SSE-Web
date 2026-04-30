@@ -116,7 +116,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-linear-to-b from-green-dark/70 via-green/50 to-green-dark/80" />
       </div>
 
-      <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center px-6 md:px-10 pb-20 pt-30 md:pt-0">
+      <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center px-6 md:px-10 md:pb-42 pt-30 md:pt-0">
         <div
           ref={tagRef}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-6"
@@ -152,7 +152,7 @@ const Hero = () => {
 
       {/* Barra de stats */}
       <div ref={barRef} className="relative z-20 w-full bg-gold">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-3 md:py-4 flex flex-col sm:flex-row items-center justify-around divide-y sm:divide-y-0 sm:divide-x divide-black/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-1 md:py-2 flex flex-col sm:flex-row items-center justify-around divide-y sm:divide-y-0 sm:divide-x divide-black/10">
           {STATS.map(s => (
             <div
               key={s.label}
@@ -163,7 +163,7 @@ const Hero = () => {
                 <AnimatedNumber target={s.value} active={statsActive} />
                 {s.suffix}
               </span>
-              <span className="font-semibold text-white text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-center">
+              <span className="font-semibold text-white text-md sm:text-xs tracking-[0.15em] uppercase text-center">
                 {s.label}
               </span>
             </div>
