@@ -93,7 +93,6 @@ const Hero = () => {
           { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
           '-=0.2'
         )
-        // dispara el conteo justo cuando la barra termina de animarse
         .call(() => setStatsActive(true))
     }, sectionRef)
     return () => ctx.revert()
@@ -116,7 +115,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-linear-to-b from-green-dark/70 via-green/50 to-green-dark/80" />
       </div>
 
-      <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center py-4 px-6 md:px-10 md:pb-42 lg:pb-26 pt-30 md:pt-0">
+      <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center py-0 px-6 md:px-10 md:pb-42 lg:pb-26 pt-30 md:pt-0 md:mb-8">
         <div
           ref={tagRef}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-6"
@@ -132,7 +131,7 @@ const Hero = () => {
 
         <p
           ref={subRef}
-          className="text-white/70 text-base leading-relaxed max-w-2xl mb-10 text-justify md:text-center md:text-lg"
+          className="text-white/70 text-base leading-relaxed max-w-2xl mb-2 text-justify md:text-center md:text-lg"
         >
           Somos un equipo enfocado en la estética y salud dental, creando
           sonrisas naturales y armónicas con tratamientos personalizados y el
@@ -152,18 +151,18 @@ const Hero = () => {
 
       {/* Barra de stats */}
       <div ref={barRef} className="relative z-20 w-full bg-gold">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-1 md:py-2 flex flex-col sm:flex-row items-center justify-around divide-y sm:divide-y-0 sm:divide-x divide-black/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-1 md:py-2 flex flex-col sm:flex-row items-center justify-center divide-y sm:divide-y-0 sm:divide-x divide-black/10 md:divide-x-0 md:gap-16 lg:gap-30">
           {STATS.map(s => (
             <div
               key={s.label}
               className="flex flex-col items-center gap-0.5 px-2 sm:px-6 py-2 sm:py-0 w-full sm:w-auto"
             >
-              <span className="display-name text-green-dark font-black text-2xl sm:text-2xl md:text-4xl tabular-nums leading-none">
+              <span className="display-name text-green-dark font-black text-md sm:text-2xl md:text-4xl tabular-nums leading-none">
                 {s.prefix}
                 <AnimatedNumber target={s.value} active={statsActive} />
                 {s.suffix}
               </span>
-              <span className="font-semibold text-white text-md sm:text-xs tracking-[0.15em] uppercase text-center">
+              <span className="font-semibold text-white text-xs sm:text-xs tracking-[0.15em] uppercase text-center">
                 {s.label}
               </span>
             </div>

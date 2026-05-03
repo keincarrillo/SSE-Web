@@ -1,4 +1,4 @@
-import type { RefObject } from 'react'
+import { useState, useRef, type RefObject } from 'react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import profesional1 from '../../assets/profesional1.webp'
 import profesional2 from '../../assets/profesional2.webp'
@@ -6,13 +6,15 @@ import profesional3 from '../../assets/profesional3.webp'
 import profesional4 from '../../assets/profesional4.webp'
 import banner1 from '../../assets/banner1.webp'
 import banner2 from '../../assets/banner2.webp'
+import profesional1green from '../../assets/profesional1green.webp'
 
 const TEAM = [
   {
     id: 1,
     name: 'Dr. [Nombre]',
     specialty: 'Director & Implantólogo',
-    img: profesional1
+    img: profesional1,
+    mobileImg: profesional1green
   },
   {
     id: 2,
@@ -34,6 +36,174 @@ const TEAM = [
   }
 ]
 
+const ChevronLeft = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M15 18l-6-6 6-6" />
+  </svg>
+)
+
+const ChevronRight = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+)
+
+/* ─── Tarjeta individual reutilizable ─── */
+const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
+  <div
+    className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col"
+    style={{ minHeight: 'clamp(260px, 70vw, 400px)' }}
+  >
+    <div
+      className="relative flex-1 overflow-hidden"
+      style={{
+        background: `
+          radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.5) 0%, transparent 55%),
+          radial-gradient(ellipse at 90% 5%,  rgba(212,175,55,0.25) 0%, transparent 45%),
+          linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)
+        `
+      }}
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, rgba(212,175,55,0.7) 1.5px, transparent 1.5px)',
+          backgroundSize: '8px 8px',
+          opacity: 0.5
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10"
+        style={{
+          height: '2px',
+          background:
+            'linear-gradient(to right, transparent, rgba(212,175,55,0.6) 40%, rgba(212,175,55,0.6) 60%, transparent)'
+        }}
+      />
+
+      {/* Imagen móvil */}
+      {member.mobileImg && (
+        <img
+          src={member.mobileImg}
+          alt={member.name}
+          className="relative w-full h-full object-cover object-top sm:hidden"
+        />
+      )}
+      {/* Imagen normal */}
+      <img
+        src={member.img}
+        alt={member.name}
+        className={`relative w-full h-full object-cover object-top ${member.mobileImg ? 'hidden sm:block' : ''}`}
+      />
+    </div>
+
+    <div className="px-3 py-2">
+      <span
+        className="block text-gold uppercase font-semibold mb-1 tracking-widest"
+        style={{ fontSize: 'clamp(7px, 1.8vw, 10px)' }}
+      >
+        {member.specialty}
+      </span>
+      <h3
+        className="text-white font-bold leading-tight"
+        style={{ fontSize: 'clamp(11px, 2.5vw, 17px)' }}
+      >
+        {member.name}
+      </h3>
+    </div>
+  </div>
+)
+
+/* ─── Carrusel móvil ─── */
+const MobileCarousel = () => {
+  const [current, setCurrent] = useState(0)
+  const startXRef = useRef(0)
+  const total = TEAM.length
+
+  const goTo = (n: number) => setCurrent(((n % total) + total) % total)
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startXRef.current = e.touches[0].clientX
+  }
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = startXRef.current - e.changedTouches[0].clientX
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1)
+  }
+
+  return (
+    <div className="sm:hidden">
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-300 ease-in-out"
+          style={{ transform: `translateX(-${current * 100}%)` }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {TEAM.map(member => (
+            <div key={member.id} className="min-w-full">
+              <DoctorCard member={member} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-1.5 mt-4">
+        {TEAM.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Ir a doctor ${i + 1}`}
+            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+              i === current ? 'bg-gold' : 'bg-white/20'
+            }`}
+          />
+        ))}
+      </div>
+
+      <div className="flex items-center justify-between mt-4">
+        <button
+          onClick={() => goTo(current - 1)}
+          className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+          aria-label="Anterior"
+        >
+          <ChevronLeft />
+        </button>
+        <span className="text-white/45 text-sm font-medium">
+          {current + 1} / {total}
+        </span>
+        <button
+          onClick={() => goTo(current + 1)}
+          className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+          aria-label="Siguiente"
+        >
+          <ChevronRight />
+        </button>
+      </div>
+    </div>
+  )
+}
+
+/* ─── Sección principal ─── */
 export default function Team() {
   const ref = useScrollReveal({ stagger: 0.12 })
 
@@ -55,68 +225,10 @@ export default function Team() {
           </div>
         </div>
 
-        {/* ── Tarjeta principal — MÓVIL: card normal, SM+: layout especial ── */}
+        {/* ── MÓVIL: carrusel con los 4 doctores ── */}
+        <MobileCarousel />
 
-        {/* Card estilo normal — solo móvil */}
-        <div
-          data-gsap="fade-up"
-          className="sm:hidden relative rounded-2xl border border-white/20 overflow-hidden flex flex-col mb-4"
-          style={{ minHeight: 'clamp(110px, 30vw, 320px)' }}
-        >
-          {/* Contenedor de IMAGEN */}
-          <div
-            className="relative flex-1 overflow-hidden"
-            style={{
-              background: `
-                radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.5) 0%, transparent 55%),
-                radial-gradient(ellipse at 90% 5%,  rgba(212,175,55,0.25) 0%, transparent 45%),
-                linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)
-              `
-            }}
-          >
-            {/* Fondo de puntos */}
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage:
-                  'radial-gradient(circle, rgba(212,175,55,0.7) 1.5px, transparent 1.5px)',
-                backgroundSize: '8px 8px',
-                opacity: 0.5
-              }}
-            />
-            {/* Línea dorada inferior */}
-            <div
-              className="absolute bottom-0 left-0 right-0 z-10"
-              style={{
-                height: '2px',
-                background:
-                  'linear-gradient(to right, transparent, rgba(212,175,55,0.6) 40%, rgba(212,175,55,0.6) 60%, transparent)'
-              }}
-            />
-            <img
-              src={profesional1}
-              alt={TEAM[0].name}
-              className="relative w-full h-full object-cover object-top"
-            />
-          </div>
-          {/* Texto */}
-          <div className="px-3 py-2">
-            <span
-              className="block text-gold uppercase font-semibold mb-1 tracking-widest"
-              style={{ fontSize: 'clamp(7px, 1.8vw, 10px)' }}
-            >
-              {TEAM[0].specialty}
-            </span>
-            <h3
-              className="text-white font-bold leading-tight"
-              style={{ fontSize: 'clamp(11px, 2.5vw, 17px)' }}
-            >
-              {TEAM[0].name}
-            </h3>
-          </div>
-        </div>
-
-        {/* Layout especial — sm+ (tablet y desktop) */}
+        {/* ── SM+: tarjeta principal grande ── */}
         <div
           data-gsap="fade-up"
           className="hidden sm:block relative mb-10 lg:mt-10 overflow-visible"
@@ -185,7 +297,7 @@ export default function Team() {
               </div>
             </div>
 
-            {/* Doctor TABLET — dentro de la card */}
+            {/* Doctor TABLET */}
             <div className="lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 w-4/5 sm:w-2/3 h-full">
               <img
                 src={profesional1}
@@ -208,8 +320,8 @@ export default function Team() {
           </div>
         </div>
 
-        {/* ── Grid de doctores — 1 col móvil, 3 cols tablet/desktop ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* ── SM+: grid de 3 doctores restantes ── */}
+        <div className="hidden sm:grid sm:grid-cols-3 gap-4">
           {TEAM.slice(1).map(m => (
             <div
               key={m.id}
@@ -217,7 +329,6 @@ export default function Team() {
               className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col"
               style={{ minHeight: 'clamp(110px, 30vw, 320px)' }}
             >
-              {/* Contenedor de IMAGEN */}
               <div
                 className="relative flex-1 overflow-hidden"
                 style={{
@@ -228,7 +339,6 @@ export default function Team() {
                   `
                 }}
               >
-                {/* Fondo de puntos */}
                 <div
                   className="absolute inset-0"
                   style={{
@@ -238,7 +348,6 @@ export default function Team() {
                     opacity: 0.5
                   }}
                 />
-                {/* Línea dorada inferior */}
                 <div
                   className="absolute bottom-0 left-0 right-0"
                   style={{
@@ -253,8 +362,6 @@ export default function Team() {
                   className="relative w-full h-full object-cover object-top"
                 />
               </div>
-
-              {/* Contenedor de TEXTO */}
               <div className="px-3 py-2 sm:px-4 sm:py-3">
                 <span
                   className="block text-gold uppercase font-semibold mb-1 tracking-widest"
