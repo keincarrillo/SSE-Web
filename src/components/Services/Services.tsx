@@ -40,9 +40,9 @@ const RIGHT = [
     icon: toothFigure
   },
   {
-    title: 'Resinas estéticas',
+    title: 'Valoración y limpieza dental',
     description:
-      'Procedimiento que permite reparar o mejorar dientes con fracturas, desgaste o imperfecciones, logrando un resultado natural.',
+      'Evaluación de tu sonrisa para recomendar el tratamiento ideal, seguida de una limpieza que elimina placa y sarro para mantener dientes más sanos.',
     size: 'sm' as const,
     icon: valuation
   }
@@ -180,11 +180,13 @@ const ServiceCardRight = ({
 const ServiceCard = ({
   title,
   description,
+  icon,
   gsap
 }: {
   title: string
   description: string
   size: 'sm' | 'lg'
+  icon: string
   gsap: string
 }) => (
   <div
@@ -192,10 +194,22 @@ const ServiceCard = ({
     className="rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] min-h-56 lg:min-h-64"
     style={{ height: '100%' }}
   >
-    <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: '16px'
+      }}
+    >
+      <div className="w-18 h-18 rounded-full bg-gold/25 border-2 border-gold/60 flex items-center justify-center">
+        <img src={icon} alt="" className="w-13 h-13 object-contain" />
+      </div>
+    </div>
+
+    <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2 text-center">
       {title}
     </h3>
-    <p className="text-md lg:text-lg leading-[1.65] text-white/50">
+    <p className="text-md lg:text-lg leading-[1.65] text-white/50 text-center">
       {description}
     </p>
   </div>
@@ -216,15 +230,32 @@ const FeaturedCard = ({
   <div
     ref={cardRef}
     data-gsap="fade-up"
-    className="relative rounded-2xl border border-gold/40 bg-gold w-full p-[22px_26px_28px] pt-18 min-h-0 md:min-h-105"
+    className="relative rounded-2xl border border-gold/40 bg-gold w-full p-[22px_26px_28px] min-h-0 md:min-h-105"
   >
     {icon && (
-      <div
-        className="icon-pulse-green absolute top-0 left-1/2 z-20 w-32 h-32 rounded-full bg-green/20 border-2 border-green/50 flex items-center justify-center"
-        style={{ transform: 'translate(-50%, -50%)' }}
-      >
-        <img src={icon} alt="" className="w-20 h-20 object-contain" />
-      </div>
+      <>
+        {/* Desktop: posición absoluta original */}
+        <div
+          className="icon-pulse-green hidden lg:flex absolute top-0 left-1/2 z-20 w-32 h-32 rounded-full bg-green/20 border-2 border-green/50 items-center justify-center"
+          style={{ transform: 'translate(-50%, -50%)' }}
+        >
+          <img src={icon} alt="" className="w-20 h-20 object-contain" />
+        </div>
+
+        {/* Móvil: icono centrado en flujo normal */}
+        <div
+          className="lg:hidden"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '16px'
+          }}
+        >
+          <div className="w-18 h-18 rounded-full bg-green/20 border-2 border-green/50 flex items-center justify-center">
+            <img src={icon} alt="" className="w-13 h-13 object-contain" />
+          </div>
+        </div>
+      </>
     )}
 
     <h3 className="display-name text-xl tracking-[0.02em] text-green mb-2 text-center">
@@ -276,12 +307,17 @@ const MobileCarousel = () => {
           {ALL_MOBILE.map((s, i) => (
             <div key={i} className="min-w-full px-4">
               {s.isFeatured ? (
-                <FeaturedCard title={s.title} description={s.description} />
+                <FeaturedCard
+                  title={s.title}
+                  description={s.description}
+                  icon={s.icon}
+                />
               ) : (
                 <ServiceCard
                   title={s.title}
                   description={s.description}
                   size={(s as { size: 'sm' | 'lg' }).size}
+                  icon={(s as { icon: string }).icon}
                   gsap="fade-up"
                 />
               )}
@@ -426,7 +462,7 @@ const Services = () => {
         <MobileCarousel />
 
         <div
-          className="hidden lg:grid items-start mt-17"
+          className="hidden lg:grid items-start mt-22"
           style={{
             gridTemplateColumns: '1fr 320px 1fr',
             gap: '0 24px',
