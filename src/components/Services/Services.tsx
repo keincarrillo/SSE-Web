@@ -1,26 +1,34 @@
-import { useRef, useEffect, type RefObject } from 'react'
+import { useRef, useEffect, useState, type RefObject } from 'react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import tooth from '../../assets/tooth.webp'
+import brackets from '../../assets/figures/brackets.svg'
+import smile from '../../assets/figures/smile.svg'
+import star from '../../assets/figures/star.svg'
+import toothFigure from '../../assets/figures/tooth.svg'
+import valuation from '../../assets/figures/valuation.svg'
 
 const LEFT = [
   {
     title: 'Prótesis',
     description:
       'Tratamientos que permiten reemplazar o restaurar piezas dentales perdidas o dañadas, devolviendo función, estética y seguridad al sonreír.',
-    size: 'sm' as const
+    size: 'sm' as const,
+    icon: smile
   },
   {
     title: 'Ortodoncia',
     description:
       'Procedimientos enfocados en corregir la posición de los dientes y la mordida, mejorando tanto la estética como la funcionalidad de la sonrisa.',
-    size: 'lg' as const
+    size: 'lg' as const,
+    icon: brackets
   }
 ]
 
 const FEATURED = {
-  title: 'Diseño de sonrisa (carillas)',
+  title: 'Diseño de sonrisa ',
   description:
-    'Tratamiento estético enfocado en mejorar la forma, tamaño y color de los dientes para lograr una sonrisa más armónica y natural, adaptada a cada paciente.'
+    'Tratamiento estético enfocado en mejorar la forma, tamaño y color de los dientes para lograr una sonrisa más armónica y natural, adaptada a cada paciente.',
+  icon: star
 }
 
 const RIGHT = [
@@ -28,22 +36,147 @@ const RIGHT = [
     title: 'Blanqueamiento dental',
     description:
       'Tratamiento que aclara el tono de los dientes y devuelve luminosidad a la sonrisa de forma segura y controlada.',
-    size: 'lg' as const
+    size: 'lg' as const,
+    icon: toothFigure
   },
   {
     title: 'Resinas estéticas',
     description:
       'Procedimiento que permite reparar o mejorar dientes con fracturas, desgaste o imperfecciones, logrando un resultado natural.',
-    size: 'sm' as const
+    size: 'sm' as const,
+    icon: valuation
   }
 ]
 
-const StarIcon = () => (
-  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+const ALL_MOBILE = [
+  { ...FEATURED, isFeatured: true as const },
+  ...LEFT.map(s => ({ ...s, isFeatured: false as const })),
+  ...RIGHT.map(s => ({ ...s, isFeatured: false as const }))
+]
+
+const ChevronLeft = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M15 18l-6-6 6-6" />
   </svg>
 )
 
+const ChevronRight = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+)
+
+const PulseStyles = () => (
+  <style>{`
+    @keyframes floatTooth {
+      0%, 100% { transform: translateX(-50%) translateY(0px); }
+      50%       { transform: translateX(-50%) translateY(-14px); }
+    }
+    .tooth-float { animation: floatTooth 4s ease-in-out infinite; }
+
+    @keyframes pulseGold {
+      0%   { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.55); }
+      70%  { box-shadow: 0 0 0 16px rgba(201, 168, 76, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+    .icon-pulse-gold { animation: pulseGold 2.2s ease-out infinite; }
+
+    @keyframes pulseGreen {
+      0%   { box-shadow: 0 0 0 0 rgba(30, 70, 32, 0.45); }
+      70%  { box-shadow: 0 0 0 16px rgba(30, 70, 32, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(30, 70, 32, 0); }
+    }
+    .icon-pulse-green { animation: pulseGreen 2.2s ease-out infinite; }
+  `}</style>
+)
+
+/* ─── Card verde izquierda ─── */
+const ServiceCardLeft = ({
+  title,
+  description,
+  icon,
+  gsap
+}: {
+  title: string
+  description: string
+  size: 'sm' | 'lg'
+  icon: string
+  gsap: string
+}) => (
+  <div
+    data-gsap={gsap}
+    className="relative rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] pl-20 min-h-56 lg:min-h-64"
+    style={{ height: '100%' }}
+  >
+    <div
+      className="icon-pulse-gold absolute left-0 top-1/2 z-20 w-32 h-32 rounded-full bg-gold/25 border-2 border-gold/60 flex items-center justify-center"
+      style={{ transform: 'translate(-50%, -50%)' }}
+    >
+      <img src={icon} alt="" className="w-20 h-20 object-contain" />
+    </div>
+
+    <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
+      {title}
+    </h3>
+    <p className="text-md lg:text-lg leading-[1.65] text-white/50">
+      {description}
+    </p>
+  </div>
+)
+
+/* ─── Card verde derecha ─── */
+const ServiceCardRight = ({
+  title,
+  description,
+  icon,
+  gsap
+}: {
+  title: string
+  description: string
+  size: 'sm' | 'lg'
+  icon: string
+  gsap: string
+}) => (
+  <div
+    data-gsap={gsap}
+    className="relative rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] pr-20 min-h-56 lg:min-h-64"
+    style={{ height: '100%' }}
+  >
+    <div
+      className="icon-pulse-gold absolute right-0 top-1/2 z-20 w-32 h-32 rounded-full bg-gold/25 border-2 border-gold/60 flex items-center justify-center"
+      style={{ transform: 'translate(50%, -50%)' }}
+    >
+      <img src={icon} alt="" className="w-20 h-20 object-contain" />
+    </div>
+
+    <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
+      {title}
+    </h3>
+    <p className="text-md lg:text-lg leading-[1.65] text-white/50">
+      {description}
+    </p>
+  </div>
+)
+
+/* ─── Card móvil genérica ─── */
 const ServiceCard = ({
   title,
   description,
@@ -68,37 +201,132 @@ const ServiceCard = ({
   </div>
 )
 
+/* ─── Card dorada central ─── */
 const FeaturedCard = ({
   title,
   description,
+  icon,
   cardRef
 }: {
   title: string
   description: string
+  icon?: string
   cardRef?: RefObject<HTMLDivElement | null>
 }) => (
   <div
     ref={cardRef}
     data-gsap="fade-up"
-    className="rounded-2xl border border-gold/40 bg-gold w-full p-[22px_26px_28px] min-h-0 md:min-h-105"
+    className="relative rounded-2xl border border-gold/40 bg-gold w-full p-[22px_26px_28px] pt-18 min-h-0 md:min-h-105"
   >
-    <div className="flex items-center gap-1.5 mb-2">
-      <div className="w-5.5 h-5.5 rounded-full bg-green flex items-center justify-center text-gold">
-        <StarIcon />
+    {icon && (
+      <div
+        className="icon-pulse-green absolute top-0 left-1/2 z-20 w-32 h-32 rounded-full bg-green/20 border-2 border-green/50 flex items-center justify-center"
+        style={{ transform: 'translate(-50%, -50%)' }}
+      >
+        <img src={icon} alt="" className="w-20 h-20 object-contain" />
       </div>
-      <span className="text-green text-xs font-bold tracking-[0.2em] uppercase">
-        Destacado
-      </span>
-    </div>
-    <h3 className="display-name text-xl tracking-[0.02em] text-green mb-2">
+    )}
+
+    <h3 className="display-name text-xl tracking-[0.02em] text-green mb-2 text-center">
       {title}
     </h3>
-    <p className="text-md lg:text-lg leading-[1.65] text-green/65">
+    <p className="text-md lg:text-lg leading-[1.65] text-green/65 text-center">
       {description}
     </p>
   </div>
 )
 
+/* ─── Mobile Carousel ─── */
+const MobileCarousel = () => {
+  const [current, setCurrent] = useState(0)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const startXRef = useRef(0)
+  const total = ALL_MOBILE.length
+
+  const goTo = (n: number) => {
+    setCurrent(((n % total) + total) % total)
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startXRef.current = e.touches[0].clientX
+  }
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = startXRef.current - e.changedTouches[0].clientX
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1)
+  }
+
+  return (
+    <div className="lg:hidden">
+      <div className="flex justify-center mb-6">
+        <img
+          src={tooth}
+          alt="Diente"
+          className="w-48 h-48 object-contain drop-shadow-2xl"
+        />
+      </div>
+
+      <div className="overflow-hidden">
+        <div
+          ref={trackRef}
+          className="flex transition-transform duration-300 ease-in-out"
+          style={{ transform: `translateX(-${current * 100}%)` }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {ALL_MOBILE.map((s, i) => (
+            <div key={i} className="min-w-full px-4">
+              {s.isFeatured ? (
+                <FeaturedCard title={s.title} description={s.description} />
+              ) : (
+                <ServiceCard
+                  title={s.title}
+                  description={s.description}
+                  size={(s as { size: 'sm' | 'lg' }).size}
+                  gsap="fade-up"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between px-4 mt-4">
+        <button
+          onClick={() => goTo(current - 1)}
+          className="w-12 h-12 rounded-full border border-green/20 flex items-center justify-center text-green hover:bg-green/5 transition-colors"
+          aria-label="Anterior"
+        >
+          <ChevronLeft />
+        </button>
+        <span className="text-green/45 text-sm font-medium">
+          {current + 1} / {total}
+        </span>
+        <button
+          onClick={() => goTo(current + 1)}
+          className="w-12 h-12 rounded-full border border-green/20 flex items-center justify-center text-green hover:bg-green/5 transition-colors"
+          aria-label="Siguiente"
+        >
+          <ChevronRight />
+        </button>
+      </div>
+
+      <div className="flex justify-center gap-1.5 mt-5">
+        {ALL_MOBILE.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Ir a servicio ${i + 1}`}
+            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+              i === current ? 'bg-green' : 'bg-green/20'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ─── Main Section ─── */
 const Services = () => {
   const ref = useScrollReveal({ stagger: 0.08 })
   const sectionRef = useRef<HTMLElement>(null)
@@ -116,7 +344,7 @@ const Services = () => {
       const bottom = cardRect.bottom - sectionRect.top
 
       toothRef.current.style.left = `${centerX}px`
-      toothRef.current.style.top = `${bottom - 140}px`
+      toothRef.current.style.top = `${bottom - 110}px`
       toothRef.current.style.transform = 'translateX(-50%)'
     }
 
@@ -140,13 +368,7 @@ const Services = () => {
       id="servicios"
       className="bg-white py-10 md:py-16 lg:py-24 relative"
     >
-      <style>{`
-        @keyframes floatTooth {
-          0%, 100% { transform: translateX(-50%) translateY(0px); }
-          50%       { transform: translateX(-50%) translateY(-14px); }
-        }
-        .tooth-float { animation: floatTooth 4s ease-in-out infinite; }
-      `}</style>
+      <PulseStyles />
 
       <div
         ref={toothRef}
@@ -193,7 +415,7 @@ const Services = () => {
           </h2>
           <p
             data-gsap="fade-up"
-            className="mt-4 text-green/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto"
+            className="mt-4  text-green/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto"
           >
             Cada sonrisa es única, por eso ofrecemos tratamientos personalizados
             que combinan estética y funcionalidad para lograr resultados
@@ -201,35 +423,26 @@ const Services = () => {
           </p>
         </div>
 
-        {/* MOBILE */}
-        <div className="lg:hidden flex flex-col gap-4">
-          <div className="flex justify-center mb-2">
-            <img
-              src={tooth}
-              alt="Diente"
-              className="w-56 h-56 object-contain drop-shadow-2xl"
-            />
-          </div>
-          <FeaturedCard {...FEATURED} />
-          {[...LEFT, ...RIGHT].map(s => (
-            <ServiceCard key={s.title} {...s} gsap="fade-up" />
-          ))}
-        </div>
+        <MobileCarousel />
 
-        {/* DESKTOP — cols verdes usan flex con flex-1 para que las cards se estiren igual */}
         <div
-          className="hidden lg:grid items-start"
-          style={{ gridTemplateColumns: '1fr 320px 1fr', gap: '0 24px' }}
+          className="hidden lg:grid items-start mt-17"
+          style={{
+            gridTemplateColumns: '1fr 320px 1fr',
+            gap: '0 24px',
+            overflow: 'visible'
+          }}
         >
-          {/* Col 1 — flex col con gap, cards se estiran */}
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-10" style={{ overflow: 'visible' }}>
             {LEFT.map(s => (
-              <ServiceCard key={s.title} {...s} gsap="fade-right" />
+              <ServiceCardLeft key={s.title} {...s} gsap="fade-right" />
             ))}
           </div>
 
-          {/* Col 2 — card dorada */}
-          <div className="flex flex-col items-center">
+          <div
+            className="flex flex-col items-center"
+            style={{ overflow: 'visible' }}
+          >
             <FeaturedCard {...FEATURED} cardRef={cardRef} />
             <div style={{ height: '200px' }} />
             <p className="text-green/35 text-md font-bold tracking-[0.25em] uppercase whitespace-nowrap">
@@ -237,10 +450,9 @@ const Services = () => {
             </p>
           </div>
 
-          {/* Col 3 */}
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-10" style={{ overflow: 'visible' }}>
             {RIGHT.map(s => (
-              <ServiceCard key={s.title} {...s} gsap="fade-left" />
+              <ServiceCardRight key={s.title} {...s} gsap="fade-left" />
             ))}
           </div>
         </div>
