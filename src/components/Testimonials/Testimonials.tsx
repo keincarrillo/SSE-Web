@@ -2,28 +2,44 @@ import { useState, useRef, useEffect, type RefObject } from 'react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import consultorio from '../../assets/consultorio.webp'
 import testimony1 from '../../assets/testimony1.webp'
+import testimony2 from '../../assets/testimony2.webp'
+import testimony3 from '../../assets/testimony3.webp'
+import testimony4 from '../../assets/testimony4.webp'
 
 const TESTIMONIALS = [
   {
-    quote:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at lorem lacinia ipsum sollicitudin eleifend. Vivamus commodo.',
-    author: '[Nombre del paciente]',
-    treatment: 'Ortodoncia',
+    treatment: 'Prótesis',
+    stars: 5,
+    hook: 'Nunca pensé que volvería a sentirme cómoda al comer y sonreír.',
+    body: 'Había perdido confianza porque mi sonrisa ya no era la misma, pero con la prótesis todo cambió. El resultado fue cómodo, funcional y natural.',
+    closing: 'Ahora puedo sonreír con mucha más seguridad.',
     img: testimony1
   },
   {
-    quote:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at lorem lacinia ipsum sollicitudin eleifend. Vivamus commodo.',
-    author: '[Nombre del paciente]',
-    treatment: 'Implantes',
-    img: undefined
+    treatment: 'Carillas',
+    subtitle: 'Diseño de sonrisa',
+    stars: 5,
+    hook: 'Siempre quise mejorar mi sonrisa, pero me preocupaba que se viera artificial.',
+    body: 'Desde la valoración entendieron lo que buscaba y el resultado fue una sonrisa más armónica, sin perder naturalidad.',
+    closing: 'Me siento mucho más segura al sonreír.',
+    img: testimony2
   },
   {
-    quote:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at lorem lacinia ipsum sollicitudin eleifend. Vivamus commodo.',
-    author: '[Nombre del paciente]',
-    treatment: 'Limpieza dental',
-    img: undefined
+    treatment: 'Carillas',
+    subtitle: 'Diseño de sonrisa',
+    stars: 5,
+    hook: 'No sabía exactamente qué necesitaba, solo quería mejorar mi sonrisa.',
+    body: 'Me orientaron en todo momento y el diseño se adaptó perfecto a mi rostro. El cambio es sutil, pero hace una gran diferencia.',
+    closing: 'Ahora sonrío con más confianza.',
+    img: testimony3
+  },
+  {
+    treatment: 'Blanqueamiento',
+    stars: 5,
+    hook: 'Con el tiempo mis dientes habían perdido brillo y eso me incomodaba.',
+    body: 'Buscaba un resultado natural y el blanqueamiento fue justo lo que necesitaba.',
+    closing: 'Mi sonrisa se ve más fresca y luminosa.',
+    img: testimony4
   }
 ]
 
@@ -59,11 +75,22 @@ const ChevronRight = () => (
   </svg>
 )
 
+const Stars = ({ count }: { count: number }) => (
+  <div style={{ display: 'flex', gap: '4px', margin: '10px 0 18px' }}>
+    {Array.from({ length: count }).map((_, i) => (
+      <span key={i} style={{ color: '#c9aa65', fontSize: '18px' }}>
+        ★
+      </span>
+    ))}
+  </div>
+)
+
 const Testimonials = () => {
   const ref = useScrollReveal({ stagger: 0.1 })
   const [current, setCurrent] = useState(0)
   const startXRef = useRef(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
   const total = TESTIMONIALS.length
 
   const startTimer = () => {
@@ -94,10 +121,12 @@ const Testimonials = () => {
     if (Math.abs(diff) > 40) navigate(diff > 0 ? current + 1 : current - 1)
   }
 
-  const t = TESTIMONIALS[current]
-
   return (
-    <section ref={ref as RefObject<HTMLElement>} id="testimonios">
+    <section
+      ref={ref as RefObject<HTMLElement>}
+      id="testimonios"
+      style={{ maxWidth: '1152px', margin: '0 auto', background: '#fff' }}
+    >
       {/* ── 1. Título ── */}
       <div className="bg-white py-10 text-center">
         <span
@@ -117,213 +146,409 @@ const Testimonials = () => {
       </div>
 
       {/* ── 2. Bloque verde ── */}
-      <div className="bg-green">
-        {/* Carrusel */}
-        <div
-          style={{ position: 'relative', minHeight: '860px', overflow: 'clip' }}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
+      <div className="mx-4 md:mx-0" style={{ position: 'relative' }}>
+        {/* Flecha izquierda */}
+        <button
+          onClick={() => navigate(current - 1)}
+          aria-label="Anterior"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '-44px',
+            transform: 'translateY(-50%)',
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            border: '1.5px solid rgba(45,90,39,0.35)',
+            background: '#fff',
+            color: '#2d5a27',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 30,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.10)'
+          }}
         >
-          {/* Fondo consultorio */}
-          <img
-            src={consultorio}
-            alt=""
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              opacity: 0.35
-            }}
-          />
+          <ChevronLeft />
+        </button>
 
-          {/* Tinte verde */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundColor: '#2d5a27',
-              opacity: 0.6
-            }}
-          />
+        {/* Flecha derecha */}
+        <button
+          onClick={() => navigate(current + 1)}
+          aria-label="Siguiente"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '-44px',
+            transform: 'translateY(-50%)',
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            border: '1.5px solid rgba(45,90,39,0.35)',
+            background: '#fff',
+            color: '#2d5a27',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 30,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.10)'
+          }}
+        >
+          <ChevronRight />
+        </button>
 
-          {/* Layout flex */}
+        {/* Contenedor verde */}
+        <div
+          className="bg-green"
+          style={{ borderRadius: '20px', overflow: 'hidden' }}
+        >
           <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              minHeight: '860px',
-              width: '100%'
-            }}
+            ref={carouselRef}
+            style={{ position: 'relative', overflow: 'hidden' }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
-            {/* Foto — grande, sin recorte */}
+            {/* Fondo consultorio */}
+            <img
+              src={consultorio}
+              alt=""
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                opacity: 0.35
+              }}
+            />
+
+            {/* Tinte verde */}
             <div
               style={{
-                flexShrink: 0,
-                width: '620px',
-                height: '880px',
+                position: 'absolute',
+                inset: 0,
+                backgroundColor: '#2d5a27',
+                opacity: 0.6
+              }}
+            />
+
+            {/* Track */}
+            <div
+              style={{
+                display: 'flex',
+                width: `${total * 100}%`,
+                transform: `translateX(-${(current * 100) / total}%)`,
+                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative'
               }}
             >
-              {t.img ? (
-                <img
-                  src={t.img}
-                  alt={t.author}
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    objectPosition: 'bottom center'
-                  }}
-                />
-              ) : (
+              {TESTIMONIALS.map((t, i) => (
                 <div
+                  key={i}
                   style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '80%',
-                    borderRadius: '999px 999px 0 0',
-                    backgroundColor: 'rgba(255,255,255,0.08)'
+                    width: `${100 / total}%`,
+                    flexShrink: 0,
+                    position: 'relative'
                   }}
-                />
-              )}
+                >
+                  {/* ── Desktop ── */}
+                  <div
+                    className="hidden md:flex"
+                    style={{
+                      alignItems: 'center',
+                      minHeight: '640px',
+                      padding: '48px 56px'
+                    }}
+                  >
+                    {/* Foto */}
+                    <div
+                      style={{
+                        flexShrink: 0,
+                        width: '360px',
+                        height: '480px',
+                        borderRadius: '20px',
+                        overflow: 'hidden',
+                        border: '2px solid rgba(255,255,255,0.18)',
+                        boxShadow: '0 8px 40px rgba(0,0,0,0.35)',
+                        background: 'rgba(255,255,255,0.05)'
+                      }}
+                    >
+                      {t.img && (
+                        <img
+                          src={t.img}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'top center',
+                            display: 'block'
+                          }}
+                        />
+                      )}
+                    </div>
+
+                    {/* Texto desktop */}
+                    <div
+                      style={{
+                        flex: 1,
+                        paddingLeft: '48px',
+                        paddingRight: '16px'
+                      }}
+                    >
+                      {/* Tratamiento grande */}
+                      <p
+                        style={{
+                          fontSize: '13px',
+                          fontWeight: 600,
+                          letterSpacing: '0.2em',
+                          textTransform: 'uppercase',
+                          color: 'rgba(255,255,255,0.5)',
+                          margin: '0 0 6px 0'
+                        }}
+                      >
+                        Tratamiento
+                      </p>
+                      <h3
+                        style={{
+                          fontSize: '40px',
+                          fontWeight: 700,
+                          color: '#fff',
+                          margin: 0,
+                          lineHeight: 1.1,
+                          letterSpacing: '-0.01em'
+                        }}
+                      >
+                        {t.treatment}
+                      </h3>
+                      {t.subtitle && (
+                        <p
+                          style={{
+                            fontSize: '16px',
+                            color: 'rgba(255,255,255,0.55)',
+                            margin: '4px 0 0',
+                            fontStyle: 'italic'
+                          }}
+                        >
+                          {t.subtitle}
+                        </p>
+                      )}
+
+                      {/* Estrellas */}
+                      <Stars count={t.stars} />
+
+                      {/* Texto testimonio */}
+                      <div
+                        style={{
+                          borderRadius: '16px',
+                          padding: '24px 28px',
+                          border: '1.5px solid rgba(255,255,255,0.18)',
+                          background: 'rgba(255,255,255,0.06)'
+                        }}
+                      >
+                        <p
+                          style={{
+                            color: '#fff',
+                            fontSize: '17px',
+                            fontWeight: 500,
+                            lineHeight: 1.5,
+                            margin: '0 0 12px 0'
+                          }}
+                        >
+                          "{t.hook}"
+                        </p>
+                        <p
+                          style={{
+                            color: 'rgba(255,255,255,0.78)',
+                            fontSize: '15px',
+                            lineHeight: 1.7,
+                            margin: '0 0 12px 0'
+                          }}
+                        >
+                          {t.body}
+                        </p>
+                        <p
+                          style={{
+                            color: '#c9aa65',
+                            fontSize: '15px',
+                            fontWeight: 500,
+                            margin: 0
+                          }}
+                        >
+                          {t.closing}
+                        </p>
+                      </div>
+
+                      {/* Nombre */}
+                      <p
+                        style={{
+                          color: 'rgba(255,255,255,0.5)',
+                          fontSize: '13px',
+                          margin: '16px 0 0',
+                          letterSpacing: '0.1em'
+                        }}
+                      ></p>
+                    </div>
+                  </div>
+
+                  {/* ── Móvil ── */}
+                  <div
+                    className="flex md:hidden"
+                    style={{
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: '32px 20px 28px',
+                      gap: '0'
+                    }}
+                  >
+                    {/* Foto */}
+                    <div
+                      style={{
+                        width: '160px',
+                        height: '200px',
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        border: '2px solid rgba(255,255,255,0.18)',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                        background: 'rgba(255,255,255,0.05)',
+                        flexShrink: 0,
+                        marginBottom: '24px'
+                      }}
+                    >
+                      {t.img && (
+                        <img
+                          src={t.img}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'top center',
+                            display: 'block'
+                          }}
+                        />
+                      )}
+                    </div>
+
+                    {/* Tratamiento grande móvil */}
+                    <p
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(255,255,255,0.5)',
+                        margin: '0 0 4px 0',
+                        textAlign: 'center'
+                      }}
+                    >
+                      Tratamiento
+                    </p>
+                    <h3
+                      style={{
+                        fontSize: '30px',
+                        fontWeight: 700,
+                        color: '#fff',
+                        margin: 0,
+                        lineHeight: 1.1,
+                        textAlign: 'center'
+                      }}
+                    >
+                      {t.treatment}
+                    </h3>
+                    {t.subtitle && (
+                      <p
+                        style={{
+                          fontSize: '13px',
+                          color: 'rgba(255,255,255,0.55)',
+                          margin: '4px 0 0',
+                          fontStyle: 'italic',
+                          textAlign: 'center'
+                        }}
+                      >
+                        {t.subtitle}
+                      </p>
+                    )}
+
+                    {/* Estrellas centradas */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        gap: '4px',
+                        margin: '10px 0 18px',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      {Array.from({ length: t.stars }).map((_, i) => (
+                        <span
+                          key={i}
+                          style={{ color: '#c9aa65', fontSize: '16px' }}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Texto testimonio */}
+                    <div
+                      style={{
+                        width: '100%',
+                        borderRadius: '14px',
+                        padding: '18px 18px',
+                        border: '1.5px solid rgba(255,255,255,0.18)',
+                        background: 'rgba(255,255,255,0.06)'
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: '#fff',
+                          fontSize: '15px',
+                          fontWeight: 500,
+                          lineHeight: 1.5,
+                          margin: '0 0 10px 0'
+                        }}
+                      >
+                        "{t.hook}"
+                      </p>
+                      <p
+                        style={{
+                          color: 'rgba(255,255,255,0.78)',
+                          fontSize: '13px',
+                          lineHeight: 1.7,
+                          margin: '0 0 10px 0'
+                        }}
+                      >
+                        {t.body}
+                      </p>
+                      <p
+                        style={{
+                          color: '#c9aa65',
+                          fontSize: '13px',
+                          fontWeight: 500,
+                          margin: 0
+                        }}
+                      >
+                        {t.closing}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Tarjetas */}
+            {/* Dots */}
             <div
               style={{
-                flex: 1,
+                position: 'relative',
+                padding: '16px 0 20px',
                 display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-                paddingRight: '60px',
-                paddingLeft: '8px'
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '8px',
+                zIndex: 10
               }}
             >
-              {/* Pill nombre + estrellas */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '14px 28px',
-                  borderRadius: '999px',
-                  border: '1.5px solid rgba(255,255,255,0.85)'
-                }}
-              >
-                <span
-                  style={{ color: '#fff', fontWeight: 500, fontSize: '16px' }}
-                >
-                  {t.author}
-                </span>
-                <span
-                  style={{
-                    color: '#c9aa65',
-                    fontSize: '15px',
-                    letterSpacing: '3px'
-                  }}
-                >
-                  ★★★★★
-                </span>
-              </div>
-
-              {/* Box tratamiento + cita */}
-              <div
-                style={{
-                  borderRadius: '16px',
-                  padding: '24px 28px',
-                  border: '1.5px solid rgba(255,255,255,0.82)',
-                  minHeight: '180px'
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    letterSpacing: '0.22em',
-                    textTransform: 'uppercase',
-                    color: '#c9aa65',
-                    margin: '0 0 14px 0'
-                  }}
-                >
-                  {t.treatment}
-                </p>
-                <blockquote
-                  style={{
-                    color: 'rgba(255,255,255,0.9)',
-                    lineHeight: 1.7,
-                    fontSize: '16px',
-                    margin: 0
-                  }}
-                >
-                  "{t.quote}"
-                </blockquote>
-              </div>
-            </div>
-          </div>
-
-          {/* Barra de progreso */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '2px',
-              backgroundColor: 'rgba(255,255,255,0.1)'
-            }}
-          >
-            <div
-              key={current}
-              style={{
-                height: '100%',
-                backgroundColor: '#c9aa65',
-                transformOrigin: 'left',
-                animation: `tsBar ${INTERVAL}ms linear forwards`
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Controles */}
-        <div
-          style={{
-            width: '100%',
-            padding: '20px 40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}
-        >
-          <button
-            onClick={() => navigate(current - 1)}
-            aria-label="Anterior"
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              border: '1px solid rgba(255,255,255,0.25)',
-              background: 'transparent',
-              color: '#fff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer'
-            }}
-          >
-            <ChevronLeft />
-          </button>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ display: 'flex', gap: '6px' }}>
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
@@ -342,44 +567,9 @@ const Testimonials = () => {
                 />
               ))}
             </div>
-            <span
-              style={{
-                fontSize: '14px',
-                fontWeight: 500,
-                color: 'rgba(255,255,255,0.4)'
-              }}
-            >
-              {current + 1} / {total}
-            </span>
           </div>
-
-          <button
-            onClick={() => navigate(current + 1)}
-            aria-label="Siguiente"
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              border: '1px solid rgba(255,255,255,0.25)',
-              background: 'transparent',
-              color: '#fff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer'
-            }}
-          >
-            <ChevronRight />
-          </button>
         </div>
       </div>
-
-      <style>{`
-        @keyframes tsBar {
-          from { transform: scaleX(0); }
-          to   { transform: scaleX(1); }
-        }
-      `}</style>
     </section>
   )
 }
