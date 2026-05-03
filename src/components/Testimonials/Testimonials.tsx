@@ -25,6 +25,14 @@ const TESTIMONIALS = [
     img: testimony2
   },
   {
+    treatment: 'Blanqueamiento',
+    stars: 5,
+    hook: 'Con el tiempo mis dientes habían perdido brillo y eso me incomodaba.',
+    body: 'Buscaba un resultado natural y el blanqueamiento fue justo lo que necesitaba.',
+    closing: 'Mi sonrisa se ve más fresca y luminosa.',
+    img: testimony4
+  },
+  {
     treatment: 'Carillas',
     subtitle: 'Diseño de sonrisa',
     stars: 5,
@@ -32,14 +40,6 @@ const TESTIMONIALS = [
     body: 'Me orientaron en todo momento y el diseño se adaptó perfecto a mi rostro. El cambio es sutil, pero hace una gran diferencia.',
     closing: 'Ahora sonrío con más confianza.',
     img: testimony3
-  },
-  {
-    treatment: 'Blanqueamiento',
-    stars: 5,
-    hook: 'Con el tiempo mis dientes habían perdido brillo y eso me incomodaba.',
-    body: 'Buscaba un resultado natural y el blanqueamiento fue justo lo que necesitaba.',
-    closing: 'Mi sonrisa se ve más fresca y luminosa.',
-    img: testimony4
   }
 ]
 
