@@ -194,13 +194,7 @@ const ServiceCard = ({
     className="rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] min-h-56 lg:min-h-64"
     style={{ height: '100%' }}
   >
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginBottom: '16px'
-      }}
-    >
+    <div className="flex justify-center mb-4">
       <div className="w-18 h-18 rounded-full bg-gold/25 border-2 border-gold/60 flex items-center justify-center">
         <img src={icon} alt="" className="w-13 h-13 object-contain" />
       </div>
@@ -230,7 +224,7 @@ const FeaturedCard = ({
   <div
     ref={cardRef}
     data-gsap="fade-up"
-    className="relative rounded-2xl border border-gold/40 bg-gold w-full p-[22px_26px_28px] min-h-0 md:min-h-105"
+    className="relative rounded-2xl border border-gold/40 bg-gold w-full p-[22px_26px_28px] md:p-[75px_26px_28px] min-h-0 md:min-h-105"
   >
     {icon && (
       <>
@@ -243,16 +237,13 @@ const FeaturedCard = ({
         </div>
 
         {/* Móvil: icono centrado en flujo normal */}
-        <div
-          className="lg:hidden"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginBottom: '16px'
-          }}
-        >
-          <div className="w-18 h-18 rounded-full bg-green/20 border-2 border-green/50 flex items-center justify-center">
-            <img src={icon} alt="" className="w-13 h-13 object-contain" />
+        <div className="lg:hidden flex justify-center mb-4">
+          <div className="w-20 h-20 rounded-full bg-green/20 border-2 border-green/50 flex items-center justify-center">
+            <img
+              src={icon}
+              alt=""
+              style={{ width: '52px', height: '52px', objectFit: 'contain' }}
+            />
           </div>
         </div>
       </>
