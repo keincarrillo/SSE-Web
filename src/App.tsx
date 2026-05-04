@@ -6,6 +6,7 @@ import Team from './components/Team/Team'
 import Testimonials from './components/Testimonials/Testimonials'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
+import Social from './components/Social/Social'
 
 const App = () => {
   useLenis()
@@ -18,6 +19,7 @@ const App = () => {
         <Services />
         <Team />
         <Testimonials />
+        <Social />
         <Contact />
       </main>
       <Footer />
