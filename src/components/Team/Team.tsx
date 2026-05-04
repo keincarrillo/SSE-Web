@@ -101,27 +101,28 @@ function useInView(threshold = 0.05) {
 const TEAM = [
   {
     id: 1,
-    name: 'Dr. [Nombre]',
-    specialty: 'Director & Implantólogo',
+    name: 'Dr. Jesus Ruiz',
+    specialty: 'Cirujano Dentista',
     img: profesional1,
-    mobileImg: profesional1green
+    mobileImg: profesional1green,
+    phrase: 'Si sonríes el mundo es mejor'
   },
   {
     id: 2,
-    name: 'Dra. [Nombre A]',
-    specialty: 'Ortodoncista',
+    name: 'Dra. Fernanda Gil',
+    specialty: 'Cirujano Dentista',
     img: profesional2
   },
   {
     id: 3,
-    name: 'Dra. [Nombre B]',
-    specialty: 'Endodoncista',
+    name: 'Dra. Jocelyn Reynoso',
+    specialty: 'Cirujano Dentista',
     img: profesional3
   },
   {
     id: 4,
-    name: 'Dr. [Nombre C]',
-    specialty: 'Odontología General',
+    name: 'Dr. Enrique Vazquez',
+    specialty: 'Cirujano Dentista',
     img: profesional4
   }
 ]
@@ -156,6 +157,7 @@ const ChevronRight = () => (
   </svg>
 )
 
+// ── DoctorCard para carrusel móvil ──
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
   <div
     className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col"
@@ -204,13 +206,13 @@ const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
     <div className="px-3 py-2">
       <span
         className="block text-gold uppercase font-semibold mb-1 tracking-widest"
-        style={{ fontSize: 'clamp(7px, 1.8vw, 10px)' }}
+        style={{ fontSize: 'clamp(10px, 2.5vw, 14px)' }}
       >
         {member.specialty}
       </span>
       <h3
         className="text-white font-bold leading-tight"
-        style={{ fontSize: 'clamp(11px, 2.5vw, 17px)' }}
+        style={{ fontSize: 'clamp(14px, 3.5vw, 20px)' }}
       >
         {member.name}
       </h3>
@@ -286,7 +288,7 @@ const MobileCarousel = ({ inView }: { inView: boolean }) => {
   )
 }
 
-// ── Tarjeta animada individualmente ──────────────────────────
+// ── Tarjeta animada individualmente (grid desktop) ──
 const AnimatedDoctorCard = ({
   member,
   delay
@@ -294,7 +296,6 @@ const AnimatedDoctorCard = ({
   member: (typeof TEAM)[number]
   delay: string
 }) => {
-  // threshold muy bajo: dispara en cuanto el borde superior asoma en pantalla
   const { ref, inView } = useInView(0.05)
 
   return (
@@ -339,13 +340,13 @@ const AnimatedDoctorCard = ({
       <div className="px-3 py-2 sm:px-4 sm:py-3">
         <span
           className="block text-gold uppercase font-semibold mb-1 tracking-widest"
-          style={{ fontSize: 'clamp(7px, 1.8vw, 10px)' }}
+          style={{ fontSize: 'clamp(10px, 2.2vw, 14px)' }}
         >
           {member.specialty}
         </span>
         <h3
           className="text-white font-bold leading-tight"
-          style={{ fontSize: 'clamp(11px, 2.5vw, 17px)' }}
+          style={{ fontSize: 'clamp(14px, 3vw, 20px)' }}
         >
           {member.name}
         </h3>
@@ -357,6 +358,7 @@ const AnimatedDoctorCard = ({
 // ── Tarjeta principal con observer individual ─────────────────
 const AnimatedMainCard = () => {
   const { ref, inView } = useInView(0.05)
+  const mainDoctor = TEAM[0]
 
   return (
     <div
@@ -379,12 +381,18 @@ const AnimatedMainCard = () => {
             />
           </div>
           <div className="relative border-l-2 border-l-green overflow-hidden">
-            <div className="absolute bottom-4 right-4 flex flex-col items-end z-10">
-              <span className="block text-gold text-[9px] tracking-[0.18em] uppercase font-semibold mb-1">
-                {TEAM[0].specialty}
+            {/* FRASE EN ESQUINA SUPERIOR DERECHA - TABLET (más grande y con salto de línea) */}
+            <div className="absolute top-6 right-6 flex flex-col items-end z-10 max-w-[280px]">
+              {mainDoctor.phrase && (
+                <p className="text-gold/90 text-right mb-2 italic font-bold leading-tight text-lg">
+                  "{mainDoctor.phrase}"
+                </p>
+              )}
+              <span className="block text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-1">
+                {mainDoctor.specialty}
               </span>
-              <h3 className="text-white text-sm font-bold leading-tight text-right">
-                {TEAM[0].name}
+              <h3 className="text-white text-xl font-bold leading-tight text-right">
+                {mainDoctor.name}
               </h3>
             </div>
           </div>
@@ -417,13 +425,26 @@ const AnimatedMainCard = () => {
             />
           </div>
           <div className="relative border border-white/25 rounded-br-2xl border-l-2 border-l-green">
-            <div className="absolute bottom-4 right-4 flex flex-col items-end">
-              <span className="block text-gold text-[9px] tracking-[0.18em] uppercase font-semibold mb-1">
-                {TEAM[0].specialty}
-              </span>
-              <h3 className="text-white text-sm font-bold leading-tight text-right">
-                {TEAM[0].name}
-              </h3>
+            {/* FRASE EN ESQUINA SUPERIOR DERECHA - DESKTOP (más grande y con salto de línea) */}
+            <div className="absolute top-8 right-8 flex flex-col items-end max-w-[320px] gap-16 ">
+              <div>
+                {mainDoctor.phrase && (
+                  <p className="text-gold/90 text-right mb-2 font-bold leading-tight display-lg">
+                    "Si sonries
+                    <br />
+                    <span className="text-white">el mundo</span>
+                    <br /> es mejor"
+                  </p>
+                )}
+              </div>
+              <div>
+                <span className="block text-gold text-base tracking-[0.25em] uppercase font-semibold mb-1">
+                  {mainDoctor.specialty}
+                </span>
+                <h3 className="text-white text-2xl font-bold leading-tight text-right">
+                  {mainDoctor.name}
+                </h3>
+              </div>
             </div>
           </div>
         </div>
@@ -469,7 +490,6 @@ export default function Team() {
           ref={titleRef as React.RefObject<HTMLDivElement>}
           className="mb-10 md:mb-14"
         >
-          {/* Badge */}
           <div
             className={`flex justify-center mb-6 ${titleInView ? 'team-slide-from-left' : 'team-hidden'}`}
             style={{ animationDelay: '0s' }}
@@ -481,7 +501,6 @@ export default function Team() {
             </div>
           </div>
 
-          {/* Título */}
           <div
             className={`text-white display-title text-center ${titleInView ? 'team-slide-from-left' : 'team-hidden'}`}
             style={{ animationDelay: '0.1s' }}
@@ -491,7 +510,6 @@ export default function Team() {
             </h2>
           </div>
 
-          {/* Descripción */}
           <p
             className={`mt-4 text-white/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto text-center ${titleInView ? 'team-slide-from-left' : 'team-hidden'}`}
             style={{ animationDelay: '0.2s' }}
@@ -501,7 +519,6 @@ export default function Team() {
             adapten a ti.
           </p>
 
-          {/* Línea dorada */}
           <div className="flex justify-center mt-4">
             <div
               className={`h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent ${titleInView ? 'team-line-grow' : 'opacity-0'}`}
@@ -512,10 +529,10 @@ export default function Team() {
         {/* ── MÓVIL: carrusel ── */}
         <MobileCarousel inView={titleInView} />
 
-        {/* ── SM+: tarjeta principal (observer propio, threshold 0.05) ── */}
+        {/* ── SM+: tarjeta principal ── */}
         <AnimatedMainCard />
 
-        {/* ── SM+: grid 3 doctores (cada una observer propio, threshold 0.05, sin delay) ── */}
+        {/* ── SM+: grid 3 doctores ── */}
         <div className="hidden sm:grid sm:grid-cols-3 gap-4">
           {TEAM.slice(1).map((m, i) => (
             <AnimatedDoctorCard key={m.id} member={m} delay={`${i * 0.08}s`} />
