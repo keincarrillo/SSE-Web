@@ -1,29 +1,28 @@
 import { useState, useRef, type RefObject } from 'react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
-const WHATSAPP_MESSAGE = encodeURIComponent(
-  'Hola, me gustaría agendar una cita.'
-)
-
 const LOCATIONS = [
   {
-    label: 'Sucursal 1',
-    address: '[Dirección sucursal 1]',
-    telefono: '+52 (xxx) xxx-xxxx',
-    whatsapp: 'XXXXXXXXXX',
-    email: 'sucursal1@ssedental.com',
-    horario: 'Lun – Vie: 9:00–18:00 · Sáb: 9:00–14:00',
+    munucipality: 'Chimalhuacan',
+    state: 'EDOMEX',
+    address: 'Sucursal 1',
+    whatsapp: 'https://wa.me/message/3AXNNBK5CECNO1',
+    whatsappDisplay: '+52 55 4502 1633',
+    email: 'smilestudioexperts@outlook.com',
+    horario: '12:00–18:00',
     embedUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.885824363715!2d-98.98411995776843!3d19.402947118852673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e33713944d9f%3A0x3252260afa632afc!2sSmile%20Studio%20Experts!5e0!3m2!1ses-419!2smx!4v1777084851360!5m2!1ses-419!2smx'
   },
   {
-    label: 'Sucursal 2',
-    address: '[Dirección sucursal 2]',
-    telefono: '+52 (xxx) xxx-xxxx',
-    whatsapp: 'XXXXXXXXXX',
-    email: 'sucursal2@ssedental.com',
-    horario: 'Lun – Vie: 9:00–18:00 · Sáb: 9:00–14:00',
-    embedUrl: 'https://www.google.com/maps/embed?pb=XXXXXXXXXXXXXXX'
+    munucipality: 'Polanco',
+    state: 'CDMX',
+    address: 'Sucursal 2',
+    whatsapp: 'https://wa.me/message/3AXNNBK5CECNO1',
+    whatsappDisplay: '+52 55 4502 1633',
+    email: 'smilestudioexperts@outlook.com',
+    horario: '12:00–18:00',
+    embedUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4452483689947!2d-99.2041844!3d19.4363609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021b854c170f%3A0x1b2db9d3c21f177a!2sAv.%20Homero%201425%2C%20Polanco%2C%20Polanco%20II%20Secc%2C%20Miguel%20Hidalgo%2C%2011530%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1777939435249!5m2!1ses-419!2smx'
   }
 ]
 
@@ -72,18 +71,13 @@ const WhatsAppIcon = () => (
 const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
   <div className="rounded-2xl overflow-hidden border border-white/15 hover:border-gold/40 transition-colors duration-300 bg-white/6">
     <div className="flex flex-col h-full">
-      {/* Info + botón WhatsApp */}
       <div className="flex items-center gap-4 p-5">
         <div className="flex flex-col flex-1 min-w-0 gap-2">
-          <span className="text-gold text-xs font-semibold tracking-[0.25em] uppercase">
-            {loc.label}
-          </span>
           <p className="text-white/70 text-sm leading-relaxed">{loc.address}</p>
 
           <div className="flex flex-col mt-1">
             {[
-              { label: 'Teléfono', value: loc.telefono },
-              { label: 'WhatsApp', value: loc.whatsapp },
+              { label: 'WhatsApp', value: loc.whatsappDisplay },
               { label: 'Email', value: loc.email },
               { label: 'Horario', value: loc.horario }
             ].map((item, i) => (
@@ -102,8 +96,9 @@ const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
           </div>
         </div>
 
+        {/* WhatsApp button: abre la URL completa, muestra el número en la card */}
         <a
-          href={`https://wa.me/${loc.whatsapp}?text=${WHATSAPP_MESSAGE}`}
+          href={loc.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Escribir por WhatsApp"
@@ -113,7 +108,6 @@ const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
         </a>
       </div>
 
-      {/* Mapa */}
       <div className="h-70 md:h-87.5">
         <iframe
           src={loc.embedUrl}
@@ -127,10 +121,24 @@ const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title={loc.label}
+          title={`${loc.munucipality}, ${loc.state}`}
         />
       </div>
     </div>
+  </div>
+)
+
+/* ─── Label grande con Anton ─── */
+const LocationLabel = ({
+  munucipality,
+  state
+}: {
+  munucipality: string
+  state: string
+}) => (
+  <div className="display-md tracking-[0.05em] uppercase mb-2 block">
+    <span className="text-gold">{munucipality}</span>
+    <span className="text-white">, {state}</span>
   </div>
 )
 
@@ -152,7 +160,6 @@ const MobileCarousel = () => {
 
   return (
     <div className="lg:hidden">
-      {/* Track */}
       <div className="overflow-hidden">
         <div
           className="flex transition-transform duration-300 ease-in-out"
@@ -161,28 +168,28 @@ const MobileCarousel = () => {
           onTouchEnd={handleTouchEnd}
         >
           {LOCATIONS.map(loc => (
-            <div key={loc.label} className="min-w-full">
+            <div key={loc.munucipality} className="min-w-full">
+              <LocationLabel
+                munucipality={loc.munucipality}
+                state={loc.state}
+              />
               <LocationCard loc={loc} />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Dots */}
       <div className="flex justify-center gap-1.5 mt-4">
         {LOCATIONS.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Ir a sucursal ${i + 1}`}
-            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-              i === current ? 'bg-gold' : 'bg-white/20'
-            }`}
+            className={`w-2 h-2 rounded-full transition-colors duration-200 ${i === current ? 'bg-gold' : 'bg-white/20'}`}
           />
         ))}
       </div>
 
-      {/* Flechas + contador */}
       <div className="flex items-center justify-between mt-4">
         <button
           onClick={() => goTo(current - 1)}
@@ -230,7 +237,7 @@ const Contact = () => {
                 </span>
               </div>
             </div>
-            <h2 data-gsap="fade-up" className="display-lg text-white">
+            <h2 data-gsap="fade-up" className="display-title text-white">
               Agenda tu cita <span className="text-gold">hoy</span>
             </h2>
           </div>
@@ -241,7 +248,11 @@ const Contact = () => {
           {/* Desktop: grid normal */}
           <div className="hidden lg:grid lg:grid-cols-2 gap-6">
             {LOCATIONS.map(loc => (
-              <div key={loc.label} data-gsap="fade-up">
+              <div key={loc.munucipality} data-gsap="fade-up">
+                <LocationLabel
+                  munucipality={loc.munucipality}
+                  state={loc.state}
+                />
                 <LocationCard loc={loc} />
               </div>
             ))}

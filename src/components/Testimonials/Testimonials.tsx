@@ -83,7 +83,6 @@ const Stars = ({ count }: { count: number }) => (
   </div>
 )
 
-// AnimatedBackground - PUNTOS DORADOS MÁS GRANDES Y VISIBLES
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -94,7 +93,6 @@ const AnimatedBackground = () => {
     if (!ctx) return
 
     let animationFrameId: number
-    let particles: any[] = []
     let time = 0
 
     const setSize = () => {
@@ -105,65 +103,105 @@ const AnimatedBackground = () => {
       }
     }
 
-    const initParticles = () => {
-      particles = []
-      for (let i = 0; i < 80; i++) {
-        // Menos partículas pero más grandes
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 6 + 3, // Puntos más grandes (3-9px)
-          alpha: Math.random() * 0.5 + 0.3, // Más intensos
-          speedX: (Math.random() - 0.5) * 0.2, // Movimiento más lento
-          speedY: (Math.random() - 0.5) * 0.15,
-          pulseSpeed: Math.random() * 0.015 + 0.005,
-          pulseOffset: Math.random() * Math.PI * 2
-        })
+    const drawWave = (
+      yBase: number,
+      amplitude: number,
+      frequency: number,
+      speed: number,
+      colorTop: string,
+      colorBot: string
+    ) => {
+      ctx.beginPath()
+      ctx.moveTo(0, canvas.height)
+
+      for (let x = 0; x <= canvas.width; x += 3) {
+        const y =
+          yBase +
+          Math.sin(
+            (x / canvas.width) * frequency * Math.PI * 2 + time * speed
+          ) *
+            amplitude +
+          Math.sin(
+            (x / canvas.width) * frequency * 0.6 * Math.PI * 2 +
+              time * speed * 1.4 +
+              0.8
+          ) *
+            amplitude *
+            0.5
+        ctx.lineTo(x, y)
       }
+
+      ctx.lineTo(canvas.width, canvas.height)
+      ctx.closePath()
+
+      const grad = ctx.createLinearGradient(
+        0,
+        yBase - amplitude,
+        0,
+        canvas.height
+      )
+      grad.addColorStop(0, colorTop)
+      grad.addColorStop(1, colorBot)
+      ctx.fillStyle = grad
+      ctx.fill()
     }
 
     const animate = () => {
-      // Limpiar con fondo blanco sólido
-      ctx.fillStyle = '#ffffff'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-      time += 0.02
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      time += 0.007
 
-      // Dibujar puntos dorados más grandes
-      particles.forEach(p => {
-        const pulse = Math.sin(time * p.pulseSpeed + p.pulseOffset) * 0.2 + 0.8
-        const currentRadius = p.r * pulse
-        const currentAlpha = p.alpha * pulse
+      const h = canvas.height
 
-        ctx.fillStyle = `rgba(212,175,55,${currentAlpha * 0.8})` // Más intenso
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, currentRadius, 0, Math.PI * 2)
-        ctx.fill()
-
-        // Mover partículas lentamente
-        p.x += p.speedX
-        p.y += p.speedY
-
-        // Rebote suave en bordes
-        if (p.x < 0) p.x = canvas.width
-        if (p.x > canvas.width) p.x = 0
-        if (p.y < 0) p.y = canvas.height
-        if (p.y > canvas.height) p.y = 0
-      })
+      drawWave(
+        h * 0.82,
+        h * 0.1,
+        2.2,
+        0.5,
+        'rgba(45,90,39,0.18)',
+        'rgba(45,90,39,0.04)'
+      )
+      drawWave(
+        h * 0.72,
+        h * 0.09,
+        2.8,
+        0.8,
+        'rgba(201,170,101,0.16)',
+        'rgba(201,170,101,0.03)'
+      )
+      drawWave(
+        h * 0.6,
+        h * 0.08,
+        2.0,
+        0.65,
+        'rgba(80,145,60,0.14)',
+        'rgba(80,145,60,0.02)'
+      )
+      drawWave(
+        h * 0.46,
+        h * 0.07,
+        3.2,
+        1.0,
+        'rgba(230,205,120,0.13)',
+        'rgba(230,205,120,0.02)'
+      )
+      drawWave(
+        h * 0.3,
+        h * 0.06,
+        2.5,
+        1.2,
+        'rgba(45,90,39,0.10)',
+        'rgba(45,90,39,0.01)'
+      )
 
       animationFrameId = requestAnimationFrame(animate)
     }
 
     const resizeObserver = new ResizeObserver(() => {
       setSize()
-      initParticles()
     })
-
-    if (canvas.parentElement) {
-      resizeObserver.observe(canvas.parentElement)
-    }
+    if (canvas.parentElement) resizeObserver.observe(canvas.parentElement)
 
     setSize()
-    initParticles()
     animate()
 
     return () => {
@@ -233,13 +271,27 @@ const Testimonials = () => {
         background: '#ffffff',
         position: 'relative',
         overflow: 'hidden',
-        minHeight: '100vh',
         paddingTop: '40px',
         paddingBottom: '80px'
       }}
     >
-      {/* Fondo con puntos dorados más grandes */}
+      {/* Fondo animado: ondas fluidas */}
       <AnimatedBackground />
+
+      {/* Difuminado inferior — solo cubre el espacio debajo de la card, zIndex bajo */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '90px',
+          background:
+            'linear-gradient(to bottom, rgba(255,255,255,0) 0%, #ffffff 100%)',
+          pointerEvents: 'none',
+          zIndex: 1
+        }}
+      />
 
       <div
         style={{
@@ -250,7 +302,6 @@ const Testimonials = () => {
         }}
       >
         {/* ── 1. Título ── */}
-
         <div
           className="py-10 text-center flex flex-col gap-4 items-center"
           style={{ position: 'relative', zIndex: 2 }}
@@ -265,8 +316,15 @@ const Testimonials = () => {
             className={`text-white display-title text-center}`}
             style={{ animationDelay: '0.1s' }}
           >
-            <h2 className="text-green">Resultados reales</h2>
+            <h2 className="text-green">
+              <span className="text-gold">Resultados</span> reales
+            </h2>
           </div>
+
+          <p className="text-green text-xl max-w-130 text-center">
+            Más allá del resultado, cada paciente vive un proceso que transforma
+            su forma de sonreír.
+          </p>
         </div>
 
         {/* ── 2. Bloque verde ── */}
@@ -426,7 +484,6 @@ const Testimonials = () => {
                           paddingRight: '16px'
                         }}
                       >
-                        {/* Tratamiento label */}
                         <p
                           style={{
                             fontSize: '13px',
@@ -440,7 +497,6 @@ const Testimonials = () => {
                           Tratamiento
                         </p>
 
-                        {/* Tratamiento título */}
                         <h3
                           style={{
                             fontSize: '40px',
@@ -537,7 +593,6 @@ const Testimonials = () => {
                         )}
                       </div>
 
-                      {/* Tratamiento label móvil */}
                       <p
                         style={{
                           fontSize: '11px',
@@ -552,7 +607,6 @@ const Testimonials = () => {
                         Tratamiento
                       </p>
 
-                      {/* Subtítulo móvil */}
                       {t.subtitle && (
                         <h3
                           style={{

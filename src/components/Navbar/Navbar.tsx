@@ -7,7 +7,8 @@ const LINKS = [
   { label: 'Servicios', href: '#servicios' },
   { label: 'Equipo', href: '#equipo' },
   { label: 'Testimonios', href: '#testimonios' },
-  { label: 'Contacto', href: '#contacto' }
+  { label: 'Contacto', href: '#contacto' },
+  { label: 'Redes Sociales', href: '#redes' }
 ]
 
 const Navbar = () => {

@@ -1,3 +1,18 @@
+const SOCIAL_LINKS = [
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr'
+  },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr'
+  },
+  {
+    label: 'WhatsApp',
+    href: 'https://wa.me/message/3AXNNBK5CECNO1'
+  }
+]
+
 const Footer = () => {
   const year = new Date().getFullYear()
 
@@ -12,17 +27,19 @@ const Footer = () => {
         </div>
 
         <p className="text-white/30 text-xs text-center">
-          © {year} Smile Studio Experts· Todos los derechos reservados
+          © {year} Smile Studio Experts · Todos los derechos reservados
         </p>
 
         <div className="flex gap-6">
-          {['Instagram', 'Facebook', 'WhatsApp'].map(s => (
+          {SOCIAL_LINKS.map(({ label, href }) => (
             <a
-              key={s}
-              href="#"
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-white/30 text-xs hover:text-gold transition-colors duration-200"
             >
-              {s}
+              {label}
             </a>
           ))}
         </div>
