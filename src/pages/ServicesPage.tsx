@@ -111,7 +111,7 @@ const SERVICES: {
     title: 'Diseño de sonrisa',
     subtitle: 'Tu sonrisa ideal, diseñada para ti',
     description:
-      'Tratamiento estético enfocado en mejorar la forma, tamaño y color de los dientes para lograr una sonrisa más armónica y natural, adaptada a cada paciente. Combinamos carillas, blanqueamiento y otros procedimientos para el resultado perfecto.',
+      'El diseño de sonrisa es un proceso estético y personalizado en el que analizamos tu rostro, tus dientes y tu personalidad para crear una sonrisa armónica y natural que realmente te represente.',
     images: [carillas1, carillas2, carillas3],
     bg: 'white',
     highlights: [
@@ -154,7 +154,7 @@ const SERVICES: {
       {
         label: 'Mantenimiento sencillo',
         detail:
-          'Te damos kit de mantenimiento y guía de hábitos para prolongar el efecto.'
+          'Te orientamos con hábitos y cuidados para prolongar el efecto del blanqueamiento.'
       }
     ]
   },
@@ -173,9 +173,9 @@ const SERVICES: {
           'Exploración de dientes, encías, oclusión y tejidos blandos con registro fotográfico.'
       },
       {
-        label: 'Profilaxis ultrasónica',
+        label: 'Limpieza profesional',
         detail:
-          'Eliminamos sarro y manchas con tecnología de ultrasonido sin dañar el esmalte.'
+          'Eliminamos placa, sarro y manchas de forma segura para mantener tus dientes y encías sanos.'
       },
       {
         label: 'Plan preventivo',
