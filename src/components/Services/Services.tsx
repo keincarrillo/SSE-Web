@@ -108,6 +108,147 @@ const PulseStyles = () => (
   `}</style>
 )
 
+/* ─── Fondo animado igual que Testimonials ─── */
+const AnimatedBackground = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    let animationFrameId: number
+    let time = 0
+
+    const setSize = () => {
+      const rect = canvas.parentElement?.getBoundingClientRect()
+      if (rect) {
+        canvas.width = rect.width
+        canvas.height = rect.height
+      }
+    }
+
+    const drawWave = (
+      yBase: number,
+      amplitude: number,
+      frequency: number,
+      speed: number,
+      colorTop: string,
+      colorBot: string
+    ) => {
+      ctx.beginPath()
+      ctx.moveTo(0, canvas.height)
+
+      for (let x = 0; x <= canvas.width; x += 3) {
+        const y =
+          yBase +
+          Math.sin(
+            (x / canvas.width) * frequency * Math.PI * 2 + time * speed
+          ) *
+            amplitude +
+          Math.sin(
+            (x / canvas.width) * frequency * 0.6 * Math.PI * 2 +
+              time * speed * 1.4 +
+              0.8
+          ) *
+            amplitude *
+            0.5
+        ctx.lineTo(x, y)
+      }
+
+      ctx.lineTo(canvas.width, canvas.height)
+      ctx.closePath()
+
+      const grad = ctx.createLinearGradient(
+        0,
+        yBase - amplitude,
+        0,
+        canvas.height
+      )
+      grad.addColorStop(0, colorTop)
+      grad.addColorStop(1, colorBot)
+      ctx.fillStyle = grad
+      ctx.fill()
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      time += 0.007
+
+      const h = canvas.height
+
+      drawWave(
+        h * 0.82,
+        h * 0.1,
+        2.2,
+        0.5,
+        'rgba(45,90,39,0.18)',
+        'rgba(45,90,39,0.04)'
+      )
+      drawWave(
+        h * 0.72,
+        h * 0.09,
+        2.8,
+        0.8,
+        'rgba(201,170,101,0.16)',
+        'rgba(201,170,101,0.03)'
+      )
+      drawWave(
+        h * 0.6,
+        h * 0.08,
+        2.0,
+        0.65,
+        'rgba(80,145,60,0.14)',
+        'rgba(80,145,60,0.02)'
+      )
+      drawWave(
+        h * 0.46,
+        h * 0.07,
+        3.2,
+        1.0,
+        'rgba(230,205,120,0.13)',
+        'rgba(230,205,120,0.02)'
+      )
+      drawWave(
+        h * 0.3,
+        h * 0.06,
+        2.5,
+        1.2,
+        'rgba(45,90,39,0.10)',
+        'rgba(45,90,39,0.01)'
+      )
+
+      animationFrameId = requestAnimationFrame(animate)
+    }
+
+    const resizeObserver = new ResizeObserver(() => setSize())
+    if (canvas.parentElement) resizeObserver.observe(canvas.parentElement)
+
+    setSize()
+    animate()
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      resizeObserver.disconnect()
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 1
+      }}
+    />
+  )
+}
+
 /* ─── Card verde izquierda ─── */
 const ServiceCardLeft = ({
   title,
@@ -228,7 +369,6 @@ const FeaturedCard = ({
   >
     {icon && (
       <>
-        {/* Desktop: posición absoluta original */}
         <div
           className="icon-pulse-green hidden lg:flex absolute top-0 left-1/2 z-20 w-32 h-32 rounded-full bg-green/20 border-2 border-green/50 items-center justify-center"
           style={{ transform: 'translate(-50%, -50%)' }}
@@ -236,7 +376,6 @@ const FeaturedCard = ({
           <img src={icon} alt="" className="w-20 h-20 object-contain" />
         </div>
 
-        {/* Móvil: icono centrado en flujo normal */}
         <div className="lg:hidden flex justify-center mb-4">
           <div className="w-20 h-20 rounded-full bg-green/20 border-2 border-green/50 flex items-center justify-center">
             <img
@@ -393,9 +532,12 @@ const Services = () => {
     <section
       ref={setRef}
       id="servicios"
-      className="bg-white py-10 md:py-16 lg:py-24 relative"
+      className="bg-white py-10 md:py-16 lg:py-24 relative overflow-hidden"
     >
       <PulseStyles />
+
+      {/* Fondo animado */}
+      <AnimatedBackground />
 
       <div
         ref={toothRef}
@@ -419,11 +561,15 @@ const Services = () => {
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 30% 50%, #C9A84C 0%, transparent 60%), radial-gradient(circle at 70% 50%, #C9A84C 0%, transparent 60%)'
+            'radial-gradient(circle at 30% 50%, #C9A84C 0%, transparent 60%), radial-gradient(circle at 70% 50%, #C9A84C 0%, transparent 60%)',
+          zIndex: 1
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
+      <div
+        className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 relative"
+        style={{ zIndex: 2 }}
+      >
         <div className="text-center mb-12 md:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-6">
             <span
@@ -442,7 +588,7 @@ const Services = () => {
           </h2>
           <p
             data-gsap="fade-up"
-            className="mt-4  text-green/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto"
+            className="mt-4 text-green/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto"
           >
             Cada sonrisa es única, por eso ofrecemos tratamientos personalizados
             que combinan estética y funcionalidad para lograr resultados
@@ -471,8 +617,8 @@ const Services = () => {
             style={{ overflow: 'visible' }}
           >
             <FeaturedCard {...FEATURED} cardRef={cardRef} />
-            <div style={{ height: '200px' }} />
-            <p className="text-green/35 text-md font-bold tracking-[0.25em] uppercase whitespace-nowrap">
+            <div className="h-52" />
+            <p className="text-green/70 text-md  tracking-[0.25em] uppercase whitespace-nowrap">
               resultados naturales que se adaptan a ti
             </p>
           </div>
