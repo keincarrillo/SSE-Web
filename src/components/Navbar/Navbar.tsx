@@ -1,22 +1,44 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { gsap } from 'gsap'
 import logoNegro from '../../assets/logo_negro.svg'
 import logoBlanco from '../../assets/logo_blanco.svg'
 
 const LINKS = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Equipo', href: '#equipo' },
-  { label: 'Testimonios', href: '#testimonios' },
-  { label: 'Contacto', href: '#contacto' },
-  { label: 'Redes Sociales', href: '#redes' }
+  { label: 'Servicios', href: 'servicios' },
+  { label: 'Equipo', href: 'equipo' },
+  { label: 'Testimonios', href: 'testimonios' },
+  { label: 'Contacto', href: 'contacto' },
+  { label: 'Redes Sociales', href: 'redes' }
 ]
 
-/* darkHero = true  → navbar transparente con texto/logo blanco al inicio (Home)
-   darkHero = false → navbar transparente con texto/logo verde al inicio (ServicesPage) */
 const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
   const navRef = useRef<HTMLElement>(null)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault()
+    setOpen(false)
+
+    const scrollToSection = () => {
+      const el = document.getElementById(sectionId)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    if (location.pathname === '/') {
+      scrollToSection()
+    } else {
+      navigate('/')
+      // Espera a que la home monte y luego hace scroll
+      setTimeout(scrollToSection, 300)
+    }
+  }
 
   useEffect(() => {
     gsap.fromTo(
@@ -28,7 +50,7 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50)
-    fn() // ejecutar al montar por si ya hay scroll
+    fn()
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
@@ -40,10 +62,8 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
     }
   }, [open])
 
-  // Hamburger bars: negro si scrolled o si no hay darkHero, blanco si darkHero sin scroll
   const barColor = scrolled ? 'bg-black' : darkHero ? 'bg-white' : 'bg-green'
 
-  // Links: cuando scrolled siempre negro; cuando no scrolled depende de darkHero
   const linkClass = scrolled
     ? 'text-black/90 hover:text-green-mid'
     : darkHero
@@ -76,7 +96,8 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
           {LINKS.map(l => (
             <a
               key={l.href}
-              href={l.href}
+              href={`#${l.href}`}
+              onClick={e => handleNavClick(e, l.href)}
               className={`text-sm font-medium transition-colors duration-200 relative group ${linkClass}`}
             >
               {l.label}
@@ -87,6 +108,7 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
 
         <a
           href="#contacto"
+          onClick={e => handleNavClick(e, 'contacto')}
           className="hidden md:inline-flex ml-4 px-5 py-2.5 rounded-full bg-green text-white text-xs font-semibold tracking-widest uppercase hover:bg-green-mid transition-colors duration-300"
         >
           Agendar cita
@@ -123,7 +145,6 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
         </button>
       </div>
 
-      {/* Menu móvil */}
       <div
         className={
           'md:hidden overflow-hidden transition-all duration-500 bg-white ' +
@@ -134,8 +155,8 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
           {LINKS.map(l => (
             <a
               key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
+              href={`#${l.href}`}
+              onClick={e => handleNavClick(e, l.href)}
               className="py-3 border-b border-border last:border-0 text-black font-medium hover:text-green transition-colors"
             >
               {l.label}
@@ -143,7 +164,7 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
           ))}
           <a
             href="#contacto"
-            onClick={() => setOpen(false)}
+            onClick={e => handleNavClick(e, 'contacto')}
             className="mt-4 mb-2 text-center py-3 rounded-full bg-green text-white text-xs font-semibold tracking-widest uppercase"
           >
             Agendar cita
