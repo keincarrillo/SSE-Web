@@ -105,7 +105,7 @@ const TEAM = [
     specialty: 'Cirujano Dentista',
     img: profesional1,
     mobileImg: profesional1green,
-    phrase: 'Si sonríes el mundo es mejor'
+    phrase: 'Si sonríes, el mundo es mejor'
   },
   {
     id: 2,
@@ -430,7 +430,7 @@ const AnimatedMainCard = () => {
               <div>
                 {mainDoctor.phrase && (
                   <p className="text-gold/90 text-right mb-2 font-bold leading-tight display-lg">
-                    "Si sonries
+                    "Si sonries,
                     <br />
                     <span className="text-white">el mundo</span>
                     <br /> es mejor"
