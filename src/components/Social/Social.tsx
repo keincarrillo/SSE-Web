@@ -162,12 +162,15 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
           onTouchEnd={handleTouchEnd}
         >
           {phones.map(phone => (
-            <div key={phone.id} className="min-w-full px-4">
+            <div key={phone.id} className="min-w-full px-1">
               <img
                 src={phone.image}
                 alt={phone.name}
-                className="w-full h-auto"
-                style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}
+                className="w-full h-auto mx-auto"
+                style={{
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))',
+                  maxWidth: '380px'
+                }}
               />
               <div className="flex justify-center mt-6">
                 <a href={phone.buttonLink} className="btn">
@@ -353,7 +356,7 @@ const MobileView = ({ inView }: { inView: boolean }) => (
     <PhonesCarousel inView={inView} />
 
     <div
-      className={`mt-12 px-4 ${inView ? 'fade-up' : 'hidden-init'}`}
+      className={`mt-12 px-2 ${inView ? 'fade-up' : 'hidden-init'}`}
       style={{ animationDelay: '0.2s' }}
     >
       <div
@@ -433,8 +436,6 @@ const MobileView = ({ inView }: { inView: boolean }) => (
             Conéctate con Smile Studio Experts. Todo sobre nuestros servicios,
             tips de expertos y resultados increíbles a un solo clic.
           </p>
-
-          {/* Bocas eliminadas en móvil */}
         </div>
       </div>
     </div>
