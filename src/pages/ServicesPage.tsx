@@ -699,7 +699,7 @@ const CtaSection = () => {
         }}
         className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-green font-semibold text-md tracking-[0.05em] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
       >
-        <span className="relative z-10">Agendar valoración</span>
+        <span className="relative z-10">Agendar hoy</span>
         <span className="relative z-10 w-7 h-7 rounded-full bg-green/10 border border-green/30 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
           <svg
             width="12"
