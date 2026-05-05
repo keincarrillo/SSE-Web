@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, type RefObject } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import tooth from '../../assets/tooth.webp'
 import brackets from '../../assets/figures/brackets.svg'
@@ -105,10 +106,18 @@ const PulseStyles = () => (
       100% { box-shadow: 0 0 0 0 rgba(30, 70, 32, 0); }
     }
     .icon-pulse-green { animation: pulseGreen 2.2s ease-out infinite; }
+
+    @keyframes shimmer {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .btn-shimmer:hover .shimmer-inner {
+      animation: shimmer 0.7s ease forwards;
+    }
   `}</style>
 )
 
-/* ─── Fondo animado igual que Testimonials ─── */
+/* ─── Fondo animado ─── */
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -498,6 +507,7 @@ const Services = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const toothRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const updateToothPosition = () => {
@@ -618,7 +628,7 @@ const Services = () => {
           >
             <FeaturedCard {...FEATURED} cardRef={cardRef} />
             <div className="h-52" />
-            <p className="text-green/70 text-md  tracking-[0.25em] uppercase whitespace-nowrap">
+            <p className="text-green/70 text-md tracking-[0.25em] uppercase whitespace-nowrap">
               resultados naturales que se adaptan a ti
             </p>
           </div>
@@ -628,6 +638,31 @@ const Services = () => {
               <ServiceCardRight key={s.title} {...s} gsap="fade-left" />
             ))}
           </div>
+        </div>
+
+        {/* ─── Botón Ver más ─── */}
+        <div className="flex justify-center mt-14 md:mt-20">
+          <button
+            onClick={() => navigate('/servicios')}
+            className="btn-shimmer group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green text-white font-semibold text-md tracking-[0.05em] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(30,70,32,0.35)]"
+          >
+            <span className="relative z-10">Ver todos los servicios</span>
+            <span className="relative z-10 w-7 h-7 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </span>
+            <span className="shimmer-inner absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full" />
+          </button>
         </div>
       </div>
     </section>
