@@ -11,7 +11,9 @@ const LINKS = [
   { label: 'Redes Sociales', href: '#redes' }
 ]
 
-const Navbar = () => {
+/* darkHero = true  → navbar transparente con texto/logo blanco al inicio (Home)
+   darkHero = false → navbar transparente con texto/logo verde al inicio (ServicesPage) */
+const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
   const navRef = useRef<HTMLElement>(null)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -26,11 +28,11 @@ const Navbar = () => {
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50)
+    fn() // ejecutar al montar por si ya hay scroll
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  // Movil
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => {
@@ -38,7 +40,15 @@ const Navbar = () => {
     }
   }, [open])
 
-  const barColor = scrolled ? 'bg-black' : 'bg-white'
+  // Hamburger bars: negro si scrolled o si no hay darkHero, blanco si darkHero sin scroll
+  const barColor = scrolled ? 'bg-black' : darkHero ? 'bg-white' : 'bg-green'
+
+  // Links: cuando scrolled siempre negro; cuando no scrolled depende de darkHero
+  const linkClass = scrolled
+    ? 'text-black/90 hover:text-green-mid'
+    : darkHero
+      ? 'text-white/90 hover:text-white'
+      : 'text-green/90 hover:text-green'
 
   return (
     <header
@@ -50,11 +60,10 @@ const Navbar = () => {
           : 'py-5')
       }
     >
-      {/* Menu */}
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center gap-6">
         <a href="/" className="flex items-center shrink-0">
           <img
-            src={scrolled ? logoNegro : logoBlanco}
+            src={scrolled ? logoNegro : darkHero ? logoBlanco : logoNegro}
             alt="Smile Studio Experts"
             className="h-16 md:h-20 w-auto object-contain transition-all duration-500"
             loading="eager"
@@ -68,8 +77,7 @@ const Navbar = () => {
             <a
               key={l.href}
               href={l.href}
-              className={`text-black/90 text-sm font-medium  transition-colors duration-200 relative group
-                ${scrolled ? 'text-black/90 hover:text-green-mid' : 'text-white/90'}`}
+              className={`text-sm font-medium transition-colors duration-200 relative group ${linkClass}`}
             >
               {l.label}
               <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gold rounded-full transition-all duration-300 group-hover:w-full" />
@@ -115,7 +123,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Menu movil */}
+      {/* Menu móvil */}
       <div
         className={
           'md:hidden overflow-hidden transition-all duration-500 bg-white ' +
