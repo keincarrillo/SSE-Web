@@ -542,7 +542,7 @@ const Services = () => {
     <section
       ref={setRef}
       id="servicios"
-      className="bg-white py-10 md:py-16 lg:py-24 relative overflow-hidden"
+      className="bg-white py-10 md:py-16 lg:py-24 relative overflow-x-hidden"
     >
       <PulseStyles />
 
@@ -606,8 +606,10 @@ const Services = () => {
           </p>
         </div>
 
+        {/* Carrusel móvil */}
         <MobileCarousel />
 
+        {/* Grid desktop */}
         <div
           className="hidden lg:grid items-start mt-22"
           style={{
@@ -640,7 +642,7 @@ const Services = () => {
           </div>
         </div>
 
-        {/* ─── Botón Ver más ─── */}
+        {/* ─── Botón Ver más — fuera del grid, visible en todos los tamaños ─── */}
         <div className="flex justify-center mt-14 md:mt-20">
           <button
             onClick={() => navigate('/servicios')}
