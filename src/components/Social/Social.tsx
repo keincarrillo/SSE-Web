@@ -66,7 +66,6 @@ function useInView() {
   return { ref, v }
 }
 
-// Iconos del carrusel
 const ChevronLeft = () => (
   <svg
     width="20"
@@ -97,11 +96,22 @@ const ChevronRight = () => (
   </svg>
 )
 
-// Carrusel solo para los teléfonos (Facebook e Instagram)
+const IconInstagram = ({ size = 40, color = '#1a3d1a' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+  </svg>
+)
+
+const IconFacebook = ({ size = 40, color = '#1a3d1a' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+  </svg>
+)
+
 const PhonesCarousel = ({ inView }: { inView: boolean }) => {
   const [current, setCurrent] = useState(0)
   const startXRef = useRef(0)
-  const autoPlayRef = useRef<ReturnType<typeof setInterval>>(undefined) // ✅ Corregido: añadido undefined como argumento
+  const autoPlayRef = useRef<ReturnType<typeof setInterval>>(undefined)
 
   const phones = [
     {
@@ -109,64 +119,41 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
       name: 'Facebook',
       image: facebook,
       buttonText: 'Facebook',
-      buttonLink: '#'
+      buttonLink: 'https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr'
     },
     {
       id: 2,
       name: 'Instagram',
       image: instagram,
       buttonText: 'Instagram',
-      buttonLink: '#'
+      buttonLink:
+        'https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr'
     }
   ]
 
   const total = phones.length
-
-  const goTo = (n: number) => {
-    setCurrent(((n % total) + total) % total)
-  }
-
+  const goTo = (n: number) => setCurrent(((n % total) + total) % total)
   const next = () => goTo(current + 1)
   const prev = () => goTo(current - 1)
 
-  // Auto-play: cambiar cada 3 segundos
   useEffect(() => {
-    // Limpiar intervalo anterior si existe
-    if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current)
-    }
-
-    // Crear nuevo intervalo
-    autoPlayRef.current = setInterval(() => {
-      next()
-    }, 3000)
-
-    // Cleanup al desmontar
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current)
+    autoPlayRef.current = setInterval(() => next(), 3000)
     return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current)
-      }
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current)
     }
   }, [current])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     startXRef.current = e.touches[0].clientX
   }
-
   const handleTouchEnd = (e: React.TouchEvent) => {
     const diff = startXRef.current - e.changedTouches[0].clientX
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        next()
-      } else {
-        prev()
-      }
-    }
+    if (Math.abs(diff) > 40) diff > 0 ? next() : prev()
   }
 
   return (
     <div className={`md:hidden ${inView ? 'fade-up' : 'hidden-init'}`}>
-      {/* Carrusel de teléfonos */}
       <div className="overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
@@ -180,9 +167,7 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
                 src={phone.image}
                 alt={phone.name}
                 className="w-full h-auto"
-                style={{
-                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))'
-                }}
+                style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}
               />
               <div className="flex justify-center mt-6">
                 <a href={phone.buttonLink} className="btn">
@@ -194,21 +179,17 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
         </div>
       </div>
 
-      {/* Indicadores (puntos) */}
       <div className="flex justify-center gap-2 mt-6">
         {phones.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Ir a ${phones[i].name}`}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === current ? 'w-8 bg-[#C9A755]' : 'w-2 bg-gray-300'
-            }`}
+            className={`h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-[#C9A755]' : 'w-2 bg-gray-300'}`}
           />
         ))}
       </div>
 
-      {/* Botones de navegación */}
       <div className="flex items-center justify-between mt-6 max-w-50 mx-auto">
         <button
           onClick={prev}
@@ -232,32 +213,37 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
   )
 }
 
-// Versión desktop (3 elementos en fila - SIN carrusel)
 const DesktopView = () => (
-  <div className="hidden md:flex flex-row items-center justify-center gap-6 md:gap-4">
+  <div className="hidden md:flex flex-row items-start justify-center gap-6 md:gap-4">
     {/* FACEBOOK */}
     <div className="flex-1">
+      <div className="flex justify-center mb-4">
+        <IconFacebook size={70} color="#1a3d1a" />
+      </div>
       <img
         src={facebook}
         alt="Facebook"
         className="w-full h-auto"
-        style={{
-          filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))'
-        }}
+        style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}
       />
       <div className="flex justify-center mt-6">
-        <a href="#" className="btn">
+        <a
+          href="https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn"
+        >
           Facebook
         </a>
       </div>
     </div>
 
     {/* CARD DORADA */}
-    <div className="flex-1">
+    <div className="w-1/3 shrink-0">
       <div
         style={{
           width: '100%',
-          aspectRatio: '13/16',
+          aspectRatio: '12/16',
           position: 'relative',
           maxWidth: '100%'
         }}
@@ -267,27 +253,71 @@ const DesktopView = () => (
             width: '100%',
             height: '100%',
             background: '#C9A755',
-            borderRadius: 40
+            borderRadius: 40,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            boxSizing: 'border-box',
+            gap: '1rem',
+            position: 'relative'
           }}
-        />
+        >
+          <div className="text-center flex flex-col items-center gap-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-green/40 bg-green/10">
+              <span className="text-green text-md font-semibold tracking-[0.2em] uppercase">
+                Redes sociales
+              </span>
+            </div>
+            <div
+              className="text-white display-title text-center"
+              style={{ animationDelay: '0.1s' }}
+            >
+              <h2 className="text-green">
+                <span className="text-white">INSPÍRATE EN NUESTRA</span>{' '}
+                COMUNIDAD
+              </h2>
+            </div>
+            <p
+              style={{
+                color: 'white',
+                fontSize: 'clamp(10px, 1.1vw, 15px)',
+                fontWeight: 500,
+                textAlign: 'center',
+                letterSpacing: '0.03em',
+                lineHeight: 1.5,
+                margin: 0
+              }}
+            >
+              Conéctate con Smile Studio Experts. <br />
+              Todo sobre nuestros servicios, tips de expertos y resultados
+              increíbles a un solo clic.
+            </p>
+          </div>
+        </div>
+
+        {/* Bocas: solo visibles en xl (≥1280px) para arriba */}
         <img
           src={mouth1}
           alt=""
+          className="hidden xl:block"
           style={{
             position: 'absolute',
-            width: 'clamp(150px, 30%, 200px)',
-            top: -80,
-            left: -30
+            width: '38%',
+            top: '-12%',
+            left: '-14%'
           }}
         />
         <img
           src={mouth2}
           alt=""
+          className="hidden xl:block"
           style={{
             position: 'absolute',
-            width: 'clamp(150px, 30%, 200px)',
-            bottom: -80,
-            right: -30
+            width: '38%',
+            bottom: '-14%',
+            right: '-14%'
           }}
         />
       </div>
@@ -295,16 +325,22 @@ const DesktopView = () => (
 
     {/* INSTAGRAM */}
     <div className="flex-1">
+      <div className="flex justify-center mb-4">
+        <IconInstagram size={70} color="#1a3d1a" />
+      </div>
       <img
         src={instagram}
         alt="Instagram"
         className="w-full h-auto"
-        style={{
-          filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))'
-        }}
+        style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}
       />
       <div className="flex justify-center mt-6">
-        <a href="#" className="btn">
+        <a
+          href="https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn"
+        >
           Instagram
         </a>
       </div>
@@ -312,13 +348,10 @@ const DesktopView = () => (
   </div>
 )
 
-// Versión móvil: Carrusel de teléfonos + card dorada fija abajo
 const MobileView = ({ inView }: { inView: boolean }) => (
   <div className="md:hidden">
-    {/* Carrusel de teléfonos */}
     <PhonesCarousel inView={inView} />
 
-    {/* Card dorada fija abajo (sin carrusel) */}
     <div
       className={`mt-12 px-4 ${inView ? 'fade-up' : 'hidden-init'}`}
       style={{ animationDelay: '0.2s' }}
@@ -326,7 +359,7 @@ const MobileView = ({ inView }: { inView: boolean }) => (
       <div
         style={{
           width: '100%',
-          aspectRatio: '13/16',
+          aspectRatio: '11/16',
           position: 'relative',
           maxWidth: '100%'
         }}
@@ -336,29 +369,73 @@ const MobileView = ({ inView }: { inView: boolean }) => (
             width: '100%',
             height: '100%',
             background: '#C9A755',
-            borderRadius: 40
+            borderRadius: 40,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            boxSizing: 'border-box',
+            gap: '1.2rem',
+            position: 'relative'
           }}
-        />
-        <img
-          src={mouth1}
-          alt=""
-          style={{
-            position: 'absolute',
-            width: 'clamp(80px, 25%, 150px)',
-            top: -30,
-            left: -30
-          }}
-        />
-        <img
-          src={mouth2}
-          alt=""
-          style={{
-            position: 'absolute',
-            width: 'clamp(80px, 25%, 150px)',
-            bottom: -30,
-            right: -30
-          }}
-        />
+        >
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '6px 16px',
+              borderRadius: 999,
+              border: '1px solid rgba(255,255,255,0.4)',
+              background: 'rgba(255,255,255,0.1)'
+            }}
+          >
+            <span
+              style={{
+                color: 'white',
+                fontSize: 13,
+                fontWeight: 600,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase'
+              }}
+            >
+              Redes sociales
+            </span>
+          </div>
+
+          <h2
+            style={{
+              fontSize: 'clamp(22px, 6vw, 34px)',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              textAlign: 'center',
+              lineHeight: 1.1,
+              margin: 0
+            }}
+          >
+            <span style={{ color: '#1a3d1a' }}>INSPÍRATE EN NUESTRA</span>{' '}
+            <span style={{ color: 'white' }}>COMUNIDAD</span>
+          </h2>
+
+          <p
+            style={{
+              color: 'white',
+              fontSize: 'clamp(11px, 3.5vw, 15px)',
+              fontWeight: 500,
+              textAlign: 'center',
+              textTransform: 'uppercase',
+              letterSpacing: '0.03em',
+              lineHeight: 1.5,
+              margin: 0
+            }}
+          >
+            Conéctate con Smile Studio Experts. Todo sobre nuestros servicios,
+            tips de expertos y resultados increíbles a un solo clic.
+          </p>
+
+          {/* Bocas eliminadas en móvil */}
+        </div>
       </div>
     </div>
   </div>
@@ -368,34 +445,13 @@ export default function Social() {
   const { ref, v } = useInView()
 
   return (
-    <section ref={ref} className="py-20 bg-white overflow-hidden">
-      {/* HEADER */}
-      <div className="text-center mb-16 px-6">
-        <h2
-          className={`${v ? 'fade-up' : 'hidden-init'} text-4xl md:text-5xl font-bold text-green`}
-        >
-          Síguenos y comparte{' '}
-          <span className="text-yellow-600">tu sonrisa</span>
-        </h2>
-
-        <p
-          className={`${v ? 'fade-up' : 'hidden-init'} mt-4 text-gray-600 max-w-xl mx-auto`}
-        >
-          Mantente al tanto de nuestros casos de éxito, promociones y consejos
-          para cuidar tu sonrisa.
-        </p>
-
-        <div className="flex justify-center mt-6">
-          <div className="h-0.5 w-24 bg-yellow-600 rounded-full"></div>
-        </div>
-      </div>
-
-      {/* CONTENIDO */}
+    <section
+      ref={ref}
+      className="py-20 mb-10 bg-white overflow-hidden"
+      id="redes"
+    >
       <div className="max-w-8xl mx-auto px-6">
-        {/* Versión móvil: carrusel de teléfonos + card fija */}
         <MobileView inView={v} />
-
-        {/* Versión desktop: todo en fila sin carrusel */}
         <DesktopView />
       </div>
     </section>
