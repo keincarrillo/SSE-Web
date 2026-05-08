@@ -83,148 +83,6 @@ const Stars = ({ count }: { count: number }) => (
   </div>
 )
 
-const AnimatedBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    let animationFrameId: number
-    let time = 0
-
-    const setSize = () => {
-      const rect = canvas.parentElement?.getBoundingClientRect()
-      if (rect) {
-        canvas.width = rect.width
-        canvas.height = rect.height
-      }
-    }
-
-    const drawWave = (
-      yBase: number,
-      amplitude: number,
-      frequency: number,
-      speed: number,
-      colorTop: string,
-      colorBot: string
-    ) => {
-      ctx.beginPath()
-      ctx.moveTo(0, canvas.height)
-
-      for (let x = 0; x <= canvas.width; x += 3) {
-        const y =
-          yBase +
-          Math.sin(
-            (x / canvas.width) * frequency * Math.PI * 2 + time * speed
-          ) *
-            amplitude +
-          Math.sin(
-            (x / canvas.width) * frequency * 0.6 * Math.PI * 2 +
-              time * speed * 1.4 +
-              0.8
-          ) *
-            amplitude *
-            0.5
-        ctx.lineTo(x, y)
-      }
-
-      ctx.lineTo(canvas.width, canvas.height)
-      ctx.closePath()
-
-      const grad = ctx.createLinearGradient(
-        0,
-        yBase - amplitude,
-        0,
-        canvas.height
-      )
-      grad.addColorStop(0, colorTop)
-      grad.addColorStop(1, colorBot)
-      ctx.fillStyle = grad
-      ctx.fill()
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      time += 0.007
-
-      const h = canvas.height
-
-      drawWave(
-        h * 0.82,
-        h * 0.1,
-        2.2,
-        0.5,
-        'rgba(45,90,39,0.18)',
-        'rgba(45,90,39,0.04)'
-      )
-      drawWave(
-        h * 0.72,
-        h * 0.09,
-        2.8,
-        0.8,
-        'rgba(201,170,101,0.16)',
-        'rgba(201,170,101,0.03)'
-      )
-      drawWave(
-        h * 0.6,
-        h * 0.08,
-        2.0,
-        0.65,
-        'rgba(80,145,60,0.14)',
-        'rgba(80,145,60,0.02)'
-      )
-      drawWave(
-        h * 0.46,
-        h * 0.07,
-        3.2,
-        1.0,
-        'rgba(230,205,120,0.13)',
-        'rgba(230,205,120,0.02)'
-      )
-      drawWave(
-        h * 0.3,
-        h * 0.06,
-        2.5,
-        1.2,
-        'rgba(45,90,39,0.10)',
-        'rgba(45,90,39,0.01)'
-      )
-
-      animationFrameId = requestAnimationFrame(animate)
-    }
-
-    const resizeObserver = new ResizeObserver(() => {
-      setSize()
-    })
-    if (canvas.parentElement) resizeObserver.observe(canvas.parentElement)
-
-    setSize()
-    animate()
-
-    return () => {
-      cancelAnimationFrame(animationFrameId)
-      resizeObserver.disconnect()
-    }
-  }, [])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 1
-      }}
-    />
-  )
-}
-
 const Testimonials = () => {
   const ref = useScrollReveal({ stagger: 0.1 })
   const [current, setCurrent] = useState(0)
@@ -255,7 +113,6 @@ const Testimonials = () => {
   const handleTouchStart = (e: React.TouchEvent) => {
     startXRef.current = e.touches[0].clientX
   }
-
   const handleTouchEnd = (e: React.TouchEvent) => {
     const diff = startXRef.current - e.changedTouches[0].clientX
     if (Math.abs(diff) > 40) navigate(diff > 0 ? current + 1 : current - 1)
@@ -275,10 +132,7 @@ const Testimonials = () => {
         paddingBottom: '80px'
       }}
     >
-      {/* Fondo animado: ondas fluidas */}
-      <AnimatedBackground />
-
-      {/* Difuminado inferior — solo cubre el espacio debajo de la card, zIndex bajo */}
+      {/* Difuminado inferior */}
       <div
         style={{
           position: 'absolute',
@@ -313,7 +167,7 @@ const Testimonials = () => {
           </div>
 
           <div
-            className={`text-white display-title text-center}`}
+            className="text-white display-title text-center"
             style={{ animationDelay: '0.1s' }}
           >
             <h2 className="text-green">
@@ -328,14 +182,20 @@ const Testimonials = () => {
         </div>
 
         {/* ── 2. Bloque verde ── */}
+        {/*
+          En mobile: mx-4 (margen lateral pequeño, flechas ocultas)
+          En tablet (md): mx-12 para dar espacio a las flechas que quedan fuera
+          En desktop (lg): mx-0 con max-width controlado por el padre, flechas a -44px
+        */}
         <div
-          className="mx-4 md:mx-0"
+          className="mx-4 md:mx-14 lg:mx-10 xl:mx-0"
           style={{ position: 'relative', zIndex: 2 }}
         >
-          {/* Flecha izquierda */}
+          {/* Flecha izquierda — solo md+ */}
           <button
             onClick={() => navigate(current - 1)}
             aria-label="Anterior"
+            className="hidden md:flex"
             style={{
               position: 'absolute',
               top: '50%',
@@ -347,7 +207,6 @@ const Testimonials = () => {
               border: '1.5px solid rgba(45,90,39,0.35)',
               background: '#fff',
               color: '#2d5a27',
-              display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
@@ -358,10 +217,11 @@ const Testimonials = () => {
             <ChevronLeft />
           </button>
 
-          {/* Flecha derecha */}
+          {/* Flecha derecha — solo md+ */}
           <button
             onClick={() => navigate(current + 1)}
             aria-label="Siguiente"
+            className="hidden md:flex"
             style={{
               position: 'absolute',
               top: '50%',
@@ -373,7 +233,6 @@ const Testimonials = () => {
               border: '1.5px solid rgba(45,90,39,0.35)',
               background: '#fff',
               color: '#2d5a27',
-              display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
@@ -439,21 +298,21 @@ const Testimonials = () => {
                       position: 'relative'
                     }}
                   >
-                    {/* ── Desktop ── */}
+                    {/* ── Desktop / Tablet ── */}
                     <div
                       className="hidden md:flex"
                       style={{
                         alignItems: 'center',
-                        minHeight: '640px',
-                        padding: '48px 56px'
+                        minHeight: '540px',
+                        padding: '40px 36px'
                       }}
                     >
                       {/* Foto */}
                       <div
                         style={{
                           flexShrink: 0,
-                          width: '360px',
-                          height: '480px',
+                          width: 'clamp(200px, 35%, 360px)',
+                          height: 'clamp(260px, 45vw, 480px)',
                           borderRadius: '20px',
                           overflow: 'hidden',
                           border: '2px solid rgba(255,255,255,0.18)',
@@ -476,12 +335,13 @@ const Testimonials = () => {
                         )}
                       </div>
 
-                      {/* Texto desktop */}
+                      {/* Texto desktop/tablet */}
                       <div
                         style={{
                           flex: 1,
-                          paddingLeft: '48px',
-                          paddingRight: '16px'
+                          paddingLeft: 'clamp(20px, 4vw, 48px)',
+                          paddingRight: '8px',
+                          minWidth: 0
                         }}
                       >
                         <p
@@ -496,26 +356,27 @@ const Testimonials = () => {
                         >
                           Tratamiento
                         </p>
-
                         <h3
                           style={{
-                            fontSize: '40px',
+                            fontSize: 'clamp(24px, 4vw, 40px)',
                             fontWeight: 700,
                             color: '#fff',
                             margin: 0,
                             lineHeight: 1.1,
-                            letterSpacing: '-0.01em'
+                            letterSpacing: '-0.01em',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
                           }}
                         >
                           {t.subtitle}
                         </h3>
-
                         <Stars count={t.stars} />
-
                         <div
                           style={{
                             borderRadius: '16px',
-                            padding: '24px 28px',
+                            padding:
+                              'clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 28px)',
                             border: '1.5px solid rgba(255,255,255,0.18)',
                             background: 'rgba(255,255,255,0.06)'
                           }}
@@ -523,7 +384,7 @@ const Testimonials = () => {
                           <p
                             style={{
                               color: '#fff',
-                              fontSize: '22px',
+                              fontSize: 'clamp(16px, 2vw, 22px)',
                               fontWeight: 700,
                               lineHeight: 1.5,
                               margin: '0 0 12px 0'
@@ -534,7 +395,7 @@ const Testimonials = () => {
                           <p
                             style={{
                               color: 'rgba(255,255,255,0.78)',
-                              fontSize: '15px',
+                              fontSize: 'clamp(13px, 1.5vw, 15px)',
                               lineHeight: 1.7,
                               margin: '0 0 12px 0'
                             }}
@@ -544,7 +405,7 @@ const Testimonials = () => {
                           <p
                             style={{
                               color: '#c9aa65',
-                              fontSize: '15px',
+                              fontSize: 'clamp(13px, 1.5vw, 15px)',
                               fontWeight: 500,
                               margin: 0
                             }}
