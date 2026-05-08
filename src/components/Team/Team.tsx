@@ -73,7 +73,6 @@ function injectStyles() {
   document.head.appendChild(el)
 }
 
-// threshold bajo (0.05) = dispara cuando apenas el 5% del elemento es visible
 function useInView(threshold = 0.05) {
   const ref = useRef<HTMLElement | null>(null)
   const [inView, setInView] = useState(false)
@@ -157,7 +156,6 @@ const ChevronRight = () => (
   </svg>
 )
 
-// ── DoctorCard para carrusel móvil ──
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
   <div
     className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col"
@@ -288,7 +286,6 @@ const MobileCarousel = ({ inView }: { inView: boolean }) => {
   )
 }
 
-// ── Tarjeta animada individualmente (grid desktop) ──
 const AnimatedDoctorCard = ({
   member,
   delay
@@ -355,7 +352,6 @@ const AnimatedDoctorCard = ({
   )
 }
 
-// ── Tarjeta principal con observer individual ─────────────────
 const AnimatedMainCard = () => {
   const { ref, inView } = useInView(0.05)
   const mainDoctor = TEAM[0]
@@ -381,17 +377,19 @@ const AnimatedMainCard = () => {
             />
           </div>
           <div className="relative border-l-2 border-l-green overflow-hidden">
-            {/* FRASE EN ESQUINA SUPERIOR DERECHA - TABLET (más grande y con salto de línea) */}
             <div className="absolute top-6 right-6 flex flex-col items-end z-10 max-w-[280px]">
               {mainDoctor.phrase && (
-                <p className="text-gold/90 text-right mb-2 italic font-bold leading-tight text-lg">
-                  "{mainDoctor.phrase}"
+                <p className="text-gold/90 text-right mb-2 font-bold leading-tight display-lg">
+                  "Si sonries,
+                  <br />
+                  <span className="text-white">el mundo</span>
+                  <br /> es mejor"
                 </p>
               )}
-              <span className="block text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-1">
+              <span className="block text-gold text-base tracking-[0.25em] uppercase font-semibold mb-1">
                 {mainDoctor.specialty}
               </span>
-              <h3 className="text-white text-xl font-bold leading-tight text-right">
+              <h3 className="text-white text-2xl font-bold leading-tight text-right">
                 {mainDoctor.name}
               </h3>
             </div>
@@ -425,8 +423,7 @@ const AnimatedMainCard = () => {
             />
           </div>
           <div className="relative border border-white/25 rounded-br-2xl border-l-2 border-l-green">
-            {/* FRASE EN ESQUINA SUPERIOR DERECHA - DESKTOP (más grande y con salto de línea) */}
-            <div className="absolute top-8 right-8 flex flex-col items-end max-w-[320px] gap-16 ">
+            <div className="absolute top-8 right-8 flex flex-col items-end max-w-[320px] gap-16">
               <div>
                 {mainDoctor.phrase && (
                   <p className="text-gold/90 text-right mb-2 font-bold leading-tight display-lg">
