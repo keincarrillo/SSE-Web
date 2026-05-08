@@ -318,7 +318,6 @@ const ServiceVisual = ({
         startTimer()
       }}
     >
-      {/* Track de imágenes */}
       <div
         style={{
           display: 'flex',
@@ -351,7 +350,6 @@ const ServiceVisual = ({
         ))}
       </div>
 
-      {/* Overlay degradado inferior para los dots */}
       {hasMultiple && (
         <div
           style={{
@@ -366,7 +364,6 @@ const ServiceVisual = ({
         />
       )}
 
-      {/* Dots — solo si hay más de 1 imagen */}
       {hasMultiple && (
         <div
           style={{
@@ -432,7 +429,6 @@ const ServiceSection = ({
             isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
           }`}
         >
-          {/* Visual */}
           <div
             className="w-full lg:w-5/12 shrink-0"
             data-gsap={isEven ? 'fade-right' : 'fade-left'}
@@ -444,9 +440,7 @@ const ServiceSection = ({
             />
           </div>
 
-          {/* Texto */}
           <div className="w-full lg:w-7/12 flex flex-col">
-            {/* número grande decorativo */}
             <span
               className={`text-[5rem] font-bold leading-none select-none mb-1 ${
                 isGreen ? 'text-gold/30' : 'text-green/30'
@@ -456,7 +450,6 @@ const ServiceSection = ({
               0{index + 1}
             </span>
 
-            {/* badge */}
             <div
               data-gsap="fade-up"
               className={`inline-flex self-start items-center gap-2 px-3 py-1 rounded-full border mb-3 ${
@@ -470,7 +463,6 @@ const ServiceSection = ({
               </span>
             </div>
 
-            {/* título */}
             <h2
               data-gsap="fade-up"
               className={`display-name text-3xl md:text-4xl mb-4 leading-tight ${
@@ -480,7 +472,6 @@ const ServiceSection = ({
               {service.title}
             </h2>
 
-            {/* descripción */}
             <p
               data-gsap="fade-up"
               className={`text-md lg:text-lg leading-[1.7] mb-8 ${
@@ -490,7 +481,6 @@ const ServiceSection = ({
               {service.description}
             </p>
 
-            {/* highlights */}
             <div className="flex flex-col gap-4">
               {service.highlights.map((h, i) => (
                 <div
@@ -563,7 +553,6 @@ const PageHeader = () => {
       ref={ref}
       className="relative pt-28 pb-20 md:pt-40 md:pb-28 text-center px-4 bg-green overflow-hidden"
     >
-      {/* Fondo decorativo sutil */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.07]"
         style={{
@@ -598,7 +587,6 @@ const PageHeader = () => {
         sonrisa.
       </p>
 
-      {/* Nav ancla rápida */}
       <div
         data-gsap="fade-up"
         className="relative flex flex-wrap justify-center gap-2 mt-8"
@@ -614,7 +602,6 @@ const PageHeader = () => {
         ))}
       </div>
 
-      {/* Ola de transición */}
       <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
         <svg
           viewBox="0 0 1440 48"
@@ -663,7 +650,6 @@ const CtaSection = () => {
       ref={ref}
       className="relative py-20 text-center px-4 bg-green border-t border-white/10"
     >
-      {/* Fondo decorativo sutil igual que el header */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.07]"
         style={{
@@ -725,7 +711,20 @@ const ServicesPage = () => {
   usePageLenis()
 
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    // Si hay hash en la URL, scroll a esa sección después de que el DOM esté listo
+    const hash = window.location.hash
+    if (hash) {
+      // Pequeño delay para que Lenis y el layout estén listos
+      const timeout = setTimeout(() => {
+        const el = document.querySelector(hash)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 300)
+      return () => clearTimeout(timeout)
+    } else {
+      window.scrollTo({ top: 0 })
+    }
   }, [])
 
   return (
