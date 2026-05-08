@@ -108,6 +108,7 @@ const IconFacebook = ({ size = 40, color = '#1a3d1a' }) => (
   </svg>
 )
 
+/* ─── Carousel (mobile < 768px) ─── */
 const PhonesCarousel = ({ inView }: { inView: boolean }) => {
   const [current, setCurrent] = useState(0)
   const startXRef = useRef(0)
@@ -153,7 +154,7 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
   }
 
   return (
-    <div className={`md:hidden ${inView ? 'fade-up' : 'hidden-init'}`}>
+    <div className={`${inView ? 'fade-up' : 'hidden-init'}`}>
       <div className="overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
@@ -216,8 +217,152 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
   )
 }
 
+/* ─── Golden card (shared) ─── */
+const GoldenCard = ({ showMouths = false }: { showMouths?: boolean }) => (
+  <div
+    style={{
+      width: '100%',
+      aspectRatio: '12/16',
+      position: 'relative',
+      maxWidth: '100%'
+    }}
+  >
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        background: '#C9A755',
+        borderRadius: 40,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem',
+        boxSizing: 'border-box',
+        gap: '1rem',
+        position: 'relative'
+      }}
+    >
+      <div className="text-center flex flex-col items-center gap-6">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-green/40 bg-green/10">
+          <span className="text-green text-md font-semibold tracking-[0.2em] uppercase">
+            Redes sociales
+          </span>
+        </div>
+        <div
+          className="text-white display-title text-center"
+          style={{ animationDelay: '0.1s' }}
+        >
+          <h2 className="text-green">
+            <span className="text-white">INSPÍRATE EN NUESTRA</span> COMUNIDAD
+          </h2>
+        </div>
+        <p
+          style={{
+            color: 'white',
+            fontSize: 'clamp(14px, 1.5vw, 20px)',
+            fontWeight: 500,
+            textAlign: 'center',
+            letterSpacing: '0.03em',
+            lineHeight: 1.6,
+            margin: 0
+          }}
+        >
+          Conéctate con Smile Studio Experts. <br />
+          Todo sobre nuestros servicios, tips de expertos y resultados
+          increíbles a un solo clic.
+        </p>
+      </div>
+    </div>
+
+    {showMouths && (
+      <>
+        <img
+          src={mouth1}
+          alt=""
+          style={{
+            position: 'absolute',
+            width: '38%',
+            top: '-12%',
+            left: '-14%',
+            pointerEvents: 'none'
+          }}
+        />
+        <img
+          src={mouth2}
+          alt=""
+          style={{
+            position: 'absolute',
+            width: '38%',
+            bottom: '-14%',
+            right: '-14%',
+            pointerEvents: 'none'
+          }}
+        />
+      </>
+    )}
+  </div>
+)
+
+/* ─── TABLET view: 768px – 1023px ─── */
+const TabletView = ({ inView }: { inView: boolean }) => (
+  <div
+    className={`hidden md:flex lg:hidden flex-row items-center justify-center gap-4 px-4 ${inView ? 'fade-up' : 'hidden-init'}`}
+  >
+    {/* FACEBOOK */}
+    <div
+      className="flex flex-col items-center gap-3"
+      style={{ flex: '0 0 38%' }}
+    >
+      <IconFacebook size={50} color="#1a3d1a" />
+      <img
+        src={facebook}
+        alt="Facebook"
+        className="w-full h-auto"
+        style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}
+      />
+      <a
+        href="https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn"
+      >
+        Facebook
+      </a>
+    </div>
+
+    {/* CARD DORADA */}
+    <div style={{ flex: '0 0 14%', overflow: 'visible' }}>
+      <GoldenCard showMouths={true} />
+    </div>
+
+    {/* INSTAGRAM */}
+    <div
+      className="flex flex-col items-center gap-3"
+      style={{ flex: '0 0 38%' }}
+    >
+      <IconInstagram size={50} color="#1a3d1a" />
+      <img
+        src={instagram}
+        alt="Instagram"
+        className="w-full h-auto"
+        style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}
+      />
+      <a
+        href="https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn"
+      >
+        Instagram
+      </a>
+    </div>
+  </div>
+)
+
+/* ─── DESKTOP view: ≥ 1024px ─── */
 const DesktopView = () => (
-  <div className="hidden md:flex flex-row items-start justify-center gap-6 md:gap-4">
+  <div className="hidden lg:flex flex-row items-start justify-center gap-6">
     {/* FACEBOOK */}
     <div className="flex-1">
       <div className="flex justify-center mb-4">
@@ -243,87 +388,7 @@ const DesktopView = () => (
 
     {/* CARD DORADA */}
     <div className="w-1/3 shrink-0">
-      <div
-        style={{
-          width: '100%',
-          aspectRatio: '12/16',
-          position: 'relative',
-          maxWidth: '100%'
-        }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            background: '#C9A755',
-            borderRadius: 40,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '2rem',
-            boxSizing: 'border-box',
-            gap: '1rem',
-            position: 'relative'
-          }}
-        >
-          <div className="text-center flex flex-col items-center gap-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-green/40 bg-green/10">
-              <span className="text-green text-md font-semibold tracking-[0.2em] uppercase">
-                Redes sociales
-              </span>
-            </div>
-            <div
-              className="text-white display-title text-center"
-              style={{ animationDelay: '0.1s' }}
-            >
-              <h2 className="text-green">
-                <span className="text-white">INSPÍRATE EN NUESTRA</span>{' '}
-                COMUNIDAD
-              </h2>
-            </div>
-            <p
-              style={{
-                color: 'white',
-                fontSize: 'clamp(10px, 1.1vw, 15px)',
-                fontWeight: 500,
-                textAlign: 'center',
-                letterSpacing: '0.03em',
-                lineHeight: 1.5,
-                margin: 0
-              }}
-            >
-              Conéctate con Smile Studio Experts. <br />
-              Todo sobre nuestros servicios, tips de expertos y resultados
-              increíbles a un solo clic.
-            </p>
-          </div>
-        </div>
-
-        {/* Bocas: solo visibles en xl (≥1280px) para arriba */}
-        <img
-          src={mouth1}
-          alt=""
-          className="hidden xl:block"
-          style={{
-            position: 'absolute',
-            width: '38%',
-            top: '-12%',
-            left: '-14%'
-          }}
-        />
-        <img
-          src={mouth2}
-          alt=""
-          className="hidden xl:block"
-          style={{
-            position: 'absolute',
-            width: '38%',
-            bottom: '-14%',
-            right: '-14%'
-          }}
-        />
-      </div>
+      <GoldenCard showMouths={true} />
     </div>
 
     {/* INSTAGRAM */}
@@ -351,6 +416,7 @@ const DesktopView = () => (
   </div>
 )
 
+/* ─── MOBILE view: < 768px ─── */
 const MobileView = ({ inView }: { inView: boolean }) => (
   <div className="md:hidden">
     <PhonesCarousel inView={inView} />
@@ -383,26 +449,8 @@ const MobileView = ({ inView }: { inView: boolean }) => (
             position: 'relative'
           }}
         >
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '6px 16px',
-              borderRadius: 999,
-              border: '1px solid rgba(255,255,255,0.4)',
-              background: 'rgba(255,255,255,0.1)'
-            }}
-          >
-            <span
-              style={{
-                color: 'white',
-                fontSize: 13,
-                fontWeight: 600,
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase'
-              }}
-            >
+          <div className="inline-flex items-center gap-4 px-4 py-1.5 rounded-full border border-green/40 bg-green/10">
+            <span className="text-green text-sm font-semibold tracking-wide uppercase">
               Redes sociales
             </span>
           </div>
@@ -422,15 +470,11 @@ const MobileView = ({ inView }: { inView: boolean }) => (
           </h2>
 
           <p
+            className="text-white font-medium uppercase m-0 text-center"
             style={{
-              color: 'white',
-              fontSize: 'clamp(11px, 3.5vw, 15px)',
-              fontWeight: 500,
-              textAlign: 'center',
-              textTransform: 'uppercase',
+              fontSize: 'clamp(14px, 3.5vw, 15px)',
               letterSpacing: '0.03em',
-              lineHeight: 1.5,
-              margin: 0
+              lineHeight: 1.5
             }}
           >
             Conéctate con Smile Studio Experts. Todo sobre nuestros servicios,
@@ -453,6 +497,7 @@ export default function Social() {
     >
       <div className="max-w-8xl mx-auto px-6">
         <MobileView inView={v} />
+        <TabletView inView={v} />
         <DesktopView />
       </div>
     </section>
