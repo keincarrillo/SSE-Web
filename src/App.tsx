@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import { useLenis } from './hooks/useLenis'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
@@ -10,11 +10,18 @@ import Footer from './components/Footer/Footer'
 import Social from './components/Social/Social'
 import ServicesPage from './pages/ServicesPage'
 
+// Layout compartido: Navbar se monta una sola vez para todas las rutas
+const Layout = () => (
+  <>
+    <Navbar />
+    <Outlet />
+  </>
+)
+
 const Home = () => {
   useLenis()
   return (
     <>
-      <Navbar />
       <main>
         <Hero />
         <Services />
@@ -30,8 +37,10 @@ const Home = () => {
 
 const App = () => (
   <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/servicios" element={<ServicesPage />} />
+    <Route element={<Layout />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/servicios" element={<ServicesPage />} />
+    </Route>
   </Routes>
 )
 
