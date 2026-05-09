@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
 
 import blanqueamiento1 from '../assets/services/blanqueamiento1.webp'
@@ -675,12 +674,13 @@ const CtaSection = () => {
         data-gsap="fade-up"
         onClick={() => {
           navigate('/')
+          // 400ms para que la Navbar termine su animación antes del scroll
           setTimeout(
             () =>
               document
                 .getElementById('contacto')
                 ?.scrollIntoView({ behavior: 'smooth' }),
-            100
+            400
           )
         }}
         className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-green font-semibold text-md tracking-[0.05em] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
@@ -711,10 +711,8 @@ const ServicesPage = () => {
   usePageLenis()
 
   useEffect(() => {
-    // Si hay hash en la URL, scroll a esa sección después de que el DOM esté listo
     const hash = window.location.hash
     if (hash) {
-      // Pequeño delay para que Lenis y el layout estén listos
       const timeout = setTimeout(() => {
         const el = document.querySelector(hash)
         if (el) {
@@ -729,7 +727,6 @@ const ServicesPage = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      <Navbar />
       <PageHeader />
       <main>
         {SERVICES.map((s, i) => (
