@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
 
 import blanqueamiento1 from '../assets/services/blanqueamiento1.webp'
@@ -728,7 +727,6 @@ const ServicesPage = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      <Navbar />
       <PageHeader />
       <main>
         {SERVICES.map((s, i) => (
