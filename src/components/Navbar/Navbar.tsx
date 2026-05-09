@@ -35,18 +35,34 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
       scrollToSection()
     } else {
       navigate('/')
-      // Espera a que la home monte y luego hace scroll
-      setTimeout(scrollToSection, 300)
+      setTimeout(scrollToSection, 400)
     }
   }
 
+  // re-anima y resetea estado al cambiar de ruta
   useEffect(() => {
+    setScrolled(false)
+    setOpen(false)
+    window.scrollTo({ top: 0 })
+
+    // oculta instantáneamente para evitar el blur visible durante la animación
+    gsap.set(navRef.current, { y: -200, opacity: 0, visibility: 'hidden' })
+
     gsap.fromTo(
       navRef.current,
       { y: -200, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, delay: 0.5, ease: 'power1.out' }
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.5,
+        ease: 'power1.out',
+        onStart: () => {
+          if (navRef.current) navRef.current.style.visibility = 'visible'
+        }
+      }
     )
-  }, [])
+  }, [location.pathname])
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50)
