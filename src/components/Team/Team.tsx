@@ -6,7 +6,6 @@ import profesional3 from '../../assets/profesional3.webp'
 import profesional4 from '../../assets/profesional4.webp'
 import banner1 from '../../assets/banner1.webp'
 import banner2 from '../../assets/banner2.webp'
-import profesional1green from '../../assets/profesional1green.webp'
 
 const ANIM_STYLES = `
   @keyframes teamFadeUp {
@@ -103,18 +102,17 @@ const TEAM = [
     name: 'Dr. Jesus Ruiz',
     specialty: 'Cirujano Dentista',
     img: profesional1,
-    mobileImg: profesional1green,
     phrase: 'Si sonríes, el mundo es mejor'
   },
   {
     id: 2,
-    name: 'Dra. Fernanda Gil',
+    name: 'Dra. Jocelyn Reynoso',
     specialty: 'Cirujano Dentista',
     img: profesional2
   },
   {
     id: 3,
-    name: 'Dra. Jocelyn Reynoso',
+    name: 'Dra. Fernanda Gil',
     specialty: 'Cirujano Dentista',
     img: profesional3
   },
@@ -157,10 +155,7 @@ const ChevronRight = () => (
 )
 
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
-  <div
-    className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col"
-    style={{ minHeight: 'clamp(260px, 70vw, 400px)' }}
-  >
+  <div className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col min-h-110">
     <div
       className="relative flex-1 overflow-hidden"
       style={{
@@ -188,17 +183,10 @@ const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
             'linear-gradient(to right, transparent, rgba(212,175,55,0.6) 40%, rgba(212,175,55,0.6) 60%, transparent)'
         }}
       />
-      {member.mobileImg && (
-        <img
-          src={member.mobileImg}
-          alt={member.name}
-          className="relative w-full h-full object-cover object-top sm:hidden"
-        />
-      )}
       <img
         src={member.img}
         alt={member.name}
-        className={`relative w-full h-full object-cover object-top ${member.mobileImg ? 'hidden sm:block' : ''}`}
+        className="absolute bottom-0 left-0 w-full h-full object-cover object-bottom"
       />
     </div>
     <div className="px-3 py-2">
@@ -377,7 +365,7 @@ const AnimatedMainCard = () => {
             />
           </div>
           <div className="relative border-l-2 border-l-green overflow-hidden">
-            <div className="absolute top-6 right-6 flex flex-col items-end z-10 max-w-[280px]">
+            <div className="absolute top-6 right-6 flex flex-col items-end z-10 max-w-70">
               {mainDoctor.phrase && (
                 <p className="text-gold/90 text-right mb-2 font-bold leading-tight display-lg">
                   "Si sonries,
@@ -518,7 +506,7 @@ export default function Team() {
 
           <div className="flex justify-center mt-4">
             <div
-              className={`h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent ${titleInView ? 'team-line-grow' : 'opacity-0'}`}
+              className={`h-px w-24 bg-linear-to-r from-transparent via-gold to-transparent ${titleInView ? 'team-line-grow' : 'opacity-0'}`}
             />
           </div>
         </div>

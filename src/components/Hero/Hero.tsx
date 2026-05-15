@@ -151,18 +151,18 @@ const Hero = () => {
 
       {/* Barra de stats */}
       <div ref={barRef} className="relative z-20 w-full bg-gold">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-1 md:py-2 flex flex-col sm:flex-row items-center justify-center divide-y sm:divide-y-0 sm:divide-x divide-black/10 md:divide-x-0 md:gap-16 lg:gap-30">
+        <div className="w-full px-6 py-1 md:py-2 grid grid-cols-3 items-center divide-x-0 md:divide-x-0">
           {STATS.map(s => (
             <div
               key={s.label}
-              className="flex flex-col items-center gap-0.5 px-2 sm:px-6 py-2 sm:py-0 w-full sm:w-auto"
+              className="flex flex-col items-center justify-center gap-0.5 py-2"
             >
               <span className="display-name text-green-dark font-black text-md sm:text-2xl md:text-4xl tabular-nums leading-none">
                 {s.prefix}
                 <AnimatedNumber target={s.value} active={statsActive} />
                 {s.suffix}
               </span>
-              <span className="font-semibold text-white text-xs sm:text-xs tracking-[0.15em] uppercase text-center">
+              <span className="font-semibold text-white text-xs lg:text-lg tracking-[0.15em] uppercase text-center">
                 {s.label}
               </span>
             </div>
