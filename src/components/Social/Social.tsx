@@ -425,63 +425,7 @@ const MobileView = ({ inView }: { inView: boolean }) => (
       className={`mt-12 px-2 ${inView ? 'fade-up' : 'hidden-init'}`}
       style={{ animationDelay: '0.2s' }}
     >
-      <div
-        style={{
-          width: '100%',
-          aspectRatio: '11/16',
-          position: 'relative',
-          maxWidth: '100%'
-        }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            background: '#C9A755',
-            borderRadius: 40,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '2rem',
-            boxSizing: 'border-box',
-            gap: '1.2rem',
-            position: 'relative'
-          }}
-        >
-          <div className="inline-flex items-center gap-4 px-4 py-1.5 rounded-full border border-green/40 bg-green/10">
-            <span className="text-green text-sm font-semibold tracking-wide uppercase">
-              Redes sociales
-            </span>
-          </div>
-
-          <h2
-            style={{
-              fontSize: 'clamp(22px, 6vw, 34px)',
-              fontWeight: 900,
-              textTransform: 'uppercase',
-              textAlign: 'center',
-              lineHeight: 1.1,
-              margin: 0
-            }}
-          >
-            <span style={{ color: '#1a3d1a' }}>INSPÍRATE EN NUESTRA</span>{' '}
-            <span style={{ color: 'white' }}>COMUNIDAD</span>
-          </h2>
-
-          <p
-            className="text-white font-medium uppercase m-0 text-center"
-            style={{
-              fontSize: 'clamp(14px, 3.5vw, 15px)',
-              letterSpacing: '0.03em',
-              lineHeight: 1.5
-            }}
-          >
-            Conéctate con Smile Studio Experts. Todo sobre nuestros servicios,
-            tips de expertos y resultados increíbles a un solo clic.
-          </p>
-        </div>
-      </div>
+      <GoldenCard showMouths={false} />
     </div>
   </div>
 )
