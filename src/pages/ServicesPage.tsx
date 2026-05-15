@@ -13,7 +13,9 @@ import carillas1 from '../assets/services/carillas1.webp'
 import carillas2 from '../assets/services/carillas2.webp'
 import carillas3 from '../assets/services/carillas3.webp'
 import limpieza from '../assets/services/limpieza.webp'
-import protesis from '../assets/services/protesis.webp'
+import protesis1 from '../assets/services/protesis1.webp'
+import protesis2 from '../assets/services/protesis2.webp'
+import protesis3 from '../assets/services/protesis3.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -59,7 +61,7 @@ const SERVICES: {
     subtitle: 'Restaura tu sonrisa con naturalidad',
     description:
       'Tratamientos que permiten reemplazar o restaurar piezas dentales perdidas o dañadas, devolviendo función, estética y seguridad al sonreír. Utilizamos materiales de alta calidad que imitan perfectamente la apariencia y resistencia de tus dientes naturales.',
-    images: [protesis],
+    images: [protesis1, protesis2, protesis3],
     bg: 'white',
     highlights: [
       {
