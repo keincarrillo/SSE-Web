@@ -61,6 +61,43 @@ const ANIM_STYLES = `
     transform: translateY(-6px);
     box-shadow: 0 20px 40px rgba(212,175,55,0.18);
   }
+
+  @keyframes descSlideDown {
+    from { opacity: 0; transform: translateY(-8px); max-height: 0; }
+    to   { opacity: 1; transform: translateY(0);    max-height: 200px; }
+  }
+  @keyframes descSlideUp {
+    from { opacity: 1; transform: translateY(0);    max-height: 200px; }
+    to   { opacity: 0; transform: translateY(-8px); max-height: 0; }
+  }
+
+  .desc-open {
+    animation: descSlideDown 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+    overflow: hidden;
+  }
+  .desc-close {
+    animation: descSlideUp 0.28s cubic-bezier(0.55, 0, 1, 0.45) both;
+    overflow: hidden;
+  }
+
+  .toggle-btn {
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .toggle-btn:hover {
+    background: rgba(212,175,55,0.15);
+    border-color: rgba(212,175,55,0.7);
+  }
+
+  @keyframes chevronRotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(180deg); }
+  }
+  @keyframes chevronRotateBack {
+    from { transform: rotate(180deg); }
+    to   { transform: rotate(0deg); }
+  }
+  .chevron-open  { animation: chevronRotate     0.3s ease both; }
+  .chevron-close { animation: chevronRotateBack 0.3s ease both; }
 `
 
 function injectStyles() {
@@ -108,19 +145,25 @@ const TEAM = [
     id: 2,
     name: 'Dra. Jocelyn Reynoso',
     specialty: 'Cirujano Dentista',
-    img: profesional2
+    img: profesional2,
+    description:
+      'La Dra. Reynoso se distingue por generar un entorno de confianza y tranquilidad desde el primer contacto. Su atención es cálida, empática y orientada al bienestar integral de cada paciente, brindando una experiencia odontológica cómoda, segura y de alta calidad en todo momento.'
   },
   {
     id: 3,
     name: 'Dra. Fernanda Gil',
     specialty: 'Cirujano Dentista',
-    img: profesional3
+    img: profesional3,
+    description:
+      'La Dra. Gil se caracteriza por su trato cercano y su capacidad para generar vínculos de confianza genuinos con sus pacientes. Clínicamente, sobresale por la precisión en la anatomía dental, obteniendo resultados estéticos naturales y armónicos con atención meticulosa al detalle.'
   },
   {
     id: 4,
     name: 'Dr. Enrique Vazquez',
     specialty: 'Cirujano Dentista',
-    img: profesional4
+    img: profesional4,
+    description:
+      'El Dr. Vázquez destaca por su actitud proactiva, su puntualidad y el compromiso con el que aborda cada tratamiento. Su empatía y calidez humana crean un ambiente de confianza que facilita una atención odontológica profesional, personalizada y centrada en el bienestar del paciente.'
   }
 ]
 
@@ -154,18 +197,100 @@ const ChevronRight = () => (
   </svg>
 )
 
+// Chevron down icon for the toggle button
+const ChevronDown = ({ className }: { className?: string }) => (
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+)
+
+// Info icon for the toggle trigger
+const InfoIcon = () => (
+  <svg
+    width="11"
+    height="11"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 16v-4M12 8h.01" />
+  </svg>
+)
+
+// ── Expandable description block ──────────────────────────────────────────────
+const DescriptionToggle = ({ text }: { text: string }) => {
+  const [open, setOpen] = useState(false)
+  // Track whether it's ever been opened so we can play close animation
+  const [hasOpened, setHasOpened] = useState(false)
+
+  const handleToggle = () => {
+    if (!open) setHasOpened(true)
+    setOpen(v => !v)
+  }
+
+  return (
+    <div className="px-3 pb-3 sm:px-4 sm:pb-4">
+      {/* Toggle button */}
+      <button
+        onClick={handleToggle}
+        className="toggle-btn w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg border border-gold/30 bg-gold/8 text-gold cursor-pointer"
+        aria-expanded={open}
+      >
+        <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase">
+          <InfoIcon />
+          {open ? 'Ocultar' : 'Conocer más'}
+        </span>
+        <ChevronDown
+          className={open ? 'chevron-open' : hasOpened ? 'chevron-close' : ''}
+        />
+      </button>
+
+      {/* Collapsible description */}
+      {hasOpened && (
+        <div className={open ? 'desc-open' : 'desc-close'}>
+          <p
+            className="mt-3 text-white/70 leading-relaxed"
+            style={{ fontSize: 'clamp(13px, 2vw, 15px)' }}
+          >
+            {text}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
-  <div className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col min-h-110">
+  <div className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col">
+    {/* Image — fixed height so the full photo shows on mobile */}
     <div
-      className="relative flex-1 overflow-hidden"
-      style={{
-        background: `
-          radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.5) 0%, transparent 55%),
-          radial-gradient(ellipse at 90% 5%,  rgba(212,175,55,0.25) 0%, transparent 45%),
-          linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)
-        `
-      }}
+      className="relative flex-shrink-0 overflow-hidden"
+      style={{ height: '360px' }}
     >
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.5) 0%, transparent 55%),
+            radial-gradient(ellipse at 90% 5%,  rgba(212,175,55,0.25) 0%, transparent 45%),
+            linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)
+          `
+        }}
+      />
       <div
         className="absolute inset-0"
         style={{
@@ -186,7 +311,7 @@ const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
       <img
         src={member.img}
         alt={member.name}
-        className="absolute bottom-0 left-0 w-full h-full object-cover object-bottom"
+        className="absolute inset-0 w-full h-full object-cover object-center"
       />
     </div>
     <div className="px-3 py-2">
@@ -203,6 +328,7 @@ const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
         {member.name}
       </h3>
     </div>
+    {member.description && <DescriptionToggle text={member.description} />}
   </div>
 )
 
@@ -276,12 +402,33 @@ const MobileCarousel = ({ inView }: { inView: boolean }) => {
 
 const AnimatedDoctorCard = ({
   member,
-  delay
+  delay,
+  isOpen,
+  onToggle
 }: {
   member: (typeof TEAM)[number]
   delay: string
+  isOpen?: boolean
+  onToggle?: () => void
 }) => {
   const { ref, inView } = useInView(0.05)
+  const [localOpen, setLocalOpen] = useState(false)
+  const [hasOpened, setHasOpened] = useState(false)
+
+  const open = onToggle !== undefined ? (isOpen ?? false) : localOpen
+
+  const handleToggle = () => {
+    if (!open) setHasOpened(true)
+    if (onToggle) {
+      onToggle()
+    } else {
+      setLocalOpen(v => !v)
+    }
+  }
+
+  useEffect(() => {
+    if (isOpen) setHasOpened(true)
+  }, [isOpen])
 
   return (
     <div
@@ -289,6 +436,7 @@ const AnimatedDoctorCard = ({
       className={`doctor-card-sm relative rounded-2xl border border-white/20 overflow-hidden flex flex-col ${inView ? 'team-slide-from-left' : 'team-hidden'}`}
       style={{ minHeight: 'clamp(110px, 30vw, 320px)', animationDelay: delay }}
     >
+      {/* Image area */}
       <div
         className="relative flex-1 overflow-hidden"
         style={{
@@ -322,7 +470,9 @@ const AnimatedDoctorCard = ({
           className="relative w-full h-full object-cover object-top"
         />
       </div>
-      <div className="px-3 py-2 sm:px-4 sm:py-3">
+
+      {/* Name & specialty */}
+      <div className="px-3 py-2 sm:px-4 sm:pt-3 sm:pb-2">
         <span
           className="block text-gold uppercase font-semibold mb-1 tracking-widest"
           style={{ fontSize: 'clamp(10px, 2.2vw, 14px)' }}
@@ -336,6 +486,60 @@ const AnimatedDoctorCard = ({
           {member.name}
         </h3>
       </div>
+
+      {/* Expandable description */}
+      {member.description && (
+        <div className="px-3 pb-3 sm:px-4 sm:pb-4">
+          <button
+            onClick={handleToggle}
+            className="toggle-btn w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg border border-gold/30 bg-gold/8 text-gold cursor-pointer"
+            aria-expanded={open}
+          >
+            <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase">
+              <InfoIcon />
+              {open ? 'Ocultar' : 'Conocer más'}
+            </span>
+            <ChevronDown
+              className={
+                open ? 'chevron-open' : hasOpened ? 'chevron-close' : ''
+              }
+            />
+          </button>
+
+          {hasOpened && (
+            <div className={open ? 'desc-open' : 'desc-close'}>
+              <p
+                className="mt-3 text-white/70 leading-relaxed"
+                style={{ fontSize: 'clamp(13px, 1.8vw, 15px)' }}
+              >
+                {member.description}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+const DesktopDoctorGrid = () => {
+  const [openId, setOpenId] = useState<number | null>(null)
+
+  const handleToggle = (id: number) => {
+    setOpenId(prev => (prev === id ? null : id))
+  }
+
+  return (
+    <div className="hidden sm:grid sm:grid-cols-3 gap-4">
+      {TEAM.slice(1).map((m, i) => (
+        <AnimatedDoctorCard
+          key={m.id}
+          member={m}
+          delay={`${i * 0.08}s`}
+          isOpen={openId === m.id}
+          onToggle={() => handleToggle(m.id)}
+        />
+      ))}
     </div>
   )
 }
@@ -518,11 +722,7 @@ export default function Team() {
         <AnimatedMainCard />
 
         {/* ── SM+: grid 3 doctores ── */}
-        <div className="hidden sm:grid sm:grid-cols-3 gap-4">
-          {TEAM.slice(1).map((m, i) => (
-            <AnimatedDoctorCard key={m.id} member={m} delay={`${i * 0.08}s`} />
-          ))}
-        </div>
+        <DesktopDoctorGrid />
       </div>
     </section>
   )
