@@ -10,6 +10,7 @@ import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import Social from './components/Social/Social'
 import ServicesPage from './pages/ServicesPage'
+import Promotions from './components/Promotions/Promotions'
 
 // Layout compartido: Navbar se monta una sola vez para todas las rutas
 const Layout = () => (
@@ -27,6 +28,7 @@ const Home = () => {
         <Problem />
         <Hero />
         <Services />
+        <Promotions />
         <Team />
         <Testimonials />
         <Social />
