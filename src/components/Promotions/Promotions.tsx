@@ -23,33 +23,76 @@ const useCountdown = () => {
 
 const PROMOS = [
   {
-    tag: 'Más popular',
-    title: 'Paquete Sonrisa Brillante',
+    tag: 'Valoración completa',
+    title: 'Paquete Valoración Premium',
     description:
-      'Incluye valoración dental completa + limpieza profesional + blanqueamiento dental. El combo ideal para renovar tu sonrisa.',
-    price: '$2,500',
-    priceNote: 'Precio regular $3,800',
+      'Diseño de sonrisa, diagnóstico, radiografías, presupuesto y fotografías profesionales, todo en una sola cita a un gran precio.',
+    price: 'Desde $200',
+    priceNote: 'Sujeto a sucursal',
     featured: true
   },
   {
-    tag: 'Tiempo limitado',
-    title: 'Primera Consulta Gratis',
+    tag: 'Descuento exclusivo',
+    title: '10% en tu Tratamiento',
     description:
-      'Agenda tu valoración inicial sin costo. Conoce el estado de tu salud bucal y recibe un plan de tratamiento personalizado.',
-    price: 'Gratis',
-    priceNote: 'Valor regular $500',
+      'Obtén un descuento del 10% en el presupuesto de tu tratamiento. Solo preséntate a tu valoración y aplica automáticamente.',
+    price: '10% off',
+    priceNote: 'Sobre el presupuesto total',
     featured: false
   },
   {
-    tag: 'Promo especial',
-    title: 'Ortodoncia con Descuento',
+    tag: 'Solo Polanco',
+    title: 'Blanqueamiento Zoom',
     description:
-      'Tratamiento de ortodoncia con brackets con 20% de descuento al pagar el enganche en tu primera cita. Cupo limitado.',
-    price: '20% off',
-    priceNote: 'Enganche desde $3,000',
+      'El blanqueamiento dental más avanzado del mercado, disponible exclusivamente en nuestra sede de Polanco. Resultados desde la primera sesión.',
+    price: 'Pregunta',
+    priceNote: 'Disponible solo en Polanco',
     featured: false
   }
 ]
+
+const MARQUEE_ITEMS = [
+  '✦ Promociones',
+  '★ Ofertas Especiales',
+  '✦ Tiempo Limitado',
+  '★ Smile Studio Experts',
+  '✦ Promociones',
+  '★ Ofertas Especiales',
+  '✦ Tiempo Limitado',
+  '★ Smile Studio Experts'
+]
+
+const Marquee = () => (
+  <div
+    className="w-full overflow-hidden py-3 md:py-5"
+    style={{ background: '#c9aa65' }}
+  >
+    <style>{`
+      @keyframes marquee {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: marquee 18s linear infinite;
+      }
+      .marquee-track:hover {
+        animation-play-state: paused;
+      }
+    `}</style>
+    <div className="marquee-track">
+      {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+        <span
+          key={i}
+          className="whitespace-nowrap px-8 md:px-12 text-white font-semibold tracking-[0.2em] md:tracking-[0.25em] uppercase text-sm md:text-2xl"
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  </div>
+)
 
 const ShimmerStyles = () => (
   <style>{`
@@ -151,7 +194,6 @@ const PromoCard = ({
         : '0 2px 16px rgba(0,0,0,0.06)'
     }}
   >
-    {/* Tag */}
     <div className="px-6 pt-6 pb-0">
       <span
         className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase"
@@ -165,8 +207,6 @@ const PromoCard = ({
         {tag}
       </span>
     </div>
-
-    {/* Content */}
     <div className="flex flex-col flex-1 px-6 pt-4 pb-6 gap-4">
       <h3
         className="display-name text-xl tracking-[0.02em]"
@@ -174,7 +214,6 @@ const PromoCard = ({
       >
         {title}
       </h3>
-
       <p
         className="text-md lg:text-lg leading-[1.65]"
         style={{
@@ -183,8 +222,6 @@ const PromoCard = ({
       >
         {description}
       </p>
-
-      {/* Price */}
       <div className="mt-auto pt-2">
         <div
           className="display-name text-3xl tracking-[0.02em]"
@@ -193,9 +230,9 @@ const PromoCard = ({
           {price}
         </div>
         <div
-          className="text-md leading-[1.65] line-through mt-0.5"
+          className="text-md leading-[1.65] mt-0.5"
           style={{
-            color: featured ? 'rgba(255,255,255,0.3)' : 'rgba(40,75,9,0.3)'
+            color: featured ? 'rgba(255,255,255,0.4)' : 'rgba(40,75,9,0.4)'
           }}
         >
           {priceNote}
@@ -212,9 +249,11 @@ const Promotions = () => {
     <section
       ref={ref}
       id="promociones"
-      className="bg-white py-10 md:py-16 lg:py-24 relative overflow-x-hidden"
+      className="bg-white py-10 md:py-10 lg:py-12 relative overflow-x-hidden"
     >
       <ShimmerStyles />
+
+      <Marquee />
 
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -226,10 +265,9 @@ const Promotions = () => {
       />
 
       <div
-        className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 relative"
+        className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 relative mt-10 md:mt-14"
         style={{ zIndex: 2 }}
       >
-        {/* Header */}
         <div className="text-center mb-12 md:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-6">
             <span
@@ -255,24 +293,21 @@ const Promotions = () => {
           </p>
         </div>
 
-        {/* Countdown */}
         <CountdownTimer />
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {PROMOS.map(promo => (
             <PromoCard key={promo.title} {...promo} />
           ))}
         </div>
 
-        {/* Botón */}
         <div className="flex justify-center mt-10">
           <button
             onClick={() => {
               const el = document.getElementById('contacto')
               if (el) el.scrollIntoView({ behavior: 'smooth' })
             }}
-            className="btn-shimmer group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green text-white font-semibold text-md tracking-[0.05em] overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(30,70,32,0.35)]"
+            className="btn-shimmer group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green text-white font-semibold text-md tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(30,70,32,0.35)]"
           >
             <span className="relative z-10">Agendar mi cita</span>
             <span className="relative z-10 w-7 h-7 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
@@ -289,7 +324,7 @@ const Promotions = () => {
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </span>
-            <span className="shimmer-inner absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full" />
+            <span className="shimmer-inner absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full" />
           </button>
         </div>
       </div>
