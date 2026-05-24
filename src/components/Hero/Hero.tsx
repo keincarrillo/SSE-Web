@@ -59,7 +59,6 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Imagen — entra con ScrollTrigger al llegar la sección
       gsap.fromTo(
         imgRef.current,
         { opacity: 0, scale: 1.04 },
@@ -70,17 +69,16 @@ const Hero = () => {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 90%'
+            start: 'top 95%'
           }
         }
       )
 
-      // Contenido — timeline encadenado al mismo trigger
       gsap
         .timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 85%'
+            start: 'top 95%'
           }
         })
         .fromTo(
@@ -107,7 +105,6 @@ const Hero = () => {
           '-=0.3'
         )
 
-      // Barra de stats — trigger propio cuando entra a la vista
       gsap.fromTo(
         barRef.current,
         { y: 30, opacity: 0 },
