@@ -1,6 +1,7 @@
 import { Routes, Route, Outlet } from 'react-router-dom'
 import { useLenis } from './hooks/useLenis'
 import Navbar from './components/Navbar/Navbar'
+import Problem from './components/Problem/Problem'
 import Hero from './components/Hero/Hero'
 import Services from './components/Services/Services'
 import Team from './components/Team/Team'
@@ -23,6 +24,7 @@ const Home = () => {
   return (
     <>
       <main>
+        <Problem />
         <Hero />
         <Services />
         <Team />
