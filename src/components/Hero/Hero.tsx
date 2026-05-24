@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import team from '../../assets/team.webp'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const STATS = [
   { label: 'Pacientes satisfechos', value: 10000, suffix: '+', prefix: '' },
@@ -56,18 +59,34 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Imagen — entra con ScrollTrigger al llegar la sección
+      gsap.fromTo(
+        imgRef.current,
+        { opacity: 0, scale: 1.04 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 90%'
+          }
+        }
+      )
+
+      // Contenido — timeline encadenado al mismo trigger
       gsap
-        .timeline({ delay: 0.8 })
-        .fromTo(
-          imgRef.current,
-          { opacity: 0, scale: 1.04 },
-          { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }
-        )
+        .timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%'
+          }
+        })
         .fromTo(
           tagRef.current,
           { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
-          '-=0.6'
+          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }
         )
         .fromTo(
           titleRef.current,
@@ -87,14 +106,25 @@ const Hero = () => {
           { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
           '-=0.3'
         )
-        .fromTo(
-          barRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
-          '-=0.2'
-        )
-        .call(() => setStatsActive(true))
+
+      // Barra de stats — trigger propio cuando entra a la vista
+      gsap.fromTo(
+        barRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: barRef.current,
+            start: 'top 90%',
+            onEnter: () => setStatsActive(true)
+          }
+        }
+      )
     }, sectionRef)
+
     return () => ctx.revert()
   }, [])
 
