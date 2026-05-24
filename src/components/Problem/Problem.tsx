@@ -65,19 +65,13 @@ const Problem = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-green-dark overflow-hidden min-h-screen flex flex-col items-center justify-center px-6 py-24"
+      className="relative bg-green overflow-hidden min-h-screen flex flex-col items-center justify-center px-6 py-24"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 50% at 50% 100%, rgba(201,170,101,0.06) 0%, transparent 70%)'
-        }}
-      />
+      {/* Mismo overlay que el Hero */}
+      <div className="absolute inset-0 bg-linear-to-b from-green-dark/70 via-green/50 to-green-dark/80" />
 
       <div className="relative z-10 max-w-3xl w-full text-center">
-        {/* Tag — igual al del Hero */}
+        {/* Tag */}
         <div
           ref={tagRef}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-6"
@@ -87,7 +81,7 @@ const Problem = () => {
           </span>
         </div>
 
-        {/* Pregunta — misma clase display-title que el Hero */}
+        {/* Pregunta */}
         <h2
           ref={questionRef}
           className="display-title text-white mb-6 max-w-3xl"
@@ -96,7 +90,7 @@ const Problem = () => {
           <span className="text-gold">sin pensarlo dos veces?</span>
         </h2>
 
-        {/* Cuerpo — mismo estilo que el subtítulo del Hero */}
+        {/* Cuerpo */}
         <p
           ref={bodyRef}
           className="text-white/70 text-base leading-relaxed max-w-2xl mb-10 mx-auto text-justify md:text-center md:text-lg"
@@ -106,7 +100,7 @@ const Problem = () => {
           —y su confianza— lo resiente.
         </p>
 
-        {/* Pills de pain points */}
+        {/* Pills */}
         <div
           ref={pillsRef}
           className="flex flex-wrap justify-center gap-3 mb-16"
