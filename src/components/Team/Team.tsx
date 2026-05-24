@@ -237,7 +237,7 @@ const DescriptionToggle = ({ text }: { text: string }) => {
   }
 
   return (
-    <div className="px-3 pb-3 sm:px-4 sm:pb-4">
+    <div className="px-3 py-2 sm:px-4 sm:pt-3 sm:pb-4">
       <button
         onClick={handleToggle}
         className="toggle-btn w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg border border-gold/30 bg-gold/8 text-gold cursor-pointer"
@@ -251,7 +251,6 @@ const DescriptionToggle = ({ text }: { text: string }) => {
           className={open ? 'chevron-open' : hasOpened ? 'chevron-close' : ''}
         />
       </button>
-
       {hasOpened && (
         <div className={open ? 'desc-open' : 'desc-close'}>
           <p
@@ -474,7 +473,7 @@ const AnimatedDoctorCard = ({
       </div>
 
       {member.description && (
-        <div className="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div className="px-3 pb-3 sm:px-4 sm:pb-4 mt-2">
           <button
             onClick={handleToggle}
             className="toggle-btn w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg border border-gold/30 bg-gold/8 text-gold cursor-pointer"
