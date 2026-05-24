@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
@@ -19,14 +19,22 @@ import protesis3 from '../assets/services/protesis3.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
-/* ─── Lenis local para ServicesPage ─── */
 const usePageLenis = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }, [])
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.3,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true
-    })
+      smoothWheel: true,
+      syncToNative: false
+    } as any)
+
+    ;(window as any).__lenis = lenis
 
     lenis.on('scroll', ScrollTrigger.update)
 
@@ -38,12 +46,12 @@ const usePageLenis = () => {
 
     return () => {
       lenis.destroy()
+      ;(window as any).__lenis = null
       gsap.ticker.remove(lenis.raf)
     }
   }, [])
 }
 
-/* ─── tipos de fondo por sección ─── */
 type BgVariant = 'white' | 'green'
 
 const SERVICES: {
@@ -187,7 +195,6 @@ const SERVICES: {
   }
 ]
 
-/* ─── Hook scroll reveal con fromTo ─── */
 const useServiceReveal = (ref: React.RefObject<HTMLElement | null>) => {
   useEffect(() => {
     if (!ref.current) return
@@ -253,7 +260,6 @@ const useServiceReveal = (ref: React.RefObject<HTMLElement | null>) => {
   }, [ref])
 }
 
-/* ─── Checkmark icon ─── */
 const Check = ({ dark }: { dark?: boolean }) => (
   <svg
     width="12"
@@ -270,7 +276,6 @@ const Check = ({ dark }: { dark?: boolean }) => (
   </svg>
 )
 
-/* ─── Visual con carrusel automático ─── */
 const ServiceVisual = ({
   images,
   title,
@@ -402,7 +407,6 @@ const ServiceVisual = ({
   )
 }
 
-/* ─── Sección individual ─── */
 const ServiceSection = ({
   service,
   index
@@ -524,7 +528,6 @@ const ServiceSection = ({
   )
 }
 
-/* ─── Header de la página ─── */
 const PageHeader = () => {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -620,7 +623,6 @@ const PageHeader = () => {
   )
 }
 
-/* ─── CTA final ─── */
 const CtaSection = () => {
   const ref = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
@@ -676,7 +678,6 @@ const CtaSection = () => {
         data-gsap="fade-up"
         onClick={() => {
           navigate('/')
-          // 400ms para que la Navbar termine su animación antes del scroll
           setTimeout(
             () =>
               document
@@ -708,7 +709,6 @@ const CtaSection = () => {
   )
 }
 
-/* ─── Page ─── */
 const ServicesPage = () => {
   usePageLenis()
   const { hash } = useLocation()
@@ -723,7 +723,10 @@ const ServicesPage = () => {
       }, 300)
       return () => clearTimeout(timeout)
     } else {
-      window.scrollTo({ top: 0 })
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      const lenis = (window as any).__lenis
+      if (lenis) lenis.scrollTo(0, { immediate: true })
     }
   }, [hash])
 
