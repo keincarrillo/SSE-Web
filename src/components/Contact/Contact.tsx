@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import { gsap } from 'gsap'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const LOCATIONS = [
