@@ -13,6 +13,9 @@ export const useLenis = () => {
       smoothWheel: true
     })
 
+    // exponer instancia globalmente para scroll programático
+    ;(window as any).__lenis = lenis
+
     // mantiene ScrollTrigger sincronizado con Lenis
     lenis.on('scroll', ScrollTrigger.update)
 
@@ -24,6 +27,7 @@ export const useLenis = () => {
 
     return () => {
       lenis.destroy()
+      ;(window as any).__lenis = null
     }
   }, [])
 }

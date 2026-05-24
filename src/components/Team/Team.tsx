@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import profesional1 from '../../assets/profesional1.webp'
 import profesional2 from '../../assets/profesional2.webp'
@@ -6,6 +8,8 @@ import profesional3 from '../../assets/profesional3.webp'
 import profesional4 from '../../assets/profesional4.webp'
 import banner1 from '../../assets/banner1.webp'
 import banner2 from '../../assets/banner2.webp'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const ANIM_STYLES = `
   @keyframes teamFadeUp {
@@ -109,25 +113,19 @@ function injectStyles() {
   document.head.appendChild(el)
 }
 
-function useInView(threshold = 0.05) {
-  const ref = useRef<HTMLElement | null>(null)
+const useInView = (threshold = 0.1) => {
+  const ref = useRef<HTMLElement>(null)
   const [inView, setInView] = useState(false)
 
   useEffect(() => {
-    injectStyles()
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          obs.disconnect()
-        }
-      },
-      { threshold }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
+    if (!ref.current) return
+    const trigger = ScrollTrigger.create({
+      trigger: ref.current,
+      start: `top ${Math.round((1 - threshold) * 100)}%`,
+      onEnter: () => setInView(true),
+      once: true
+    })
+    return () => trigger.kill()
   }, [threshold])
 
   return { ref, inView }
@@ -197,7 +195,6 @@ const ChevronRight = () => (
   </svg>
 )
 
-// Chevron down icon for the toggle button
 const ChevronDown = ({ className }: { className?: string }) => (
   <svg
     width="13"
@@ -214,7 +211,6 @@ const ChevronDown = ({ className }: { className?: string }) => (
   </svg>
 )
 
-// Info icon for the toggle trigger
 const InfoIcon = () => (
   <svg
     width="11"
@@ -231,10 +227,8 @@ const InfoIcon = () => (
   </svg>
 )
 
-// ── Expandable description block ──────────────────────────────────────────────
 const DescriptionToggle = ({ text }: { text: string }) => {
   const [open, setOpen] = useState(false)
-  // Track whether it's ever been opened so we can play close animation
   const [hasOpened, setHasOpened] = useState(false)
 
   const handleToggle = () => {
@@ -243,8 +237,7 @@ const DescriptionToggle = ({ text }: { text: string }) => {
   }
 
   return (
-    <div className="px-3 pb-3 sm:px-4 sm:pb-4">
-      {/* Toggle button */}
+    <div className="px-3 py-2 sm:px-4 sm:pt-3 sm:pb-4">
       <button
         onClick={handleToggle}
         className="toggle-btn w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg border border-gold/30 bg-gold/8 text-gold cursor-pointer"
@@ -258,8 +251,6 @@ const DescriptionToggle = ({ text }: { text: string }) => {
           className={open ? 'chevron-open' : hasOpened ? 'chevron-close' : ''}
         />
       </button>
-
-      {/* Collapsible description */}
       {hasOpened && (
         <div className={open ? 'desc-open' : 'desc-close'}>
           <p
@@ -276,7 +267,6 @@ const DescriptionToggle = ({ text }: { text: string }) => {
 
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
   <div className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col">
-    {/* Image — fixed height so the full photo shows on mobile */}
     <div
       className="relative flex-shrink-0 overflow-hidden"
       style={{ height: '360px' }}
@@ -419,11 +409,8 @@ const AnimatedDoctorCard = ({
 
   const handleToggle = () => {
     if (!open) setHasOpened(true)
-    if (onToggle) {
-      onToggle()
-    } else {
-      setLocalOpen(v => !v)
-    }
+    if (onToggle) onToggle()
+    else setLocalOpen(v => !v)
   }
 
   useEffect(() => {
@@ -436,7 +423,6 @@ const AnimatedDoctorCard = ({
       className={`doctor-card-sm relative rounded-2xl border border-white/20 overflow-hidden flex flex-col ${inView ? 'team-slide-from-left' : 'team-hidden'}`}
       style={{ minHeight: 'clamp(110px, 30vw, 320px)', animationDelay: delay }}
     >
-      {/* Image area */}
       <div
         className="relative flex-1 overflow-hidden"
         style={{
@@ -471,7 +457,6 @@ const AnimatedDoctorCard = ({
         />
       </div>
 
-      {/* Name & specialty */}
       <div className="px-3 py-2 sm:px-4 sm:pt-3 sm:pb-2">
         <span
           className="block text-gold uppercase font-semibold mb-1 tracking-widest"
@@ -487,9 +472,8 @@ const AnimatedDoctorCard = ({
         </h3>
       </div>
 
-      {/* Expandable description */}
       {member.description && (
-        <div className="px-3 pb-3 sm:px-4 sm:pb-4">
+        <div className="px-3 pb-3 sm:px-4 sm:pb-4 mt-2">
           <button
             onClick={handleToggle}
             className="toggle-btn w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg border border-gold/30 bg-gold/8 text-gold cursor-pointer"
@@ -667,6 +651,10 @@ export default function Team() {
   const ref = useScrollReveal({ stagger: 0.12 })
   const { ref: titleRef, inView: titleInView } = useInView(0.05)
 
+  useEffect(() => {
+    injectStyles()
+  }, [])
+
   const setRef = (el: HTMLElement | null) => {
     ;(ref as React.MutableRefObject<HTMLElement | null>).current = el
   }
@@ -674,7 +662,6 @@ export default function Team() {
   return (
     <section ref={setRef} id="equipo" className="py-16 md:py-28 bg-green">
       <div className="max-w-6xl mx-auto px-5 md:px-10">
-        {/* ── Título ── */}
         <div
           ref={titleRef as React.RefObject<HTMLDivElement>}
           className="mb-10 md:mb-14"
@@ -715,13 +702,8 @@ export default function Team() {
           </div>
         </div>
 
-        {/* ── MÓVIL: carrusel ── */}
         <MobileCarousel inView={titleInView} />
-
-        {/* ── SM+: tarjeta principal ── */}
         <AnimatedMainCard />
-
-        {/* ── SM+: grid 3 doctores ── */}
         <DesktopDoctorGrid />
       </div>
     </section>

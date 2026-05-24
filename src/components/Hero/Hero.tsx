@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import team from '../../assets/team.webp'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const STATS = [
   { label: 'Pacientes satisfechos', value: 10000, suffix: '+', prefix: '' },
@@ -54,20 +57,47 @@ const Hero = () => {
   const barRef = useRef<HTMLDivElement>(null)
   const [statsActive, setStatsActive] = useState(false)
 
+  // IntersectionObserver para stats — funciona con scroll manual y programático
+  useEffect(() => {
+    if (!barRef.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setStatsActive(true)
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(barRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   useEffect(() => {
     const ctx = gsap.context(() => {
+      gsap.fromTo(
+        imgRef.current,
+        { opacity: 0, scale: 1.04 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 95%'
+          }
+        }
+      )
+
       gsap
-        .timeline({ delay: 0.8 })
-        .fromTo(
-          imgRef.current,
-          { opacity: 0, scale: 1.04 },
-          { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }
-        )
+        .timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 95%'
+          }
+        })
         .fromTo(
           tagRef.current,
           { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
-          '-=0.6'
+          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }
         )
         .fromTo(
           titleRef.current,
@@ -87,14 +117,23 @@ const Hero = () => {
           { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
           '-=0.3'
         )
-        .fromTo(
-          barRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
-          '-=0.2'
-        )
-        .call(() => setStatsActive(true))
+
+      gsap.fromTo(
+        barRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: barRef.current,
+            start: 'top 95%'
+          }
+        }
+      )
     }, sectionRef)
+
     return () => ctx.revert()
   }, [])
 
@@ -112,7 +151,7 @@ const Hero = () => {
             className="hidden md:block w-full h-full object-cover scale-110 -translate-y-8 md:-translate-y-12 lg:-translate-y-0.5"
           />
         </div>
-        <div className="absolute inset-0 bg-linear-to-b from-green-dark/70 via-green/50 to-green-dark/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-green/50 to-green-dark/80" />
       </div>
 
       <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center py-0 px-6 md:px-10 md:pb-42 lg:pb-26 pt-30 md:pt-0 md:mb-8">
@@ -139,13 +178,22 @@ const Hero = () => {
           se vean bien y duren en el tiempo.
         </p>
 
-        <div ref={ctaRef} className="flex flex-wrap gap-4 justify-center">
-          <a
-            href="#contacto"
+        <div ref={ctaRef} className="flex flex-wrap gap-4 justify-center mt-8">
+          <button
+            onClick={() => {
+              const lenis = (window as any).__lenis
+              if (lenis) {
+                lenis.scrollTo('#contacto', { offset: 0, duration: 1.8 })
+              } else {
+                document
+                  .getElementById('contacto')
+                  ?.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
             className="inline-flex items-center gap-2 px-9 py-4 rounded-full bg-gold text-black text-md font-semibold tracking-wide hover:bg-gold-light transition-colors duration-300"
           >
             Agendar cita →
-          </a>
+          </button>
         </div>
       </div>
 
