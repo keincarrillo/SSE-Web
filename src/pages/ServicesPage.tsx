@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -711,9 +711,9 @@ const CtaSection = () => {
 /* ─── Page ─── */
 const ServicesPage = () => {
   usePageLenis()
+  const { hash } = useLocation()
 
   useEffect(() => {
-    const hash = window.location.hash
     if (hash) {
       const timeout = setTimeout(() => {
         const el = document.querySelector(hash)
@@ -725,7 +725,7 @@ const ServicesPage = () => {
     } else {
       window.scrollTo({ top: 0 })
     }
-  }, [])
+  }, [hash])
 
   return (
     <div className="bg-white min-h-screen">
