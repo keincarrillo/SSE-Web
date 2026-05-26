@@ -63,10 +63,7 @@ const MARQUEE_ITEMS = [
 ]
 
 const Marquee = () => (
-  <div
-    className="w-full overflow-hidden py-3 md:py-5"
-    style={{ background: '#c9aa65' }}
-  >
+  <div className="w-full overflow-hidden py-3 md:py-5 bg-gold">
     <style>{`
       @keyframes marquee {
         0%   { transform: translateX(0); }
@@ -119,44 +116,26 @@ const CountdownTimer = () => {
 
   const box = (val: number, label: string) => (
     <div
-      className="flex flex-col items-center justify-center gap-1 rounded-xl"
-      style={{
-        background: 'transparent',
-        border: '1.5px solid #e0ddd5',
-        width: 72,
-        height: 72
-      }}
+      className="flex flex-col items-center justify-center gap-1 rounded-xl border border-border"
+      style={{ width: 72, height: 72 }}
     >
-      <span
-        className="font-display text-2xl leading-none"
-        style={{ color: '#284b09' }}
-      >
+      <span className="font-display text-2xl leading-none text-green">
         {String(val).padStart(2, '0')}
       </span>
-      <span
-        className="text-[10px] uppercase tracking-[0.15em]"
-        style={{ color: '#b0afa9' }}
-      >
+      <span className="text-[10px] uppercase tracking-[0.15em] text-muted">
         {label}
       </span>
     </div>
   )
 
-  const sep = (
-    <span className="font-display text-2xl pb-4" style={{ color: '#e0ddd5' }}>
-      :
-    </span>
-  )
+  const sep = <span className="font-display text-2xl pb-4 text-border">:</span>
 
   return (
     <div
       data-gsap="fade-up"
       className="flex flex-col items-center gap-3 mb-12 md:mb-16"
     >
-      <p
-        className="text-md font-semibold tracking-[0.2em] uppercase"
-        style={{ color: '#b0afa9' }}
-      >
+      <p className="text-md font-semibold tracking-[0.2em] uppercase text-muted">
         {expired ? 'Promoción finalizada' : 'Ofertas válidas por'}
       </p>
       {expired ? (
@@ -185,55 +164,51 @@ const PromoCard = ({
   featured
 }: (typeof PROMOS)[number]) => (
   <div
-    className="promo-card relative flex flex-col rounded-2xl overflow-hidden border"
+    className={`promo-card relative flex flex-col rounded-2xl overflow-hidden border ${
+      featured ? 'bg-green border-gold/40' : 'bg-white border-black/7'
+    }`}
     style={{
-      background: featured ? '#284b09' : '#fff',
-      borderColor: featured ? 'rgba(201,170,101,0.4)' : 'rgba(0,0,0,0.07)',
       boxShadow: featured
-        ? '0 8px 40px rgba(40,75,9,0.18)'
+        ? '0 8px 40px rgba(var(--color-green), 0.18)'
         : '0 2px 16px rgba(0,0,0,0.06)'
     }}
   >
     <div className="px-6 pt-6 pb-0">
       <span
-        className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase"
-        style={{
-          background: featured
-            ? 'rgba(201,170,101,0.18)'
-            : 'rgba(40,75,9,0.07)',
-          color: featured ? '#c9aa65' : '#284b09'
-        }}
+        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase ${
+          featured ? 'bg-gold/20 text-gold' : 'bg-green/7 text-green'
+        }`}
       >
         {tag}
       </span>
     </div>
     <div className="flex flex-col flex-1 px-6 pt-4 pb-6 gap-4">
       <h3
-        className="display-name text-xl tracking-[0.02em]"
-        style={{ color: featured ? '#fff' : '#284b09' }}
+        className={`display-name text-xl tracking-[0.02em] ${
+          featured ? 'text-white' : 'text-green'
+        }`}
       >
         {title}
       </h3>
       <p
-        className="text-md lg:text-lg leading-[1.65]"
-        style={{
-          color: featured ? 'rgba(255,255,255,0.5)' : 'rgba(40,75,9,0.6)'
-        }}
+        className={`text-md lg:text-lg leading-[1.65] ${
+          featured ? 'text-white/50' : 'text-green/60'
+        }`}
       >
         {description}
       </p>
       <div className="mt-auto pt-2">
         <div
-          className="display-name text-3xl tracking-[0.02em]"
-          style={{ color: featured ? '#c9aa65' : '#284b09' }}
+          className={`display-name text-3xl tracking-[0.02em] ${
+            featured ? 'text-gold' : 'text-green'
+          }`}
         >
           {price}
         </div>
         <div
-          className="text-md leading-[1.65] mt-0.5"
-          style={{
-            color: featured ? 'rgba(255,255,255,0.4)' : 'rgba(40,75,9,0.4)'
-          }}
+          className={`text-md leading-[1.65] mt-0.5 ${
+            featured ? 'text-white/40' : 'text-green/40'
+          }`}
         >
           {priceNote}
         </div>
@@ -259,7 +234,7 @@ const Promotions = () => {
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 30% 50%, #C9A84C 0%, transparent 60%), radial-gradient(circle at 70% 50%, #C9A84C 0%, transparent 60%)',
+            'radial-gradient(circle at 30% 50%, var(--color-gold) 0%, transparent 60%), radial-gradient(circle at 70% 50%, var(--color-gold) 0%, transparent 60%)',
           zIndex: 1
         }}
       />
