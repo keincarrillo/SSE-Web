@@ -99,16 +99,16 @@ const PulseStyles = () => (
     .tooth-float { animation: floatTooth 4s ease-in-out infinite; }
 
     @keyframes pulseGold {
-      0%   { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.55); }
-      70%  { box-shadow: 0 0 0 16px rgba(201, 168, 76, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(var(--color-gold-rgb, 183,147,63), 0.55); }
+      70%  { box-shadow: 0 0 0 16px rgba(var(--color-gold-rgb, 183,147,63), 0); }
+      100% { box-shadow: 0 0 0 0 rgba(var(--color-gold-rgb, 183,147,63), 0); }
     }
     .icon-pulse-gold { animation: pulseGold 2.2s ease-out infinite; }
 
     @keyframes pulseGreen {
-      0%   { box-shadow: 0 0 0 0 rgba(30, 70, 32, 0.45); }
-      70%  { box-shadow: 0 0 0 16px rgba(30, 70, 32, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(30, 70, 32, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(var(--color-green-rgb, 78,88,57), 0.45); }
+      70%  { box-shadow: 0 0 0 16px rgba(var(--color-green-rgb, 78,88,57), 0); }
+      100% { box-shadow: 0 0 0 0 rgba(var(--color-green-rgb, 78,88,57), 0); }
     }
     .icon-pulse-green { animation: pulseGreen 2.2s ease-out infinite; }
 
@@ -309,11 +309,7 @@ const FeaturedCard = ({
           </div>
           <div className="lg:hidden flex justify-center mb-3">
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green/20 border-2 border-green/50 flex items-center justify-center">
-              <img
-                src={icon}
-                alt=""
-                style={{ width: '40px', height: '40px', objectFit: 'contain' }}
-              />
+              <img src={icon} alt="" className="w-10 h-10 object-contain" />
             </div>
           </div>
         </>
@@ -419,7 +415,9 @@ const MobileCarousel = () => {
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Ir a servicio ${i + 1}`}
-            className={`w-2 h-2 rounded-full transition-colors duration-200 ${i === current ? 'bg-green' : 'bg-green/20'}`}
+            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+              i === current ? 'bg-green' : 'bg-green/20'
+            }`}
           />
         ))}
       </div>
@@ -490,7 +488,7 @@ const Services = () => {
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 30% 50%, #C9A84C 0%, transparent 60%), radial-gradient(circle at 70% 50%, #C9A84C 0%, transparent 60%)',
+            'radial-gradient(circle at 30% 50%, var(--color-gold) 0%, transparent 60%), radial-gradient(circle at 70% 50%, var(--color-gold) 0%, transparent 60%)',
           zIndex: 1
         }}
       />
