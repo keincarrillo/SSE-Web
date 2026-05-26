@@ -1,34 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&family=Tenor+Sans&display=swap');
 @import 'tailwindcss';
 
-@font-face {
-  font-family: 'Anton';
-  src: url('/src/assets/fonts/Anton-Regular.ttf') format('woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Questrial';
-  src: url('/src/assets/fonts/Questrial-Regular.ttf') format('woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-
 @theme {
-  --color-gold: #c9aa65;
-  --color-gold-light: #dcc48a;
-  --color-green: #284b09;
-  --color-green-dark: #1a3205;
-  --color-green-mid: #3a6a0d;
-  --color-black: #0d0d0d;
+  --color-gold: #b7933f;
+  --color-gold-light: #c9aa65;
+  --color-green: #4e5839;
+  --color-green-dark: #3a4229;
+  --color-green-mid: #606b44;
+  --color-black: #000000;
   --color-white: #ffffff;
   --color-gray: #f4f4f2;
   --color-gray-mid: #e2e2de;
   --color-muted: #6b6b65;
   --color-border: #e0ddd5;
 
-  --font-display: 'Anton', sans-serif;
-  --font-sans: 'Questrial', system-ui, sans-serif;
+  --font-display: 'Darker Grotesque', sans-serif;
+  --font-sans: 'Tenor Sans', system-ui, sans-serif;
 }
 
 *,
