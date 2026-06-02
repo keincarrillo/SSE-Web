@@ -14,8 +14,8 @@
   --color-muted: #6b6b65;
   --color-border: #e0ddd5;
 
-  --font-display: 'Darker Grotesque', sans-serif;
-  --font-sans: 'Tenor Sans', system-ui, sans-serif;
+  --font-display: 'Tenor Sans', system-ui, sans-serif;
+  --font-sans: 'Darker Grotesque', sans-serif;
 }
 
 *,
