@@ -53,7 +53,7 @@ const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null)
   const subRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
-  const imgRef = useRef<HTMLDivElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const [statsActive, setStatsActive] = useState(false)
 
