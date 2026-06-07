@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
+import problem from '../../assets/problem.webp'
 
 const Problem = () => {
   const overlayRef = useRef<HTMLDivElement>(null)
@@ -212,7 +213,7 @@ const Problem = () => {
         style={{
           opacity: 0,
           background: '#4e5839',
-          width: 'min(96vw, 1100px)',
+          width: 'min(96vw, 1000px)',
           boxShadow:
             '0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,170,101,0.15)'
         }}
@@ -459,78 +460,80 @@ const Problem = () => {
           </svg>
         </button>
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-10 py-14 sm:px-16 sm:py-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-8">
-            <span
-              className="text-gold font-semibold tracking-[0.2em] uppercase"
-              style={{ fontSize: 'clamp(0.7rem, 1.2vw, 0.85rem)' }}
-            >
-              Smile Studio Experts
-            </span>
-          </div>
-
-          <h2
-            ref={questionRef}
-            className="text-white mb-8"
-            style={{
-              opacity: 0,
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(1.6rem, 4vw, 3.8rem)',
-              lineHeight: 1.1,
-              letterSpacing: '0.02em',
-              fontWeight: 600
-            }}
-          >
-            <span className="block whitespace-nowrap">
-              ¿Hace cuánto no visitas
-            </span>
-            <span className="text-gold block whitespace-nowrap">
-              al dentista?
-            </span>
-          </h2>
-
-          <div ref={bodyRef} style={{ opacity: 0 }} className="mb-12">
-            <p
-              className="text-white/70 leading-loose"
-              style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.55rem)' }}
-            >
+        {/* Content: 2 columnas — texto izquierda, imagen derecha */}
+        <div className="relative z-10 flex flex-col md:flex-row items-stretch gap-0">
+          {/* Columna izquierda — texto */}
+          <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left px-10 py-14 sm:px-14 sm:py-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-8">
               <span
-                style={{
-                  fontSize: 'clamp(1.3rem, 2.8vw, 1.75rem)',
-                  whiteSpace: 'nowrap'
-                }}
+                className="text-gold font-semibold tracking-[0.2em] uppercase"
+                style={{ fontSize: 'clamp(0.7rem, 1.2vw, 0.85rem)' }}
+              >
+                Smile Studio Experts
+              </span>
+            </div>
+
+            <h2
+              ref={questionRef}
+              className="text-white mb-8"
+              style={{
+                opacity: 0,
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(1.6rem, 3.5vw, 3.8rem)',
+                lineHeight: 1.1,
+                letterSpacing: '0.02em',
+                fontWeight: 600
+              }}
+            >
+              <span className="block">¿Hace cuánto no visitas</span>
+              <span className="text-gold block">al dentista?</span>
+            </h2>
+
+            <div ref={bodyRef} style={{ opacity: 0 }} className="mb-12">
+              <p
+                className="text-white/70 leading-loose"
+                style={{ fontSize: 'clamp(1rem, 1.8vw, 1.3rem)' }}
               >
                 El miedo y las malas experiencias hacen que muchas personas lo
                 eviten por mucho tiempo.
-              </span>
-              <br />
-              <span className="uppercase font-display">
-                Pero eso no tiene por qué seguir así.
-              </span>
-            </p>
+                <br />
+                <span className="uppercase font-semibold text-white/90">
+                  Pero eso no tiene por qué seguir así.
+                </span>
+              </p>
+            </div>
+
+            <div
+              ref={arrowRef}
+              style={{ opacity: 0 }}
+              className="w-full flex justify-center md:justify-start"
+            >
+              <button
+                onClick={handleDismiss}
+                className="inline-flex items-center justify-center rounded-full bg-gold text-black font-semibold tracking-wide hover:bg-gold-light transition-colors duration-300"
+                style={{
+                  fontSize: 'clamp(0.95rem, 1.8vw, 1.15rem)',
+                  paddingTop: '1rem',
+                  paddingBottom: '1rem',
+                  paddingLeft: '2.5rem',
+                  paddingRight: '2.5rem',
+                  lineHeight: 1,
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                ¡Hay una solución! →
+              </button>
+            </div>
           </div>
 
-          <div
-            ref={arrowRef}
-            style={{ opacity: 0 }}
-            className="flex justify-center"
-          >
-            <button
-              onClick={handleDismiss}
-              className="inline-flex items-center justify-center rounded-full bg-gold text-black font-semibold tracking-wide hover:bg-gold-light transition-colors duration-300"
-              style={{
-                fontSize: 'clamp(0.95rem, 1.8vw, 1.15rem)',
-                paddingTop: '1rem',
-                paddingBottom: '1rem',
-                paddingLeft: '2.5rem',
-                paddingRight: '2.5rem',
-                lineHeight: 1,
-                whiteSpace: 'nowrap'
-              }}
-            >
-              ¡Hay una solución! →
-            </button>
+          {/* Columna derecha — imagen */}
+          <div className="hidden md:block flex-shrink-0 w-[42%] relative overflow-hidden rounded-r-3xl">
+            <img
+              src={problem}
+              alt="Consulta dental"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: '30% center' }}
+            />
           </div>
         </div>
       </div>

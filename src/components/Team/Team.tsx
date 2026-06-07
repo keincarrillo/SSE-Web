@@ -145,7 +145,7 @@ const TEAM = [
     specialty: 'Cirujano Dentista',
     img: profesional2,
     description:
-      'La Dra. Reynoso se distingue por generar un entorno de confianza y tranquilidad desde el primer contacto. Su atención es cálida, empática y orientada al bienestar integral de cada paciente, brindando una experiencia odontológica cómoda, segura y de alta calidad en todo momento.'
+      'Crea un ambiente de confianza desde el primer contacto. Su atención cálida y empática garantiza una experiencia cómoda y de alta calidad.'
   },
   {
     id: 3,
@@ -153,7 +153,7 @@ const TEAM = [
     specialty: 'Cirujano Dentista',
     img: profesional3,
     description:
-      'La Dra. Gil se caracteriza por su trato cercano y su capacidad para generar vínculos de confianza genuinos con sus pacientes. Clínicamente, sobresale por la precisión en la anatomía dental, obteniendo resultados estéticos naturales y armónicos con atención meticulosa al detalle.'
+      'Trato cercano y precisa en anatomía dental. Logra resultados estéticos naturales y armónicos con atención meticulosa a cada detalle.'
   },
   {
     id: 4,
@@ -161,7 +161,7 @@ const TEAM = [
     specialty: 'Cirujano Dentista',
     img: profesional4,
     description:
-      'El Dr. Vázquez destaca por su actitud proactiva, su puntualidad y el compromiso con el que aborda cada tratamiento. Su empatía y calidez humana crean un ambiente de confianza que facilita una atención odontológica profesional, personalizada y centrada en el bienestar del paciente.'
+      'Proactivo y puntual, aborda cada tratamiento con compromiso. Su empatía crea un ambiente de confianza para una atención personalizada y profesional.'
   }
 ]
 
@@ -254,8 +254,8 @@ const DescriptionToggle = ({ text }: { text: string }) => {
       {hasOpened && (
         <div className={open ? 'desc-open' : 'desc-close'}>
           <p
-            className="mt-3 text-white/70 leading-relaxed"
-            style={{ fontSize: 'clamp(13px, 2vw, 15px)' }}
+            className="mt-3 text-white/70 leading-relaxed text-lg"
+            style={{ fontSize: 'clamp(15px, 2vw, 18px)' }}
           >
             {text}
           </p>
@@ -493,8 +493,8 @@ const AnimatedDoctorCard = ({
           {hasOpened && (
             <div className={open ? 'desc-open' : 'desc-close'}>
               <p
-                className="mt-3 text-white/70 leading-relaxed"
-                style={{ fontSize: 'clamp(13px, 1.8vw, 15px)' }}
+                className="mt-3 text-white/70 leading-relaxed text-lg"
+                style={{ fontSize: 'clamp(15px, 1.8vw, 18px)' }}
               >
                 {member.description}
               </p>

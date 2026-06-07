@@ -47,7 +47,7 @@ const RIGHT = [
   {
     title: 'Valoración y limpieza dental',
     description:
-      'Evaluación de tu sonrisa para recomendar el tratamiento ideal, seguida de una limpieza que elimina placa y sarro para mantener dientes más sanos.',
+      'Revisión completa de tu salud bucal y limpieza profunda para eliminar placa y sarro, manteniendo tu sonrisa sana y lista para cualquier tratamiento.',
     size: 'sm' as const,
     icon: valuation,
     href: '/servicios#valoracion-limpieza'
@@ -153,7 +153,7 @@ const ServiceCardLeft = ({
   return (
     <div
       data-gsap={gsap}
-      className="service-card-clickable relative rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] pl-16 xl:pl-20 min-h-56 lg:min-h-64"
+      className="service-card-clickable relative rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] pl-16 xl:pl-20 min-h-72 lg:min-h-72"
       style={{ height: '100%' }}
       onClick={() => navigate(href)}
       role="button"
@@ -174,7 +174,7 @@ const ServiceCardLeft = ({
       <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
         {title}
       </h3>
-      <p className="text-md lg:text-lg leading-[1.65] text-white/50">
+      <p className="text-md lg:text-lg leading-[1.3] text-white/50">
         {description}
       </p>
     </div>
@@ -200,7 +200,7 @@ const ServiceCardRight = ({
   return (
     <div
       data-gsap={gsap}
-      className="service-card-clickable relative rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] pr-16 xl:pr-20 min-h-56 lg:min-h-64"
+      className="service-card-clickable relative rounded-2xl border border-white/[0.07] bg-green p-[28px_26px] pr-16 xl:pr-20 min-h-72 lg:min-h-72"
       style={{ height: '100%' }}
       onClick={() => navigate(href)}
       role="button"
@@ -221,7 +221,7 @@ const ServiceCardRight = ({
       <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
         {title}
       </h3>
-      <p className="text-md lg:text-lg leading-[1.65] text-white/50">
+      <p className="text-md lg:text-lg leading-[1.3] text-white/50">
         {description}
       </p>
     </div>
@@ -266,7 +266,7 @@ const ServiceCard = ({
       <h3 className="display-name text-lg sm:text-xl tracking-[0.02em] text-white mb-1.5 text-center">
         {title}
       </h3>
-      <p className="text-sm sm:text-md leading-[1.6] text-white/50 text-center">
+      <p className="text-sm sm:text-md leading-[1.3] text-white/50 text-center">
         {description}
       </p>
     </div>
@@ -317,7 +317,7 @@ const FeaturedCard = ({
       <h3 className="display-name text-lg sm:text-xl tracking-[0.02em] text-green mb-1.5 text-center">
         {title}
       </h3>
-      <p className="text-md lg:text-lg leading-[1.65] text-green/65 text-center">
+      <p className="text-md lg:text-lg leading-[1.3] text-green/65 text-center">
         {description}
       </p>
     </div>
@@ -530,12 +530,15 @@ const Services = () => {
         <div
           className="hidden lg:grid items-start mt-22"
           style={{
-            gridTemplateColumns: '1fr 320px 1fr',
-            gap: '0 24px',
+            gridTemplateColumns: '1fr 360px 1fr',
+            gap: '0 28px',
             overflow: 'visible'
           }}
         >
-          <div className="flex flex-col gap-10" style={{ overflow: 'visible' }}>
+          <div
+            className="flex flex-col gap-10 items-stretch"
+            style={{ overflow: 'visible' }}
+          >
             {LEFT.map(s => (
               <ServiceCardLeft key={s.title} {...s} gsap="fade-right" />
             ))}
@@ -550,7 +553,10 @@ const Services = () => {
               resultados naturales que se adaptan a ti
             </p>
           </div>
-          <div className="flex flex-col gap-10" style={{ overflow: 'visible' }}>
+          <div
+            className="flex flex-col gap-10 items-stretch"
+            style={{ overflow: 'visible' }}
+          >
             {RIGHT.map(s => (
               <ServiceCardRight key={s.title} {...s} gsap="fade-left" />
             ))}
