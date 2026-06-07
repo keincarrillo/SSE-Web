@@ -44,7 +44,7 @@ const TESTIMONIALS = [
     img: testimony4
   },
   {
-    subtitle: 'Carillas',
+    subtitle: 'Diseño de sonrisa',
     stars: 5,
     hook: 'Siempre tuve inseguridad con la posición de mis dientes y lo evitaba en fotos.',
     body: 'El tratamiento fue más cómodo de lo que esperaba y los avances se notaron desde los primeros meses.',
@@ -52,7 +52,7 @@ const TESTIMONIALS = [
     img: testimony5
   },
   {
-    subtitle: 'Carillas',
+    subtitle: 'Diseño de sonrisa',
     stars: 5,
     hook: 'No había ido al dentista en mucho tiempo y tenía miedo de lo que pudieran encontrar.',
     body: 'Me atendieron sin juzgarme, explicaron todo con calma y el resultado fue mejor de lo que esperaba.',
@@ -183,7 +183,7 @@ const Testimonials = () => {
             style={{ animationDelay: '0.1s' }}
           >
             <h2 className="text-green">
-              <span className="text-gold">Resultados</span> reales
+              <span className="text-gold">Resultados</span> Reales
             </h2>
           </div>
 
@@ -321,13 +321,13 @@ const Testimonials = () => {
                           </p>
                           <p
                             className="text-white/80 leading-[1.7] m-0 mb-3"
-                            style={{ fontSize: 'clamp(13px, 1.5vw, 15px)' }}
+                            style={{ fontSize: 'clamp(17px, 1.5vw, 19px)' }}
                           >
                             {t.body}
                           </p>
                           <p
                             className="text-gold font-medium m-0"
-                            style={{ fontSize: 'clamp(13px, 1.5vw, 15px)' }}
+                            style={{ fontSize: 'clamp(17px, 1.5vw, 19px)' }}
                           >
                             {t.closing}
                           </p>

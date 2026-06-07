@@ -265,9 +265,15 @@ const GoldenCard = ({ showMouths = false }: { showMouths?: boolean }) => (
         </div>
         <div
           className="text-white display-title text-center"
-          style={{ animationDelay: '0.1s' }}
+          style={{
+            animationDelay: '0.1s',
+            fontSize: 'clamp(1.8rem, 7vw, 3.5rem)'
+          }}
         >
-          <h2 className="text-green">
+          <h2
+            className="text-green"
+            style={{ fontSize: 'clamp(1.4rem, 5vw, 3.5rem)', lineHeight: 1.1 }}
+          >
             <span className="text-white">INSPÍRATE EN NUESTRA</span> COMUNIDAD
           </h2>
         </div>

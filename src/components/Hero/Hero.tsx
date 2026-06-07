@@ -53,11 +53,10 @@ const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null)
   const subRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
-  const imgRef = useRef<HTMLDivElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const [statsActive, setStatsActive] = useState(false)
 
-  // IntersectionObserver para stats — funciona con scroll manual y programático
   useEffect(() => {
     if (!barRef.current) return
     const observer = new IntersectionObserver(
@@ -141,20 +140,23 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="inicio"
-      className="relative min-h-screen bg-green overflow-hidden flex flex-col"
+      className="relative min-h-0 md:min-h-screen bg-green overflow-hidden flex flex-col"
     >
-      <div ref={imgRef} className="absolute inset-0 w-full h-full">
-        <div className="w-full h-full overflow-hidden">
-          <img
-            src={team}
-            alt="Nuestro equipo"
-            className="hidden md:block w-full h-full object-cover scale-110 -translate-y-8 md:-translate-y-12 lg:-translate-y-0.5"
-          />
-        </div>
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-green/50 to-green-dark/80" />
+      {/* Imagen anclada al fondo — crece hacia arriba, doctores siempre en la parte baja */}
+      <div className="absolute inset-x-0 bottom-[90px] md:bottom-[72px]">
+        <img
+          ref={imgRef}
+          src={team}
+          alt="Nuestro equipo"
+          className="hidden md:block w-full object-cover object-top"
+          style={{ height: '95vh' }}
+        />
       </div>
+      {/* Overlay: fuerte arriba para el texto, transparente abajo para los doctores */}
+      <div className="absolute inset-0 bg-linear-to-b from-green/85 via-green/50 via-40% to-green/5" />
 
-      <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center py-0 px-6 md:px-10 md:pb-42 lg:pb-26 pt-30 md:pt-0 md:mb-8">
+      {/* Contenido central */}
+      <div className="relative z-20 flex-1 flex flex-col items-center justify-start text-center px-6 md:px-10 pt-36 md:pt-50">
         <div
           ref={tagRef}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-6"
@@ -164,13 +166,23 @@ const Hero = () => {
           </span>
         </div>
 
-        <h1 ref={titleRef} className="display-title text-white mb-6 max-w-3xl">
+        {/* Título en una sola línea */}
+        <h1
+          ref={titleRef}
+          className="display-title text-white mb-6 whitespace-nowrap"
+          style={{ fontSize: 'clamp(1.8rem, 5.5vw, 5rem)' }}
+        >
           Smile <span className="text-gold">Studio</span> Experts
         </h1>
 
+        {/* Texto descriptivo más grande y legible */}
         <p
           ref={subRef}
-          className="text-white/70 text-base leading-relaxed max-w-2xl mb-2 text-justify md:text-center md:text-lg"
+          className="text-white/85  max-w-2xl mb-2 text-center "
+          style={{
+            fontSize: 'clamp(1.05rem, 1.6vw, 1.4rem)',
+            lineHeight: '1.4'
+          }}
         >
           Somos un equipo enfocado en la estética y salud dental, creando
           sonrisas naturales y armónicas con tratamientos personalizados y el
@@ -178,7 +190,10 @@ const Hero = () => {
           se vean bien y duren en el tiempo.
         </p>
 
-        <div ref={ctaRef} className="flex flex-wrap gap-4 justify-center mt-8">
+        <div
+          ref={ctaRef}
+          className="flex flex-wrap gap-4 justify-center mt-8 pb-12 md:pb-0"
+        >
           <button
             onClick={() => {
               const lenis = (window as any).__lenis
