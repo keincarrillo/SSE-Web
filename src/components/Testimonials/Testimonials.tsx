@@ -110,9 +110,9 @@ const ChevronRight = () => (
 )
 
 const Stars = ({ count }: { count: number }) => (
-  <div style={{ display: 'flex', gap: '4px', margin: '10px 0 18px' }}>
+  <div className="flex gap-1 my-2.5 mb-[18px]">
     {Array.from({ length: count }).map((_, i) => (
-      <span key={i} style={{ color: '#c9aa65', fontSize: '18px' }}>
+      <span key={i} className="text-gold text-[18px]">
         ★
       </span>
     ))}
@@ -158,44 +158,20 @@ const Testimonials = () => {
     <section
       ref={ref as RefObject<HTMLElement>}
       id="testimonios"
-      style={{
-        maxWidth: '100%',
-        margin: '0 auto',
-        background: '#ffffff',
-        position: 'relative',
-        overflow: 'hidden',
-        paddingTop: '40px',
-        paddingBottom: '80px'
-      }}
+      className="bg-white relative overflow-hidden pt-10 pb-20 max-w-full mx-auto"
     >
       {/* Difuminado inferior */}
       <div
+        className="absolute bottom-0 left-0 right-0 h-[90px] pointer-events-none z-[1]"
         style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '90px',
           background:
-            'linear-gradient(to bottom, rgba(255,255,255,0) 0%, #ffffff 100%)',
-          pointerEvents: 'none',
-          zIndex: 1
+            'linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--color-white) 100%)'
         }}
       />
 
-      <div
-        style={{
-          maxWidth: '1152px',
-          margin: '0 auto',
-          position: 'relative',
-          zIndex: 2
-        }}
-      >
+      <div className="max-w-[1152px] mx-auto relative z-[2]">
         {/* ── 1. Título ── */}
-        <div
-          className="py-10 text-center flex flex-col gap-4 items-center"
-          style={{ position: 'relative', zIndex: 2 }}
-        >
+        <div className="py-10 text-center flex flex-col gap-4 items-center relative z-[2]">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10">
             <span className="text-gold text-md font-semibold tracking-[0.2em] uppercase">
               Testimonios
@@ -218,35 +194,18 @@ const Testimonials = () => {
         </div>
 
         {/* ── 2. Bloque verde ── */}
-        {/*
-          En mobile: mx-4 (margen lateral pequeño, flechas ocultas)
-          En tablet (md): mx-12 para dar espacio a las flechas que quedan fuera
-          En desktop (lg): mx-0 con max-width controlado por el padre, flechas a -44px
-        */}
-        <div
-          className="mx-4 md:mx-14 lg:mx-10 xl:mx-0"
-          style={{ position: 'relative', zIndex: 2 }}
-        >
+        <div className="mx-4 md:mx-14 lg:mx-10 xl:mx-0 relative z-[2]">
           {/* Flecha izquierda — solo md+ */}
           <button
             onClick={() => navigate(current - 1)}
             aria-label="Anterior"
-            className="hidden md:flex"
+            className="hidden md:flex absolute items-center justify-center cursor-pointer z-30 text-green bg-white border border-green/35 rounded-full"
             style={{
-              position: 'absolute',
               top: '50%',
               left: '-44px',
               transform: 'translateY(-50%)',
               width: '32px',
               height: '32px',
-              borderRadius: '50%',
-              border: '1.5px solid rgba(45,90,39,0.35)',
-              background: '#fff',
-              color: '#2d5a27',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              zIndex: 30,
               boxShadow: '0 2px 8px rgba(0,0,0,0.10)'
             }}
           >
@@ -257,22 +216,13 @@ const Testimonials = () => {
           <button
             onClick={() => navigate(current + 1)}
             aria-label="Siguiente"
-            className="hidden md:flex"
+            className="hidden md:flex absolute items-center justify-center cursor-pointer z-30 text-green bg-white border border-green/35 rounded-full"
             style={{
-              position: 'absolute',
               top: '50%',
               right: '-44px',
               transform: 'translateY(-50%)',
               width: '32px',
               height: '32px',
-              borderRadius: '50%',
-              border: '1.5px solid rgba(45,90,39,0.35)',
-              background: '#fff',
-              color: '#2d5a27',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              zIndex: 30,
               boxShadow: '0 2px 8px rgba(0,0,0,0.10)'
             }}
           >
@@ -280,13 +230,10 @@ const Testimonials = () => {
           </button>
 
           {/* Contenedor verde */}
-          <div
-            className="bg-green"
-            style={{ borderRadius: '20px', overflow: 'hidden' }}
-          >
+          <div className="bg-green rounded-[20px] overflow-hidden">
             <div
               ref={carouselRef}
-              style={{ position: 'relative', overflow: 'hidden' }}
+              className="relative overflow-hidden"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -295,63 +242,38 @@ const Testimonials = () => {
                 src={consultorio}
                 alt=""
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  opacity: 0.35
-                }}
+                className="absolute inset-0 w-full h-full object-cover opacity-35"
               />
 
               {/* Tinte verde */}
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundColor: '#2d5a27',
-                  opacity: 0.6
-                }}
-              />
+              <div className="absolute inset-0 bg-green opacity-60" />
 
               {/* Track */}
               <div
+                className="relative flex"
                 style={{
-                  display: 'flex',
                   width: `${total * 100}%`,
                   transform: `translateX(-${(current * 100) / total}%)`,
-                  transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                  position: 'relative'
+                  transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
                 {TESTIMONIALS.map((t, i) => (
                   <div
                     key={i}
-                    style={{
-                      width: `${100 / total}%`,
-                      flexShrink: 0,
-                      position: 'relative'
-                    }}
+                    className="relative flex-shrink-0"
+                    style={{ width: `${100 / total}%` }}
                   >
                     {/* ── Desktop / Tablet ── */}
                     <div
-                      className="hidden md:flex"
-                      style={{
-                        alignItems: 'center',
-                        minHeight: '540px',
-                        padding: '40px 36px'
-                      }}
+                      className="hidden md:flex items-center"
+                      style={{ minHeight: '540px', padding: '40px 36px' }}
                     >
                       {/* Foto */}
                       <div
+                        className="flex-shrink-0 rounded-[20px] overflow-hidden border border-white/20"
                         style={{
-                          flexShrink: 0,
                           width: 'clamp(200px, 35%, 360px)',
                           height: 'clamp(260px, 45vw, 480px)',
-                          borderRadius: '20px',
-                          overflow: 'hidden',
-                          border: '2px solid rgba(255,255,255,0.18)',
                           boxShadow: '0 8px 40px rgba(0,0,0,0.35)',
                           background: 'rgba(255,255,255,0.05)'
                         }}
@@ -360,91 +282,52 @@ const Testimonials = () => {
                           <img
                             src={t.img}
                             alt={t.subtitle}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              objectPosition: 'top center',
-                              display: 'block'
-                            }}
+                            className="w-full h-full object-cover object-top block"
                           />
                         )}
                       </div>
 
                       {/* Texto desktop/tablet */}
                       <div
+                        className="flex-1 min-w-0"
                         style={{
-                          flex: 1,
                           paddingLeft: 'clamp(20px, 4vw, 48px)',
-                          paddingRight: '8px',
-                          minWidth: 0
+                          paddingRight: '8px'
                         }}
                       >
-                        <p
-                          style={{
-                            fontSize: '13px',
-                            fontWeight: 600,
-                            letterSpacing: '0.2em',
-                            textTransform: 'uppercase',
-                            color: 'rgba(255,255,255,0.5)',
-                            margin: '0 0 6px 0'
-                          }}
-                        >
+                        <p className="text-[13px] font-semibold tracking-[0.2em] uppercase text-white/50 m-0 mb-1.5">
                           Tratamiento
                         </p>
                         <h3
-                          style={{
-                            fontSize: 'clamp(24px, 4vw, 40px)',
-                            fontWeight: 700,
-                            color: '#fff',
-                            margin: 0,
-                            lineHeight: 1.1,
-                            letterSpacing: '-0.01em',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis'
-                          }}
+                          className="text-white font-bold m-0 leading-[1.1] tracking-[-0.01em] whitespace-nowrap overflow-hidden text-ellipsis"
+                          style={{ fontSize: 'clamp(24px, 4vw, 40px)' }}
                         >
                           {t.subtitle}
                         </h3>
                         <Stars count={t.stars} />
                         <div
+                          className="rounded-[16px] border border-white/20"
                           style={{
-                            borderRadius: '16px',
                             padding:
                               'clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 28px)',
-                            border: '1.5px solid rgba(255,255,255,0.18)',
                             background: 'rgba(255,255,255,0.06)'
                           }}
                         >
                           <p
-                            style={{
-                              color: '#fff',
-                              fontSize: 'clamp(16px, 2vw, 22px)',
-                              fontWeight: 700,
-                              lineHeight: 1.5,
-                              margin: '0 0 12px 0'
-                            }}
+                            className="text-white font-bold leading-[1.5] m-0 mb-3"
+                            style={{ fontSize: 'clamp(16px, 2vw, 22px)' }}
                           >
                             "{t.hook}"
                           </p>
                           <p
-                            style={{
-                              color: 'rgba(255,255,255,0.78)',
-                              fontSize: 'clamp(13px, 1.5vw, 15px)',
-                              lineHeight: 1.7,
-                              margin: '0 0 12px 0'
-                            }}
+                            className="text-white/80 leading-[1.7] m-0 mb-3"
+                            style={{ fontSize: 'clamp(13px, 1.5vw, 15px)' }}
                           >
                             {t.body}
                           </p>
                           <p
-                            style={{
-                              color: '#c9aa65',
-                              fontSize: 'clamp(13px, 1.5vw, 15px)',
-                              fontWeight: 500,
-                              margin: 0
-                            }}
+                            className="text-gold font-medium m-0"
+                            style={{ fontSize: 'clamp(13px, 1.5vw, 15px)' }}
                           >
                             {t.closing}
                           </p>
@@ -454,127 +337,59 @@ const Testimonials = () => {
 
                     {/* ── Móvil ── */}
                     <div
-                      className="flex md:hidden"
-                      style={{
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '32px 20px 28px',
-                        gap: '0'
-                      }}
+                      className="flex md:hidden flex-col items-center gap-0"
+                      style={{ padding: '32px 20px 28px' }}
                     >
                       <div
+                        className="rounded-[16px] overflow-hidden border border-white/20 flex-shrink-0 mb-6"
                         style={{
                           width: '160px',
                           height: '200px',
-                          borderRadius: '16px',
-                          overflow: 'hidden',
-                          border: '2px solid rgba(255,255,255,0.18)',
                           boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-                          background: 'rgba(255,255,255,0.05)',
-                          flexShrink: 0,
-                          marginBottom: '24px'
+                          background: 'rgba(255,255,255,0.05)'
                         }}
                       >
                         {t.img && (
                           <img
                             src={t.img}
                             alt={t.subtitle}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              objectPosition: 'top center',
-                              display: 'block'
-                            }}
+                            className="w-full h-full object-cover object-top block"
                           />
                         )}
                       </div>
 
-                      <p
-                        style={{
-                          fontSize: '11px',
-                          fontWeight: 600,
-                          letterSpacing: '0.2em',
-                          textTransform: 'uppercase',
-                          color: 'rgba(255,255,255,0.5)',
-                          margin: '0 0 4px 0',
-                          textAlign: 'center'
-                        }}
-                      >
+                      <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50 m-0 mb-1 text-center">
                         Tratamiento
                       </p>
 
                       {t.subtitle && (
-                        <h3
-                          style={{
-                            fontSize: '30px',
-                            fontWeight: 700,
-                            color: '#fff',
-                            margin: 0,
-                            lineHeight: 1.1,
-                            textAlign: 'center'
-                          }}
-                        >
+                        <h3 className="text-[30px] font-bold text-white m-0 leading-[1.1] text-center">
                           {t.subtitle}
                         </h3>
                       )}
 
-                      <div
-                        style={{
-                          display: 'flex',
-                          gap: '4px',
-                          margin: '10px 0 18px',
-                          justifyContent: 'center'
-                        }}
-                      >
+                      <div className="flex gap-1 my-2.5 mb-[18px] justify-center">
                         {Array.from({ length: t.stars }).map((_, i) => (
-                          <span
-                            key={i}
-                            style={{ color: '#c9aa65', fontSize: '16px' }}
-                          >
+                          <span key={i} className="text-gold text-[16px]">
                             ★
                           </span>
                         ))}
                       </div>
 
                       <div
+                        className="w-full rounded-[14px] border border-white/20"
                         style={{
-                          width: '100%',
-                          borderRadius: '14px',
-                          padding: '18px 18px',
-                          border: '1.5px solid rgba(255,255,255,0.18)',
+                          padding: '18px',
                           background: 'rgba(255,255,255,0.06)'
                         }}
                       >
-                        <p
-                          style={{
-                            color: '#fff',
-                            fontSize: '22px',
-                            fontWeight: 700,
-                            lineHeight: 1.5,
-                            margin: '0 0 10px 0'
-                          }}
-                        >
+                        <p className="text-white text-[22px] font-bold leading-[1.5] m-0 mb-2.5">
                           "{t.hook}"
                         </p>
-                        <p
-                          style={{
-                            color: 'rgba(255,255,255,0.78)',
-                            fontSize: '13px',
-                            lineHeight: 1.7,
-                            margin: '0 0 10px 0'
-                          }}
-                        >
+                        <p className="text-white/80 text-[13px] leading-[1.7] m-0 mb-2.5">
                           {t.body}
                         </p>
-                        <p
-                          style={{
-                            color: '#c9aa65',
-                            fontSize: '13px',
-                            fontWeight: 500,
-                            margin: 0
-                          }}
-                        >
+                        <p className="text-gold text-[13px] font-medium m-0">
                           {t.closing}
                         </p>
                       </div>
@@ -584,31 +399,18 @@ const Testimonials = () => {
               </div>
 
               {/* Dots */}
-              <div
-                style={{
-                  position: 'relative',
-                  padding: '16px 0 20px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '8px',
-                  zIndex: 10
-                }}
-              >
+              <div className="relative flex justify-center items-center gap-2 py-4 pb-5 z-10">
                 {TESTIMONIALS.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => navigate(i)}
                     aria-label={`Ir a testimonio ${i + 1}`}
+                    className="w-2 h-2 rounded-full border-none cursor-pointer p-0 transition-colors"
                     style={{
-                      width: '8px',
-                      height: '8px',
-                      borderRadius: '50%',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: 0,
                       backgroundColor:
-                        i === current ? '#c9aa65' : 'rgba(255,255,255,0.25)'
+                        i === current
+                          ? 'var(--color-gold)'
+                          : 'rgba(255,255,255,0.25)'
                     }}
                   />
                 ))}
