@@ -187,7 +187,7 @@ const Testimonials = () => {
             </h2>
           </div>
 
-          <p className="text-green text-xl max-w-130 text-center">
+          <p className="text-green  max-w-130 text-center">
             Más allá del resultado, cada paciente vive un proceso que transforma
             su forma de sonreír.
           </p>
