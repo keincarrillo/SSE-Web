@@ -312,7 +312,7 @@ const ServiceVisual = ({
 
   return (
     <div
-      className={`relative rounded-2xl overflow-hidden border h-[480px] md:h-[520px] ${
+      className={`relative rounded-2xl overflow-hidden border h-[550px] md:h-[650px] lg:h-[700px] ${
         isGreen ? 'border-white/10' : 'border-green/10'
       }`}
       onMouseEnter={() => {
@@ -435,7 +435,7 @@ const ServiceSection = ({
           }`}
         >
           <div
-            className="w-full lg:w-5/12 shrink-0"
+            className="w-full lg:w-6/12 shrink-0"
             data-gsap={isEven ? 'fade-right' : 'fade-left'}
           >
             <ServiceVisual
@@ -445,7 +445,7 @@ const ServiceSection = ({
             />
           </div>
 
-          <div className="w-full lg:w-7/12 flex flex-col">
+          <div className="w-full lg:w-6/12 flex flex-col">
             <span
               className={`text-[5rem] font-bold leading-none select-none mb-1 ${
                 isGreen ? 'text-gold/30' : 'text-green/30'
@@ -454,7 +454,6 @@ const ServiceSection = ({
             >
               0{index + 1}
             </span>
-
             <div
               data-gsap="fade-up"
               className={`inline-flex self-start items-center gap-2 px-3 py-1 rounded-full border mb-3 ${
@@ -467,7 +466,6 @@ const ServiceSection = ({
                 {service.subtitle}
               </span>
             </div>
-
             <h2
               data-gsap="fade-up"
               className={`display-name text-3xl md:text-4xl mb-4 leading-tight ${
@@ -476,7 +474,6 @@ const ServiceSection = ({
             >
               {service.title}
             </h2>
-
             <p
               data-gsap="fade-up"
               className={` leading-[1.7] mb-8 ${
@@ -485,7 +482,6 @@ const ServiceSection = ({
             >
               {service.description}
             </p>
-
             <div className="flex flex-col gap-4">
               {service.highlights.map((h, i) => (
                 <div
