@@ -2,6 +2,8 @@ import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import problem from '../../assets/problem.webp'
 
+const DISMISSED_KEY = 'problem_dismissed'
+
 const Problem = () => {
   const overlayRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -9,7 +11,9 @@ const Problem = () => {
   const bodyRef = useRef<HTMLDivElement>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(
+    () => sessionStorage.getItem(DISMISSED_KEY) !== 'true'
+  )
 
   useEffect(() => {
     if (!visible) return
@@ -127,23 +131,6 @@ const Problem = () => {
         })
       })
 
-      const rings =
-        sectionRef.current!.querySelectorAll<HTMLElement>('.amb-ring')
-      rings.forEach((ring, i) => {
-        gsap.fromTo(
-          ring,
-          { scale: 0.3, opacity: 0.6 },
-          {
-            scale: 2.4,
-            opacity: 0,
-            duration: 4,
-            ease: 'power1.out',
-            repeat: -1,
-            delay: i * 1.33
-          }
-        )
-      })
-
       const glints =
         sectionRef.current!.querySelectorAll<HTMLElement>('.amb-glint')
       glints.forEach((g, i) => {
@@ -182,6 +169,7 @@ const Problem = () => {
       delay: 0.15,
       ease: 'power2.in',
       onComplete: () => {
+        sessionStorage.setItem(DISMISSED_KEY, 'true')
         setVisible(false)
         const lenis = (window as any).__lenis
         if (lenis) lenis.scrollTo('#inicio', { offset: 0, duration: 1.8 })
@@ -346,22 +334,6 @@ const Problem = () => {
             style={{ background: '#c9aa65', opacity: 0.45 }}
           />
 
-          {/* Ripple rings */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div
-              className="amb-ring w-32 h-32 rounded-full absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ border: '1.5px solid rgba(201,170,101,0.5)' }}
-            />
-            <div
-              className="amb-ring w-32 h-32 rounded-full absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ border: '1.5px solid rgba(201,170,101,0.4)' }}
-            />
-            <div
-              className="amb-ring w-32 h-32 rounded-full absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ border: '1px solid rgba(255,255,255,0.15)' }}
-            />
-          </div>
-
           {/* Glints */}
           <div
             className="amb-glint absolute top-[15%] left-[22%]"
@@ -521,7 +493,7 @@ const Problem = () => {
                   whiteSpace: 'nowrap'
                 }}
               >
-                ¡Hay una solución! →
+                ¡Hay una solución!
               </button>
             </div>
           </div>

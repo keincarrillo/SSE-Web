@@ -9,7 +9,6 @@ import Team from './components/Team/Team'
 import Testimonials from './components/Testimonials/Testimonials'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
-import Social from './components/Social/Social'
 import ServicesPage from './pages/ServicesPage'
 import Promotions from './components/Promotions/Promotions'
 
@@ -52,7 +51,6 @@ const Home = () => {
         <Promotions />
         <Team />
         <Testimonials />
-        <Social />
         <Contact />
       </main>
       <Footer />
