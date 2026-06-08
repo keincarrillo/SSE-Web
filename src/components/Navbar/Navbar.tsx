@@ -9,8 +9,7 @@ const LINKS = [
   { label: 'Promociones', href: 'promociones' },
   { label: 'Equipo', href: 'equipo' },
   { label: 'Testimonios', href: 'testimonios' },
-  { label: 'Contacto', href: 'contacto' },
-  { label: 'Redes Sociales', href: 'redes' }
+  { label: 'Contacto', href: 'contacto' }
 ]
 
 const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
