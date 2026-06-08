@@ -508,7 +508,7 @@ const Services = () => {
           </div>
           <h2
             data-gsap="fade-up"
-            className="display-title text-green"
+            className="display-title text-green "
             style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)' }}
           >
             Nuestros <span className="text-gold">Servicios</span>

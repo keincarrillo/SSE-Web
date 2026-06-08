@@ -209,7 +209,6 @@ const SocialColumn = () => (
       </a>
     ))}
 
-    {/* Info de contacto */}
     <div className="mt-2 flex flex-col gap-0">
       {[
         { label: 'Email', value: 'smilestudioexperts@outlook.com' },
