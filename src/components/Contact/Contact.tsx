@@ -52,7 +52,7 @@ const SOCIAL_LINKS = [
   },
   {
     label: 'TikTok',
-    href: 'https://www.tiktok.com/@smilestudioexperts',
+    href: 'https://www.tiktok.com/@jesusodontotrembo?_r=1&_t=ZS-971u0nhdxBQ',
     color: '#010101',
     gradient: undefined as string | undefined,
     icon: (
