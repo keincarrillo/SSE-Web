@@ -229,20 +229,17 @@ const SocialColumn = () => (
   </div>
 )
 
-/* ── Tarjeta de sucursal: info a la izquierda, mapa a la derecha ── */
 const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
   <div>
-    {/* Título fuera de la card */}
     <div className="display-sm tracking-[0.05em] uppercase mb-2 px-1">
       <span className="text-gold">{loc.munucipality}</span>
       <span className="text-white">, {loc.state}</span>
     </div>
 
     <div className="rounded-2xl overflow-hidden border border-white/15 hover:border-gold/40 transition-colors duration-300 bg-white/6">
-      {/* Fila: 1/3 info + 2/3 mapa */}
       <div className="flex h-56">
-        {/* Info + WhatsApp — 1/3 */}
-        <div className="w-1/3 flex flex-col justify-between p-4 gap-3 min-w-0 shrink-0">
+        {/* Info + WhatsApp — solo desktop */}
+        <div className="hidden lg:flex w-1/3 flex-col justify-between p-4 gap-3 min-w-0 shrink-0">
           <div className="flex flex-col">
             <div className="flex flex-col gap-0.5 py-1.5 border-t border-white/8">
               <span className="text-gold text-[11px] tracking-[0.18em] uppercase font-semibold">
@@ -280,8 +277,8 @@ const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
           </a>
         </div>
 
-        {/* Mapa — 2/3 */}
-        <div className="w-2/3 flex-shrink-0 border-l border-white/10 overflow-hidden">
+        {/* Mapa — full width en mobile, 2/3 en desktop */}
+        <div className="w-full lg:w-2/3 flex-shrink-0 lg:border-l border-white/10 overflow-hidden">
           <iframe
             src={loc.embedUrl}
             width="100%"
