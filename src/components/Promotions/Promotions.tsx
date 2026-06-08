@@ -261,7 +261,7 @@ const Promotions = () => {
           </h2>
           <p
             data-gsap="fade-up"
-            className="mt-4 text-green/60 text-md  leading-[1.7] max-w-4xl mx-auto"
+            className="mt-4 text-green/60 text-md  leading-[1.7] max-w-5xl mx-auto"
           >
             Aprovecha nuestras ofertas por tiempo limitado y da el primer paso
             hacia la sonrisa que siempre quisiste.

@@ -173,7 +173,7 @@ const AmbientCanvas = ({
 /* ── Columna izquierda: redes sociales + info de contacto ── */
 const SocialColumn = () => (
   <div className="flex flex-col gap-4">
-    <p className="font-display text-gold text-xs tracking-[0.22em] uppercase mb-2">
+    <p className="font-display text-gold text-md tracking-[0.22em] uppercase mb-2">
       Redes
     </p>
     {SOCIAL_LINKS.map(social => (
@@ -217,12 +217,12 @@ const SocialColumn = () => (
       ].map((item, i) => (
         <div
           key={item.label}
-          className={`flex gap-3 items-center py-3 border-b border-white/8 ${i === 0 ? 'border-t border-white/8' : ''}`}
+          className={`flex gap-10 items-center py-3 border-b border-white/8 ${i === 0 ? 'border-t border-white/8' : ''}`}
         >
-          <span className="text-gold text-[11px] tracking-[0.18em] uppercase font-semibold w-16 shrink-0">
+          <span className="text-gold text-md tracking-[0.18em] uppercase font-semibold w-16 shrink-0">
             {item.label}
           </span>
-          <span className="text-white/60 text-lg">{item.value}</span>
+          <span className="text-white text-xl">{item.value}</span>
         </div>
       ))}
     </div>
