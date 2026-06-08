@@ -254,7 +254,7 @@ const Promotions = () => {
           </div>
           <h2
             data-gsap="fade-up"
-            className="display-lg text-green"
+            className="display-title text-green"
             style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)' }}
           >
             Nuestras <span className="text-gold">Promociones</span>

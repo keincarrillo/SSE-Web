@@ -147,8 +147,7 @@ const Hero = () => {
       id="inicio"
       className="relative md:min-h-screen bg-green overflow-hidden flex flex-col"
     >
-      {/* Imagen del equipo */}
-      <div className="absolute inset-x-0 bottom-[72px] md:bottom-[72px] lg:bottom-[72px] z-0">
+      <div className="absolute inset-x-0 bottom-[72px] md:bottom-[72px] lg:bottom-[95px] z-0">
         <img
           ref={imgRef}
           src={team}
