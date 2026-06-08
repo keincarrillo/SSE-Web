@@ -145,7 +145,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="inicio"
-      className="relative min-h-screen bg-green overflow-hidden flex flex-col"
+      className="relative md:min-h-screen bg-green overflow-hidden flex flex-col"
     >
       {/* Imagen del equipo */}
       <div className="absolute inset-x-0 bottom-[72px] md:bottom-[72px] lg:bottom-[72px] z-0">
@@ -165,7 +165,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-10 bg-linear-to-b from-green/90 via-green/65 via-45% to-green/20" />
 
       {/* Contenido central */}
-      <div className="relative z-20 flex-1 flex flex-col items-center justify-start text-center px-6 md:px-10 pt-32 md:pt-24 lg:pt-44">
+      <div className="relative z-20 flex-none md:flex-1 flex flex-col items-center justify-start text-center px-6 md:px-10 pt-32 md:pt-24 lg:pt-44">
         <div
           ref={tagRef}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-5 md:mb-6"
