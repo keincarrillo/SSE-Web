@@ -123,8 +123,10 @@ body {
   animation: pulse-subtle 2.8s ease-in-out infinite;
 }
 
-p {
-  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+@layer base {
+  p {
+    font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  }
 }
 
 /* Estados iniciales GSAP */
