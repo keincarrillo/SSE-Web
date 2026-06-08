@@ -33,12 +33,14 @@ const AnimatedNumber = ({
       const progress = Math.min(elapsed / totalMs, 1)
       const eased = 1 - Math.pow(1 - progress, 3)
       setCount(Math.round(eased * target))
+
       if (progress < 1) {
         rafRef.current = requestAnimationFrame(tick)
       }
     }
 
     rafRef.current = requestAnimationFrame(tick)
+
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
     }
@@ -59,13 +61,16 @@ const Hero = () => {
 
   useEffect(() => {
     if (!barRef.current) return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setStatsActive(true)
       },
       { threshold: 0.1 }
     )
+
     observer.observe(barRef.current)
+
     return () => observer.disconnect()
   }, [])
 
@@ -140,48 +145,53 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="inicio"
-      className="relative min-h-0 md:min-h-screen bg-green overflow-hidden flex flex-col"
+      className="relative min-h-screen bg-green overflow-hidden flex flex-col"
     >
-      {/* Imagen — altura responsiva */}
-      <div className="absolute inset-x-0 bottom-[90px] md:bottom-[72px]">
+      {/* Imagen del equipo */}
+      <div className="absolute inset-x-0 bottom-[72px] md:bottom-[72px] lg:bottom-[72px] z-0">
         <img
           ref={imgRef}
           src={team}
           alt="Nuestro equipo"
           className="hidden md:block w-full object-cover"
-          style={{ height: '95vh', objectPosition: '50% 30%' }}
+          style={{
+            height: 'clamp(500px, 72vh, 760px)',
+            objectPosition: '50% 38%'
+          }}
         />
       </div>
+
       {/* Overlay */}
-      <div className="absolute inset-0 bg-linear-to-b from-green/85 via-green/50 via-40% to-green/5" />
+      <div className="absolute inset-0 z-10 bg-linear-to-b from-green/90 via-green/65 via-45% to-green/20" />
 
       {/* Contenido central */}
-      <div className="relative z-20 flex-1 flex flex-col items-center justify-start text-center px-6 md:px-10 pt-36 md:pt-28 lg:pt-44">
+      <div className="relative z-20 flex-1 flex flex-col items-center justify-start text-center px-6 md:px-10 pt-32 md:pt-24 lg:pt-44">
         <div
           ref={tagRef}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-6"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 mb-5 md:mb-6"
         >
-          <span className="text-gold text-md font-semibold tracking-[0.2em] uppercase">
+          <span className="text-gold text-sm md:text-md font-semibold tracking-[0.2em] uppercase">
             ¿Quiénes somos?
           </span>
         </div>
 
-        {/* Título responsivo */}
         <h1
           ref={titleRef}
-          className="display-title text-white mb-6"
-          style={{ fontSize: 'clamp(1.8rem, 4.5vw, 5rem)' }}
+          className="display-title text-white mb-5 md:mb-6"
+          style={{
+            fontSize: 'clamp(2rem, 4.4vw, 5rem)',
+            lineHeight: '1.05'
+          }}
         >
           Smile <span className="text-gold">Studio</span> Experts
         </h1>
 
-        {/* Texto descriptivo */}
         <p
           ref={subRef}
-          className="text-white/85 max-w-2xl mb-2 text-center"
+          className="text-white/90  md:max-w-xl mb-2 text-center"
           style={{
-            fontSize: 'clamp(0.9rem, 1.4vw, 1.4rem)',
-            lineHeight: '1.4'
+            fontSize: 'clamp(.9rem, 1.30vw, 1.35rem)',
+            lineHeight: '1.6'
           }}
         >
           Somos un equipo enfocado en la estética y salud dental, creando
@@ -192,7 +202,7 @@ const Hero = () => {
 
         <div
           ref={ctaRef}
-          className="flex flex-wrap gap-4 justify-center mt-8 pb-12 md:pb-0"
+          className="flex flex-wrap gap-4 justify-center mt-1 pb-10 md:pb-0"
         >
           <button
             onClick={() => {
@@ -225,6 +235,7 @@ const Hero = () => {
                 <AnimatedNumber target={s.value} active={statsActive} />
                 {s.suffix}
               </span>
+
               <span className="font-semibold text-white text-xs lg:text-lg tracking-[0.15em] uppercase text-center">
                 {s.label}
               </span>
