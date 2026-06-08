@@ -9,7 +9,7 @@ const LOCATIONS = [
     whatsapp: 'https://wa.me/message/3AXNNBK5CECNO1',
     whatsappDisplay: '+52 55 4502 1633',
     email: 'smilestudioexperts@outlook.com',
-    horario: '12:00–18:00',
+    horario: '12:00–18:00 de Lun a Sab',
     embedUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.885824363715!2d-98.98411995776843!3d19.402947118852673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e33713944d9f%3A0x3252260afa632afc!2sSmile%20Studio%20Experts!5e0!3m2!1ses-419!2smx!4v1777084851360!5m2!1ses-419!2smx'
   },
@@ -20,7 +20,7 @@ const LOCATIONS = [
     whatsapp: 'https://wa.me/message/3AXNNBK5CECNO1',
     whatsappDisplay: '+52 55 4502 1633',
     email: 'smilestudioexperts@outlook.com',
-    horario: '12:00–18:00',
+    horario: '12:00–18:00 de Lun a Sab',
     embedUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4452483689947!2d-99.2041844!3d19.4363609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021b854c170f%3A0x1b2db9d3c21f177a!2sAv.%20Homero%201425%2C%20Polanco%2C%20Polanco%20II%20Secc%2C%20Miguel%20Hidalgo%2C%2011530%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1777939435249!5m2!1ses-419!2smx'
   }
@@ -174,7 +174,7 @@ const AmbientCanvas = ({
 const SocialColumn = () => (
   <div className="flex flex-col gap-4">
     <p className="font-display text-gold text-md tracking-[0.22em] uppercase mb-2">
-      Redes
+      redes sociales
     </p>
     {SOCIAL_LINKS.map(social => (
       <a
@@ -209,11 +209,10 @@ const SocialColumn = () => (
       </a>
     ))}
 
-    {/* Info de contacto */}
     <div className="mt-2 flex flex-col gap-0">
       {[
         { label: 'Email', value: 'smilestudioexperts@outlook.com' },
-        { label: 'Horario', value: '12:00–18:00' }
+        { label: 'Horario', value: '12:00–18:00 de Lun a Sab' }
       ].map((item, i) => (
         <div
           key={item.label}
