@@ -114,7 +114,7 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
                 key={l.href}
                 href={`#${l.href}`}
                 onClick={e => handleNavClick(e, l.href)}
-                className={`text-sm font-medium transition-colors duration-200 relative group ${linkClass}`}
+                className={`text-lg font-medium transition-colors duration-200 relative group ${linkClass}`}
               >
                 {l.label}
                 <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gold rounded-full transition-all duration-300 group-hover:w-full" />
@@ -125,7 +125,7 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
           <a
             href="#contacto"
             onClick={e => handleNavClick(e, 'contacto')}
-            className="hidden md:inline-flex ml-4 px-5 py-2.5 rounded-full bg-green text-white text-xs font-semibold tracking-widest uppercase hover:bg-green-mid transition-colors duration-300"
+            className="hidden md:inline-flex ml-4 px-5 py-2.5 rounded-full bg-green text-white text-sm font-semibold tracking-widest uppercase hover:bg-green-mid transition-colors duration-300"
           >
             Agendar cita
           </a>
