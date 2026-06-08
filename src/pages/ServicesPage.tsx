@@ -479,7 +479,7 @@ const ServiceSection = ({
 
             <p
               data-gsap="fade-up"
-              className={`text-md lg:text-lg leading-[1.7] mb-8 ${
+              className={` leading-[1.7] mb-8 ${
                 isGreen ? 'text-white/55' : 'text-green/60'
               }`}
             >

@@ -82,7 +82,7 @@ body {
 
 @layer base {
   p {
-    font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+    font-size: clamp(1.15rem, 1.8vw, 1.55rem);
   }
 }
 

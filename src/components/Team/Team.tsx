@@ -687,7 +687,7 @@ export default function Team() {
           </div>
 
           <p
-            className={`mt-4 text-white/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto text-center ${titleInView ? 'team-slide-from-left' : 'team-hidden'}`}
+            className={`mt-4 text-white/60 text-md  leading-[1.7] max-w-4xl mx-auto text-center ${titleInView ? 'team-slide-from-left' : 'team-hidden'}`}
             style={{ animationDelay: '0.2s' }}
           >
             Somos un equipo enfocado en crear sonrisas armónicas y naturales,

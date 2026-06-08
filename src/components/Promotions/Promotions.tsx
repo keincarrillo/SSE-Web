@@ -191,7 +191,7 @@ const PromoCard = ({
         {title}
       </h3>
       <p
-        className={`text-md lg:text-lg leading-[1.65] ${
+        className={`text-md  leading-[1.2] ${
           featured ? 'text-white/50' : 'text-green/60'
         }`}
       >
@@ -261,7 +261,7 @@ const Promotions = () => {
           </h2>
           <p
             data-gsap="fade-up"
-            className="mt-4 text-green/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto"
+            className="mt-4 text-green/60 text-md  leading-[1.7] max-w-4xl mx-auto"
           >
             Aprovecha nuestras ofertas por tiempo limitado y da el primer paso
             hacia la sonrisa que siempre quisiste.

@@ -174,7 +174,7 @@ const ServiceCardLeft = ({
       <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
         {title}
       </h3>
-      <p className="text-md lg:text-lg leading-[1.3] text-white/50">
+      <p className="text-lg lg:text-xl leading-[1.3] text-white">
         {description}
       </p>
     </div>
@@ -221,7 +221,7 @@ const ServiceCardRight = ({
       <h3 className="display-name text-xl tracking-[0.02em] text-white mb-2">
         {title}
       </h3>
-      <p className="text-md lg:text-lg leading-[1.3] text-white/50">
+      <p className="text-lg lg:text-xl leading-[1.3] text-white">
         {description}
       </p>
     </div>
@@ -266,7 +266,7 @@ const ServiceCard = ({
       <h3 className="display-name text-lg sm:text-xl tracking-[0.02em] text-white mb-1.5 text-center">
         {title}
       </h3>
-      <p className="text-sm sm:text-md leading-[1.3] text-white/50 text-center">
+      <p className="text-md sm:text-lg leading-[1.3] text-white text-center">
         {description}
       </p>
     </div>
@@ -317,7 +317,7 @@ const FeaturedCard = ({
       <h3 className="display-name text-lg sm:text-xl tracking-[0.02em] text-green mb-1.5 text-center">
         {title}
       </h3>
-      <p className="text-md lg:text-lg leading-[1.3] text-green/65 text-center">
+      <p className="text-lg lg:text-xl leading-[1.3] text-green text-center">
         {description}
       </p>
     </div>
@@ -515,7 +515,7 @@ const Services = () => {
           </h2>
           <p
             data-gsap="fade-up"
-            className="mt-4 text-green/60 text-md lg:text-lg leading-[1.7] max-w-4xl mx-auto"
+            className="mt-4 text-green/60 text-md leading-[1.7] max-w-4xl mx-auto"
           >
             Cada sonrisa es única, por eso ofrecemos tratamientos personalizados
             que combinan estética y funcionalidad para lograr resultados
