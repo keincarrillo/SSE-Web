@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { useNavigate } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 
 const CtaSection = () => {
   const ref = useRef<HTMLDivElement>(null)
@@ -69,18 +70,7 @@ const CtaSection = () => {
       >
         <span className="relative z-10">Agendar hoy</span>
         <span className="relative z-10 w-7 h-7 rounded-full bg-green/10 border border-green/30 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
+          <ArrowRight className="w-3 h-3" />
         </span>
         <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-green/5 to-transparent" />
       </button>

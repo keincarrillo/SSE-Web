@@ -90,7 +90,7 @@ const ServiceSection = ({
                         : 'bg-gold/15 border-gold/40'
                     }`}
                   >
-                    <Check dark={isGreen} />
+                    <Check className={isGreen ? 'text-green' : 'text-gold'} size={16} strokeWidth={3} />
                   </div>
                   <div>
                     <p

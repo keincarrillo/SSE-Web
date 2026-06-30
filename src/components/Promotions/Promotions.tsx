@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { PROMOS } from './data'
 import { Marquee, CountdownTimer, PromoCard } from './components'
@@ -39,10 +40,7 @@ const Promotions = () => {
           >
             <span className="relative z-10">Agendar mi cita</span>
             <span className="relative z-10 w-7 h-7 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-                strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              <ArrowRight className="w-3 h-3" />
             </span>
             <span className="shimmer-inner absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full" />
           </button>

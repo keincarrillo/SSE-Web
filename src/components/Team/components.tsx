@@ -20,10 +20,11 @@ const DescriptionToggle = ({ text }: { text: string }) => {
         aria-expanded={open}
       >
         <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase">
-          <InfoIcon />
+           <InfoIcon size={16} />
           {open ? 'Ocultar' : 'Conocer más'}
         </span>
         <ChevronDown
+          size={16}
           className={open ? 'chevron-open' : hasOpened ? 'chevron-close' : ''}
         />
       </button>
@@ -181,10 +182,11 @@ const AnimatedDoctorCard = ({
             aria-expanded={open}
           >
             <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase">
-              <InfoIcon />
+               <InfoIcon size={16} />
               {open ? 'Ocultar' : 'Conocer más'}
             </span>
             <ChevronDown
+              size={16}
               className={
                 open ? 'chevron-open' : hasOpened ? 'chevron-close' : ''
               }

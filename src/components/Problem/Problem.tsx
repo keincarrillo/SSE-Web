@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
+import { X } from 'lucide-react'
 import problem from '../../assets/problem.webp'
 import { AmbientEffects } from './ambient'
 
@@ -70,9 +71,7 @@ const Problem = () => {
           className="absolute top-5 right-5 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/50 hover:text-white hover:border-white/50 hover:bg-white/10 transition-all duration-200"
           aria-label="Cerrar"
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
+          <X className="w-4 h-4" />
         </button>
 
         <div className="relative z-10 flex flex-col md:flex-row items-stretch gap-0">

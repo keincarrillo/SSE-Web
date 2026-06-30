@@ -1,21 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { Check } from 'lucide-react'
 import { type BgVariant } from '../../data/services'
 
-export const Check = ({ dark }: { dark?: boolean }) => (
-  <svg
-    width="12"
-    height="12"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={dark ? 'text-green' : 'text-gold'}
-  >
-    <path d="M20 6L9 17l-5-5" />
-  </svg>
-)
+export { Check }
 
 const ServiceVisual = ({
   images,
