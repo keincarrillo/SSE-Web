@@ -17,7 +17,7 @@ const ScrollToTop = () => {
 
   useLayoutEffect(() => {
     if (!hash) {
-      const lenis = (window as any).__lenis
+      const lenis = window.__lenis
       if (lenis) {
         lenis.stop()
         lenis.scrollTo(0, { immediate: true })
