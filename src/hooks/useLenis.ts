@@ -3,8 +3,6 @@ import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
-
 export const useLenis = () => {
   useEffect(() => {
     const lenis = new Lenis({
@@ -14,7 +12,7 @@ export const useLenis = () => {
     })
 
     // exponer instancia globalmente para scroll programático
-    ;(window as any).__lenis = lenis
+    window.__lenis = lenis
 
     // mantiene ScrollTrigger sincronizado con Lenis
     lenis.on('scroll', ScrollTrigger.update)
@@ -27,7 +25,7 @@ export const useLenis = () => {
 
     return () => {
       lenis.destroy()
-      ;(window as any).__lenis = null
+      window.__lenis = null
     }
   }, [])
 }
