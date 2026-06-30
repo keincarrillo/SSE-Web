@@ -3,7 +3,7 @@ import facebook from '../../assets/social/facebook.webp'
 import instagram from '../../assets/social/instagram.webp'
 import mouth1 from '../../assets/social/mouth1.webp'
 import mouth2 from '../../assets/social/mouth2.webp'
-import { ChevronLeft, ChevronRight, IconInstagram, IconFacebook } from './icons'
+import { ChevronLeft, ChevronRight, FaInstagram, FaFacebook } from './icons'
 
 const GoldenCard = ({ showMouths = false }: { showMouths?: boolean }) => (
   <div style={{ width: '100%', aspectRatio: '12/16', position: 'relative', maxWidth: '100%' }}>
@@ -108,13 +108,13 @@ const MobileView = ({ inView }: { inView: boolean }) => (
 const TabletView = ({ inView }: { inView: boolean }) => (
   <div className={`hidden md:flex lg:hidden flex-row items-center justify-center gap-4 px-4 ${inView ? 'fade-up' : 'hidden-init'}`}>
     <div className="flex flex-col items-center gap-3" style={{ flex: '0 0 38%' }}>
-      <IconFacebook size={50} />
+      <FaFacebook size={50} />
       <img src={facebook} alt="Facebook" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
       <a href="https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="btn">Facebook</a>
     </div>
     <div style={{ flex: '0 0 14%', overflow: 'visible' }}><GoldenCard showMouths={true} /></div>
     <div className="flex flex-col items-center gap-3" style={{ flex: '0 0 38%' }}>
-      <IconInstagram size={50} />
+      <FaInstagram size={50} />
       <img src={instagram} alt="Instagram" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
       <a href="https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr" target="_blank" rel="noopener noreferrer" className="btn">Instagram</a>
     </div>
@@ -124,7 +124,7 @@ const TabletView = ({ inView }: { inView: boolean }) => (
 const DesktopView = () => (
   <div className="hidden lg:flex flex-row items-start justify-center gap-6">
     <div className="flex-1">
-      <div className="flex justify-center mb-4"><IconFacebook size={70} /></div>
+      <div className="flex justify-center mb-4"><FaFacebook size={70} /></div>
       <img src={facebook} alt="Facebook" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
       <div className="flex justify-center mt-6">
         <a href="https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="btn">Facebook</a>
@@ -132,7 +132,7 @@ const DesktopView = () => (
     </div>
     <div className="w-1/3 shrink-0"><GoldenCard showMouths={true} /></div>
     <div className="flex-1">
-      <div className="flex justify-center mb-4"><IconInstagram size={70} /></div>
+      <div className="flex justify-center mb-4"><FaInstagram size={70} /></div>
       <img src={instagram} alt="Instagram" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
       <div className="flex justify-center mt-6">
         <a href="https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr" target="_blank" rel="noopener noreferrer" className="btn">Instagram</a>
