@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLenis } from '../hooks/useLenis'
+import { SEO } from '../components/SEO/SEO'
 import { SERVICES } from '../data/services'
 import PageHeader from '../components/ServicesPage/PageHeader'
 import ServiceSection from '../components/ServicesPage/ServiceSection'
@@ -28,6 +29,11 @@ const ServicesPage = () => {
 
   return (
     <div className="bg-white min-h-screen">
+      <SEO
+        title="Servicios | Smile Studio Experts - Dentista en Chimalhuacán y Polanco"
+        description="Descubre nuestros servicios dentales: blanqueamiento, ortodoncia, diseño de sonrisa, prótesis y limpieza dental. Clínica dental en Chimalhuacán y Polanco, CDMX."
+        canonical="https://smilestudioexperts.com/servicios"
+      />
       <PageHeader />
       <main>
         {SERVICES.map((s, i) => (

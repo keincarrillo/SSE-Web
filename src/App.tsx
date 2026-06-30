@@ -1,6 +1,7 @@
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import { useLayoutEffect } from 'react'
 import { useLenis } from './hooks/useLenis'
+import { SEO, StructuredData } from './components/SEO/SEO'
 import Navbar from './components/Navbar/Navbar'
 import Problem from './components/Problem/Problem'
 import Hero from './components/Hero/Hero'
@@ -35,6 +36,7 @@ const ScrollToTop = () => {
 const Layout = () => (
   <>
     <ScrollToTop />
+    <StructuredData />
     <Navbar />
     <Outlet />
   </>
@@ -44,6 +46,11 @@ const Home = () => {
   useLenis()
   return (
     <>
+      <SEO
+        title="Smile Studio Experts | Dentista en Chimalhuacán y Polanco, CDMX"
+        description="Clínica dental especializada en estética y salud bucal. Blanqueamiento, ortodoncia, diseño de sonrisa, prótesis y limpieza dental en Chimalhuacán y Polanco. Agenda tu cita hoy."
+        canonical="https://smilestudioexperts.com/"
+      />
       <main>
         <Problem />
         <Hero />
