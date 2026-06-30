@@ -10,7 +10,7 @@ interface SEOProps {
 }
 
 const defaultSEO = {
-  title: 'Smile Studio Experts | Dentista en Chimalhuacán y Polanco, CDMX',
+  title: 'Smile Studio Experts',
   description:
     'Clínica dental especializada en estética y salud bucal. Blanqueamiento, ortodoncia, diseño de sonrisa, prótesis y limpieza dental en Chimalhuacán y Polanco. Agenda tu cita hoy.',
   canonical: SITE_URL,
