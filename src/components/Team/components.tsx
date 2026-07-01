@@ -51,7 +51,7 @@ const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
       <img
         src={member.img}
         alt={member.name}
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        className="absolute inset-0 w-full h-full object-cover object-top"
       />
     </div>
     <div className="px-3 py-2">
