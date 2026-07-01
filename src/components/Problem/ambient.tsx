@@ -2,15 +2,15 @@ import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 
 const ORBS = [
-  { style: '-top-32 -left-32', size: 'w-[500px] h-[500px]', bg: 'radial-gradient(circle, rgba(201,170,101,0.22) 0%, rgba(201,170,101,0.06) 45%, transparent 70%)' },
-  { style: 'bottom-0 -right-32', size: 'w-[400px] h-[400px]', bg: 'radial-gradient(circle, rgba(201,170,101,0.18) 0%, rgba(201,170,101,0.05) 45%, transparent 70%)' },
-  { style: 'top-1/4 right-[12%]', size: 'w-40 h-40', bg: 'radial-gradient(circle, rgba(201,170,101,0.28) 0%, transparent 65%)' },
-  { style: 'bottom-1/3 left-[8%]', size: 'w-28 h-28', bg: 'radial-gradient(circle, rgba(201,170,101,0.24) 0%, transparent 65%)' }
+  { style: '-top-32 -left-32', size: 'w-[500px] h-[500px]', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.22) 0%, rgba(var(--color-gold-light-rgb),0.06) 45%, transparent 70%)' },
+  { style: 'bottom-0 -right-32', size: 'w-[400px] h-[400px]', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.18) 0%, rgba(var(--color-gold-light-rgb),0.05) 45%, transparent 70%)' },
+  { style: 'top-1/4 right-[12%]', size: 'w-40 h-40', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.28) 0%, transparent 65%)' },
+  { style: 'bottom-1/3 left-[8%]', size: 'w-28 h-28', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.24) 0%, transparent 65%)' }
 ]
 
 const LINES = [
-  { style: { top: '28%', height: '2px' }, bg: 'linear-gradient(105deg, transparent 30%, rgba(201,170,101,0.18) 50%, transparent 70%)' },
-  { style: { top: '65%', height: '1px' }, bg: 'linear-gradient(105deg, transparent 30%, rgba(201,170,101,0.14) 50%, transparent 70%)' },
+  { style: { top: '28%', height: '2px' }, bg: 'linear-gradient(105deg, transparent 30%, rgba(var(--color-gold-light-rgb),0.18) 50%, transparent 70%)' },
+  { style: { top: '65%', height: '1px' }, bg: 'linear-gradient(105deg, transparent 30%, rgba(var(--color-gold-light-rgb),0.14) 50%, transparent 70%)' },
   { style: { top: '45%', height: '1px' }, bg: 'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.10) 50%, transparent 70%)' }
 ]
 
@@ -20,14 +20,14 @@ const PARTICLES: ({ style: React.CSSProperties; round?: boolean })[] = [
   { style: { top: '18%', right: '10%', width: 12, height: 12, background: 'var(--color-gold-light)', opacity: 0.6, transform: 'rotate(45deg)', borderRadius: 2 } },
   { style: { top: '75%', right: '8%', width: 8, height: 8, background: 'var(--color-gold-light)', opacity: 0.55, transform: 'rotate(45deg)', borderRadius: 1 } },
   { style: { top: '42%', left: '5%', width: 12, height: 12, background: 'var(--color-gold-light)', opacity: 0.45, borderRadius: '50%' }, round: true },
-  { style: { top: '55%', right: '6%', width: 10, height: 10, background: '#dcc48a', opacity: 0.4, borderRadius: '50%' }, round: true },
+  { style: { top: '55%', right: '6%', width: 10, height: 10, background: 'var(--color-gold-pale)', opacity: 0.4, borderRadius: '50%' }, round: true },
   { style: { top: '32%', left: '18%', width: 8, height: 8, background: 'var(--color-gold-light)', opacity: 0.5, borderRadius: '50%' }, round: true },
   { style: { top: '80%', right: '20%', width: 8, height: 8, background: 'var(--color-gold-light)', opacity: 0.45, borderRadius: '50%' }, round: true }
 ]
 
 const GLINTS = [
   { top: '15%', left: '22%', right: undefined as string | undefined, w: 3, h: 24, cw: 24, ch: 3, mt: -13, ml: -10, color: 'var(--color-gold-light)' },
-  { top: '60%', left: undefined as string | undefined, right: '18%', w: 2, h: 18, cw: 18, ch: 2, mt: -10, ml: -8, color: '#dcc48a' },
+  { top: '60%', left: undefined as string | undefined, right: '18%', w: 2, h: 18, cw: 18, ch: 2, mt: -10, ml: -8, color: 'var(--color-gold-pale)' },
   { top: '80%', left: '30%', right: undefined as string | undefined, w: 2, h: 16, cw: 16, ch: 2, mt: -9, ml: -7, color: 'var(--color-gold-light)' }
 ]
 

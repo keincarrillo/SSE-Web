@@ -53,32 +53,21 @@ const ServiceVisual = ({
       }}
     >
       <div
+        className="carousel-track"
         style={{
-          display: 'flex',
           width: `${images.length * 100}%`,
-          height: '100%',
           transform: `translateX(-${(current * 100) / images.length}%)`,
-          transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
         }}
       >
         {images.map((img, i) => (
           <div
             key={i}
-            style={{
-              width: `${100 / images.length}%`,
-              flexShrink: 0,
-              height: '100%'
-            }}
+            className="carousel-slide"
+            style={{ width: `${100 / images.length}%` }}
           >
             <img
               src={img}
               alt={`${title} ${i + 1}`}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block'
-              }}
             />
           </div>
         ))}
@@ -86,15 +75,7 @@ const ServiceVisual = ({
 
       {hasMultiple && (
         <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '64px',
-            background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)',
-            pointerEvents: 'none'
-          }}
+          className="absolute bottom-0 left-0 right-0 h-16 gradient-fade-bottom pointer-events-none"
         />
       )}
 
@@ -116,19 +97,7 @@ const ServiceVisual = ({
               key={i}
               onClick={() => goTo(i)}
               aria-label={`Imagen ${i + 1}`}
-              style={{
-                width: i === current ? '20px' : '7px',
-                height: '7px',
-                borderRadius: '4px',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 0,
-                backgroundColor:
-                  i === current
-                    ? 'var(--color-gold-light)'
-                    : 'rgba(255,255,255,0.5)',
-                transition: 'width 0.3s ease, background-color 0.3s ease'
-              }}
+              className={`dot-indicator ${i === current ? 'active' : ''}`}
             />
           ))}
         </div>

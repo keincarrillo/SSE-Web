@@ -36,7 +36,7 @@ const Promotions = () => {
         <div className="flex justify-center mt-10">
           <button
             onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-shimmer group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green text-white font-semibold text-md tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(30,70,32,0.35)]"
+            className="btn-shimmer group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green text-white font-semibold text-md tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(var(--color-green-rgb),0.35)]"
           >
             <span className="relative z-10">Agendar mi cita</span>
             <span className="relative z-10 w-7 h-7 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">

@@ -68,8 +68,8 @@ const PhonesCarousel = ({ inView }: { inView: boolean }) => {
         >
           {phones.map(phone => (
             <div key={phone.id} className="min-w-full px-1">
-              <img src={phone.image} alt={phone.name} className="w-full h-auto mx-auto"
-                style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))', maxWidth: '380px' }}
+              <img src={phone.image} alt={phone.name} className="w-full h-auto mx-auto img-shadow"
+                style={{ maxWidth: '380px' }}
               />
               <div className="flex justify-center mt-6">
                 <a href={phone.buttonLink} className="btn">{phone.buttonText}</a>
@@ -109,13 +109,13 @@ const TabletView = ({ inView }: { inView: boolean }) => (
   <div className={`hidden md:flex lg:hidden flex-row items-center justify-center gap-4 px-4 ${inView ? 'fade-up' : 'hidden-init'}`}>
     <div className="flex flex-col items-center gap-3" style={{ flex: '0 0 38%' }}>
       <FaFacebook size={50} />
-      <img src={facebook} alt="Facebook" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
+      <img src={facebook} alt="Facebook" className="w-full h-auto img-shadow" />
       <a href="https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="btn">Facebook</a>
     </div>
     <div style={{ flex: '0 0 14%', overflow: 'visible' }}><GoldenCard showMouths={true} /></div>
     <div className="flex flex-col items-center gap-3" style={{ flex: '0 0 38%' }}>
       <FaInstagram size={50} />
-      <img src={instagram} alt="Instagram" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
+      <img src={instagram} alt="Instagram" className="w-full h-auto img-shadow" />
       <a href="https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr" target="_blank" rel="noopener noreferrer" className="btn">Instagram</a>
     </div>
   </div>
@@ -125,7 +125,7 @@ const DesktopView = () => (
   <div className="hidden lg:flex flex-row items-start justify-center gap-6">
     <div className="flex-1">
       <div className="flex justify-center mb-4"><FaFacebook size={70} /></div>
-      <img src={facebook} alt="Facebook" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
+      <img src={facebook} alt="Facebook" className="w-full h-auto img-shadow" />
       <div className="flex justify-center mt-6">
         <a href="https://www.facebook.com/share/17wxn6hzXU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="btn">Facebook</a>
       </div>
@@ -133,7 +133,7 @@ const DesktopView = () => (
     <div className="w-1/3 shrink-0"><GoldenCard showMouths={true} /></div>
     <div className="flex-1">
       <div className="flex justify-center mb-4"><FaInstagram size={70} /></div>
-      <img src={instagram} alt="Instagram" className="w-full h-auto" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }} />
+      <img src={instagram} alt="Instagram" className="w-full h-auto img-shadow" />
       <div className="flex justify-center mt-6">
         <a href="https://www.instagram.com/smilestudioexperts?igsh=Y241YjJqcTJrNm15&utm_source=qr" target="_blank" rel="noopener noreferrer" className="btn">Instagram</a>
       </div>

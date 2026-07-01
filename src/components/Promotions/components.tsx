@@ -45,7 +45,7 @@ const CountdownTimer = () => {
 
 const PromoCard = (promo: (typeof PROMOS)[number]) => (
   <div className={`promo-card relative flex flex-col rounded-2xl overflow-hidden border ${promo.featured ? 'bg-green border-gold/40' : 'bg-white border-black/7'}`}
-    style={{ boxShadow: promo.featured ? '0 8px 40px rgba(var(--color-green), 0.18)' : '0 2px 16px rgba(0,0,0,0.06)' }}>
+    style={{ boxShadow: promo.featured ? '0 8px 40px rgba(var(--color-green-rgb), 0.18)' : '0 2px 16px rgba(0,0,0,0.06)' }}>
     <div className="px-6 pt-6 pb-0">
       <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase ${promo.featured ? 'bg-gold/20 text-gold' : 'bg-green/7 text-green'}`}>
         {promo.tag}
