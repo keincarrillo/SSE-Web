@@ -31,7 +31,7 @@ const Testimonials = () => {
 
   return (
     <section ref={ref as React.RefObject<HTMLElement>} id="testimonios"
-      className="bg-white relative overflow-hidden pt-10 pb-20 max-w-full mx-auto">
+      className="bg-white relative overflow-hidden pt-10 pb-20 max-w-full mx-auto scroll-mt-24">
       <div className="absolute bottom-0 left-0 right-0 h-[90px] pointer-events-none z-[1] gradient-fade-top"
       />
 
@@ -105,9 +105,9 @@ const Testimonials = () => {
                         {Array.from({ length: t.stars }).map((_, i) => (<span key={i} className="text-gold text-[16px]">★</span>))}
                       </div>
                       <div className="w-full rounded-[14px] border border-white/20 glass-card-subtle" style={{ padding: '18px' }}>
-                        <p className="text-white text-[22px] font-bold leading-[1.5] m-0 mb-2.5">"{t.hook}"</p>
-                        <p className="text-white/80 text-[13px] leading-[1.7] m-0 mb-2.5">{t.body}</p>
-                        <p className="text-gold text-[13px] font-medium m-0">{t.closing}</p>
+                        <p className="text-white font-bold leading-[1.5] m-0 mb-2.5" style={{ fontSize: 'clamp(18px, 5.5vw, 22px)' }}>"{t.hook}"</p>
+                        <p className="text-white/80 leading-[1.7] m-0 mb-2.5" style={{ fontSize: 'clamp(13px, 3.5vw, 15px)' }}>{t.body}</p>
+                        <p className="text-gold font-medium m-0" style={{ fontSize: 'clamp(13px, 3.5vw, 15px)' }}>{t.closing}</p>
                       </div>
                     </div>
                   </div>

@@ -65,7 +65,7 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center gap-6">
           <a href="/" className="flex items-center shrink-0">
             <img src={scrolled ? logoNegro : darkHero ? logoBlanco : logoNegro}
-              alt="Smile Studio Experts" className="h-16 md:h-20 w-auto object-contain transition-all duration-500"
+              alt="Smile Studio Experts" className="h-16 md:h-16 w-auto object-contain transition-all duration-500"
               loading="eager" fetchPriority="high" decoding="async" />
           </a>
 

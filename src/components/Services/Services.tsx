@@ -33,7 +33,7 @@ const Services = () => {
   }, [ref])
 
   return (
-    <section ref={ref} id="servicios" className="bg-white py-10 md:py-16 lg:py-24 relative overflow-x-hidden">
+    <section ref={ref} id="servicios" className="bg-white py-10 md:py-16 lg:py-24 relative overflow-x-hidden scroll-mt-24">
       <div ref={toothRef} className="tooth-float hidden lg:block pointer-events-none z-20"
         style={{ position: 'absolute', width: '300px', height: '300px', top: 0, left: 0 }}>
         <img src={tooth} alt="Diente" className="object-contain drop-shadow-2xl w-full h-full" />

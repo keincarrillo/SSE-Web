@@ -44,14 +44,14 @@ const DescriptionToggle = ({ text }: { text: string }) => {
 
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
   <div className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col">
-    <div className="relative flex-shrink-0 overflow-hidden" style={{ height: '360px' }}>
+    <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 'clamp(280px, 75vw, 360px)' }}>
       <div className="absolute inset-0 team-card-bg" />
       <div className="absolute inset-0 team-dot-pattern" />
       <div className="absolute bottom-0 left-0 right-0 z-10 team-divider-line" />
       <img
         src={member.img}
         alt={member.name}
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        className="absolute inset-0 w-full h-full object-cover object-top"
       />
     </div>
     <div className="px-3 py-2">
@@ -171,7 +171,7 @@ const DesktopDoctorGrid = () => {
   }
 
   return (
-    <div className="hidden sm:grid sm:grid-cols-3 gap-4">
+    <div className="hidden md:grid md:grid-cols-3 gap-4">
       {TEAM.slice(1).map((m, i) => (
         <AnimatedDoctorCard
           key={m.id}
@@ -192,14 +192,14 @@ const AnimatedMainCard = () => {
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`hidden sm:block relative mb-10 lg:mt-10 overflow-visible ${inView ? 'team-slide-from-left' : 'team-hidden'}`}
+      className={`hidden md:block relative mb-10 lg:mt-10 overflow-visible ${inView ? 'team-slide-from-left' : 'team-hidden'}`}
       style={{ animationDelay: '0s' }}
     >
       <div
         className="relative rounded-2xl border border-white/25 overflow-hidden"
         style={{ minHeight: 'clamp(350px, 65vw, 700px)' }}
       >
-        <div className="hidden sm:grid lg:hidden absolute inset-0 grid-cols-2 grid-rows-2">
+        <div className="hidden md:grid lg:hidden absolute inset-0 grid-cols-2 grid-rows-2">
           <div className="row-span-2 overflow-hidden">
             <img
               src={banner2}

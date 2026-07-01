@@ -9,7 +9,7 @@ const Contact = () => {
   return (
     <section ref={ref} id="contacto"
       style={{ isolation: 'isolate', position: 'relative', overflow: 'hidden' }}
-      className="py-24 md:py-32 bg-green">
+      className="py-24 md:py-32 bg-green scroll-mt-24">
       <AmbientCanvas containerRef={ref} />
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-10">

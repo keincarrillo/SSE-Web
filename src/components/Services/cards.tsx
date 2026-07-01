@@ -62,7 +62,7 @@ export const ServiceCard = ({
   return (
     <div
       data-gsap="fade-up"
-      className="service-card-clickable rounded-2xl border border-white/[0.07] bg-green p-5 sm:p-6"
+      className="service-card-clickable rounded-2xl border border-white/[0.07] bg-green p-4 sm:p-6"
       onClick={() => navigate(href)} role="button" tabIndex={0}
       onKeyDown={e => e.key === 'Enter' && navigate(href)}
       aria-label={`Ver servicio: ${title}`}
@@ -88,7 +88,7 @@ export const FeaturedCard = ({
     <div
       ref={cardRef}
       data-gsap="fade-up"
-      className="service-card-clickable relative rounded-2xl border border-gold/40 bg-gold w-full p-5 sm:p-6 lg:p-[75px_26px_28px] min-h-0 lg:min-h-105"
+      className="service-card-clickable relative rounded-2xl border border-gold/40 bg-gold w-full p-4 sm:p-6 lg:p-[75px_26px_28px] min-h-0 lg:min-h-105"
       onClick={() => navigate(href)} role="button" tabIndex={0}
       onKeyDown={e => e.key === 'Enter' && navigate(href)}
       aria-label={`Ver servicio: ${title}`}

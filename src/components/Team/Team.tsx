@@ -16,7 +16,7 @@ export default function Team() {
     <section
       ref={ref as React.RefObject<HTMLElement>}
       id="equipo"
-      className="py-16 md:py-28 bg-green"
+      className="py-16 md:py-28 bg-green scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto px-5 md:px-10">
         <div

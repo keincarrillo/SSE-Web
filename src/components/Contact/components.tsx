@@ -56,7 +56,7 @@ const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
     </div>
 
     <div className="rounded-2xl overflow-hidden border border-white/15 hover:border-gold/40 transition-colors duration-300 bg-white/6">
-      <div className="flex h-56">
+      <div className="flex h-48 lg:h-56">
         <div className="hidden lg:flex w-1/3 flex-col justify-between p-4 gap-3 min-w-0 shrink-0">
           <div className="flex flex-col">
             <div className="flex flex-col gap-0.5 py-1.5 border-t border-white/8">

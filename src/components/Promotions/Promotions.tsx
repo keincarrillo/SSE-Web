@@ -7,7 +7,7 @@ const Promotions = () => {
   const ref = useScrollReveal({ stagger: 0.08 })
 
   return (
-    <section ref={ref} id="promociones" className="bg-white py-10 md:py-10 lg:py-12 relative overflow-x-hidden">
+    <section ref={ref} id="promociones" className="bg-white py-10 md:py-10 lg:py-12 relative overflow-x-hidden scroll-mt-24">
       <Marquee />
 
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -29,7 +29,7 @@ const Promotions = () => {
 
         <CountdownTimer />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {PROMOS.map(promo => <PromoCard key={promo.title} {...promo} />)}
         </div>
 
