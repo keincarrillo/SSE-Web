@@ -200,10 +200,18 @@ body {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: opacity;
 }
 .modal-card {
   background: var(--color-green);
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--color-gold-light-rgb), 0.15);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
 /* ─── WhatsApp button ────────────────────────────────────────────────────── */
