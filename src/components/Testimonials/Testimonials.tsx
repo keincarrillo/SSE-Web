@@ -32,8 +32,7 @@ const Testimonials = () => {
   return (
     <section ref={ref as React.RefObject<HTMLElement>} id="testimonios"
       className="bg-white relative overflow-hidden pt-10 pb-20 max-w-full mx-auto">
-      <div className="absolute bottom-0 left-0 right-0 h-[90px] pointer-events-none z-[1]"
-        style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--color-white) 100%)' }}
+      <div className="absolute bottom-0 left-0 right-0 h-[90px] pointer-events-none z-[1] gradient-fade-top"
       />
 
       <div className="max-w-[1152px] mx-auto relative z-[2]">
@@ -51,14 +50,14 @@ const Testimonials = () => {
 
         <div className="mx-4 md:mx-14 lg:mx-10 xl:mx-0 relative z-[2]">
           <button onClick={() => navigate(current - 1)} aria-label="Anterior"
-            className="hidden md:flex absolute items-center justify-center cursor-pointer z-30 text-green bg-white border border-green/35 rounded-full"
-            style={{ top: '50%', left: '-44px', transform: 'translateY(-50%)', width: '32px', height: '32px', boxShadow: '0 2px 8px rgba(0,0,0,0.10)' }}>
+            className="hidden md:flex absolute items-center justify-center cursor-pointer z-30 text-green bg-white border border-green/35 rounded-full shadow-card-sm"
+            style={{ top: '50%', left: '-44px', transform: 'translateY(-50%)', width: '32px', height: '32px' }}>
             <ChevronLeft />
           </button>
 
           <button onClick={() => navigate(current + 1)} aria-label="Siguiente"
-            className="hidden md:flex absolute items-center justify-center cursor-pointer z-30 text-green bg-white border border-green/35 rounded-full"
-            style={{ top: '50%', right: '-44px', transform: 'translateY(-50%)', width: '32px', height: '32px', boxShadow: '0 2px 8px rgba(0,0,0,0.10)' }}>
+            className="hidden md:flex absolute items-center justify-center cursor-pointer z-30 text-green bg-white border border-green/35 rounded-full shadow-card-sm"
+            style={{ top: '50%', right: '-44px', transform: 'translateY(-50%)', width: '32px', height: '32px' }}>
             <ChevronRight />
           </button>
 
@@ -77,8 +76,8 @@ const Testimonials = () => {
                 {TESTIMONIALS.map((t, i) => (
                   <div key={i} className="relative flex-shrink-0" style={{ width: `${100 / total}%` }}>
                     <div className="hidden md:flex items-center" style={{ minHeight: '540px', padding: '40px 36px' }}>
-                      <div className="flex-shrink-0 rounded-[20px] overflow-hidden border border-white/20"
-                        style={{ width: 'clamp(200px, 35%, 360px)', height: 'clamp(260px, 45vw, 480px)', boxShadow: '0 8px 40px rgba(0,0,0,0.35)', background: 'rgba(255,255,255,0.05)' }}>
+                      <div className="flex-shrink-0 rounded-[20px] overflow-hidden border border-white/20 shadow-card-lg glass-card"
+                        style={{ width: 'clamp(200px, 35%, 360px)', height: 'clamp(260px, 45vw, 480px)' }}>
                         {t.img && <img src={t.img} alt={t.subtitle} className="w-full h-full object-cover object-top block" />}
                       </div>
 
@@ -87,7 +86,7 @@ const Testimonials = () => {
                         <h3 className="text-white font-bold m-0 leading-[1.1] tracking-[-0.01em] whitespace-nowrap overflow-hidden text-ellipsis"
                           style={{ fontSize: 'clamp(24px, 4vw, 40px)' }}>{t.subtitle}</h3>
                         <Stars count={t.stars} />
-                        <div className="rounded-[16px] border border-white/20" style={{ padding: 'clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 28px)', background: 'rgba(255,255,255,0.06)' }}>
+                        <div className="rounded-[16px] border border-white/20 glass-card-subtle" style={{ padding: 'clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 28px)' }}>
                           <p className="text-white font-bold leading-[1.5] m-0 mb-3" style={{ fontSize: 'clamp(16px, 2vw, 22px)' }}>"{t.hook}"</p>
                           <p className="text-white/80 leading-[1.7] m-0 mb-3" style={{ fontSize: 'clamp(17px, 1.5vw, 19px)' }}>{t.body}</p>
                           <p className="text-gold font-medium m-0" style={{ fontSize: 'clamp(17px, 1.5vw, 19px)' }}>{t.closing}</p>
@@ -96,8 +95,8 @@ const Testimonials = () => {
                     </div>
 
                     <div className="flex md:hidden flex-col items-center gap-0" style={{ padding: '32px 20px 28px' }}>
-                      <div className="rounded-[16px] overflow-hidden border border-white/20 flex-shrink-0 mb-6"
-                        style={{ width: '160px', height: '200px', boxShadow: '0 4px 20px rgba(0,0,0,0.3)', background: 'rgba(255,255,255,0.05)' }}>
+                      <div className="rounded-[16px] overflow-hidden border border-white/20 flex-shrink-0 mb-6 shadow-card glass-card"
+                        style={{ width: '160px', height: '200px' }}>
                         {t.img && <img src={t.img} alt={t.subtitle} className="w-full h-full object-cover object-top block" />}
                       </div>
                       <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50 m-0 mb-1 text-center">Tratamiento</p>
@@ -105,7 +104,7 @@ const Testimonials = () => {
                       <div className="flex gap-1 my-2.5 mb-[18px] justify-center">
                         {Array.from({ length: t.stars }).map((_, i) => (<span key={i} className="text-gold text-[16px]">★</span>))}
                       </div>
-                      <div className="w-full rounded-[14px] border border-white/20" style={{ padding: '18px', background: 'rgba(255,255,255,0.06)' }}>
+                      <div className="w-full rounded-[14px] border border-white/20 glass-card-subtle" style={{ padding: '18px' }}>
                         <p className="text-white text-[22px] font-bold leading-[1.5] m-0 mb-2.5">"{t.hook}"</p>
                         <p className="text-white/80 text-[13px] leading-[1.7] m-0 mb-2.5">{t.body}</p>
                         <p className="text-gold text-[13px] font-medium m-0">{t.closing}</p>
