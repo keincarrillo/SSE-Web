@@ -42,7 +42,7 @@ const Hero = () => {
 
   return (
     <section ref={sectionRef} id="inicio" className="relative md:min-h-screen bg-green overflow-hidden flex flex-col scroll-mt-24">
-      <div className="absolute inset-x-0 bottom-[72px] md:bottom-[72px] lg:bottom-[95px] z-0">
+      <div className="absolute inset-x-0 bottom-18 md:bottom-18 lg:bottom-23.75 z-0">
         <img ref={imgRef} src={team} alt="Nuestro equipo" className="hidden md:block w-full object-cover"
           style={{ height: 'clamp(500px, 72vh, 760px)', objectPosition: '50% 38%' }} />
       </div>

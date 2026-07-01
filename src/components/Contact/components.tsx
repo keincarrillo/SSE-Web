@@ -17,7 +17,7 @@ const SocialColumn = () => (
         className="group flex items-center gap-4 px-5 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 hover:border-white/25 hover:scale-[1.02]"
       >
         <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center text-white flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+          className="w-12 h-12 rounded-xl flex items-center justify-center text-white shrink-0 transition-transform duration-300 group-hover:scale-110"
           style={{ background: social.gradient ?? social.color }}
         >
           {social.icon}
@@ -50,7 +50,7 @@ const SocialColumn = () => (
 
 const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
   <div>
-    <div className="display-sm tracking-[0.05em] uppercase mb-2 px-1">
+    <div className="display-sm tracking-wider uppercase mb-2 px-1">
       <span className="text-gold">{loc.munucipality}</span>
       <span className="text-white">, {loc.state}</span>
     </div>
@@ -88,7 +88,7 @@ const LocationCard = ({ loc }: { loc: (typeof LOCATIONS)[number] }) => (
           </a>
         </div>
 
-        <div className="w-full lg:w-2/3 flex-shrink-0 lg:border-l border-white/10 overflow-hidden">
+        <div className="w-full lg:w-2/3 shrink-0 lg:border-l border-white/10 overflow-hidden">
           <iframe
             src={loc.embedUrl}
             width="100%"

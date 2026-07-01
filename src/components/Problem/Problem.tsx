@@ -108,7 +108,7 @@ const Problem = () => {
             </div>
           </div>
 
-          <div className="hidden md:block flex-shrink-0 w-[42%] relative overflow-hidden rounded-r-3xl">
+          <div className="hidden md:block shrink-0 w-[42%] relative overflow-hidden rounded-r-3xl">
             <img
               src={problem}
               alt="Consulta dental"
