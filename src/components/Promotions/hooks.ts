@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 
-const PROMO_DEADLINE = new Date(Date.now() + 24 * 60 * 60 * 1000)
+const getEndOfDay = () => {
+  const d = new Date()
+  d.setHours(23, 59, 59, 999)
+  return d
+}
 
 export const useCountdown = () => {
   const calc = () => {
-    const diff = PROMO_DEADLINE.getTime() - Date.now()
+    const diff = getEndOfDay().getTime() - Date.now()
     if (diff <= 0) return { hours: 0, minutes: 0, seconds: 0 }
     return {
       hours: Math.floor(diff / 3600000),
