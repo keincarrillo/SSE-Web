@@ -13,6 +13,11 @@
   --color-gray-mid: #e2e2de;
   --color-muted: #6b6b65;
   --color-border: #e0ddd5;
+  --color-gold-team: #d4af37;
+  --color-gold-pale: #dcc48a;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #1fc45e;
+  --color-shadow-green: rgba(30, 70, 32, 0.35);
 
   --font-display: 'Tenor Sans', system-ui, sans-serif;
   --font-sans: 'Darker Grotesque', sans-serif;
@@ -91,6 +96,9 @@ body {
   --color-gold-rgb: 183, 147, 63; /* #b7933f */
   --color-gold-light-rgb: 201, 170, 101; /* #c9aa65 */
   --color-green-rgb: 78, 88, 57; /* #4e5839 */
+  --color-gold-team-rgb: 212, 175, 55; /* #d4af37 */
+  --color-gold-pale-rgb: 220, 196, 138; /* #dcc48a */
+  --color-green-dark-rgb: 58, 66, 41; /* #3a4229 */
 }
 
 /* ─── Services — diente flotante ─────────────────────────────────────────── */
@@ -165,6 +173,70 @@ body {
 }
 .service-card-clickable:active {
   transform: scale(0.98);
+}
+
+/* ─── Sombras reutilizables ──────────────────────────────────────────────── */
+.shadow-card {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+.shadow-card-sm {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.shadow-card-lg {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+}
+.shadow-card-hover {
+  box-shadow: 0 20px 40px rgba(var(--color-gold-team-rgb), 0.18);
+}
+.shadow-btn-green {
+  box-shadow: 0 8px 30px rgba(var(--color-green-rgb), 0.35);
+}
+.shadow-btn-green-hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Overlay modal ──────────────────────────────────────────────────────── */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.modal-card {
+  background: var(--color-green);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--color-gold-light-rgb), 0.15);
+}
+
+/* ─── WhatsApp button ────────────────────────────────────────────────────── */
+.btn-whatsapp {
+  background: var(--color-whatsapp);
+  color: white;
+  transition: background 0.3s, transform 0.3s;
+}
+.btn-whatsapp:hover {
+  background: var(--color-whatsapp-hover);
+  transform: scale(1.05);
+}
+
+/* ─── Imagen drop-shadow ─────────────────────────────────────────────────── */
+.img-shadow {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+/* ─── Team card backgrounds ──────────────────────────────────────────────── */
+.team-card-bg {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(var(--color-gold-team-rgb), 0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 5%, rgba(var(--color-gold-team-rgb), 0.25) 0%, transparent 45%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+.team-dot-pattern {
+  background-image: radial-gradient(circle, rgba(var(--color-gold-team-rgb), 0.7) 1.5px, transparent 1.5px);
+  background-size: 8px 8px;
+  opacity: 0.5;
+}
+.team-divider-line {
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(var(--color-gold-team-rgb), 0.6) 40%, rgba(var(--color-gold-team-rgb), 0.6) 60%, transparent);
 }
 
 /* ─── Promotions — marquee scrolling ─────────────────────────────────────── */
