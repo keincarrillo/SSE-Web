@@ -42,9 +42,9 @@ const Hero = () => {
 
   return (
     <section ref={sectionRef} id="inicio" className="relative md:min-h-screen bg-green overflow-hidden flex flex-col scroll-mt-24">
-      <div className="absolute inset-x-0 bottom-18 md:bottom-18 lg:bottom-23.75 z-0">
-        <img ref={imgRef} src={team} alt="Nuestro equipo" className="hidden md:block w-full object-cover"
-          style={{ height: 'clamp(500px, 72vh, 760px)', objectPosition: '50% 38%' }} />
+      <div className="absolute inset-0 z-0">
+        <img ref={imgRef} src={team} alt="Nuestro equipo" className="hidden md:block w-full h-full object-cover"
+          style={{ objectPosition: '50% 0%' }} />
       </div>
 
       <div className="absolute inset-0 z-10 bg-linear-to-b from-green/90 via-green/65 via-45% to-green/20" />
