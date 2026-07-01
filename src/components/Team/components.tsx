@@ -45,33 +45,9 @@ const DescriptionToggle = ({ text }: { text: string }) => {
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
   <div className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col">
     <div className="relative flex-shrink-0 overflow-hidden" style={{ height: '360px' }}>
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.5) 0%, transparent 55%),
-            radial-gradient(ellipse at 90% 5%,  rgba(212,175,55,0.25) 0%, transparent 45%),
-            linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)
-          `
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, rgba(212,175,55,0.7) 1.5px, transparent 1.5px)',
-          backgroundSize: '8px 8px',
-          opacity: 0.5
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 right-0 z-10"
-        style={{
-          height: '2px',
-          background:
-            'linear-gradient(to right, transparent, rgba(212,175,55,0.6) 40%, rgba(212,175,55,0.6) 60%, transparent)'
-        }}
-      />
+      <div className="absolute inset-0 team-card-bg" />
+      <div className="absolute inset-0 team-dot-pattern" />
+      <div className="absolute bottom-0 left-0 right-0 z-10 team-divider-line" />
       <img
         src={member.img}
         alt={member.name}
@@ -126,32 +102,10 @@ const AnimatedDoctorCard = ({
       style={{ minHeight: 'clamp(110px, 30vw, 320px)', animationDelay: delay }}
     >
       <div
-        className="relative flex-1 overflow-hidden"
-        style={{
-          background: `
-            radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.5) 0%, transparent 55%),
-            radial-gradient(ellipse at 90% 5%,  rgba(212,175,55,0.25) 0%, transparent 45%),
-            linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)
-          `
-        }}
+        className="relative flex-1 overflow-hidden team-card-bg"
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, rgba(212,175,55,0.7) 1.5px, transparent 1.5px)',
-            backgroundSize: '8px 8px',
-            opacity: 0.5
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 right-0"
-          style={{
-            height: '2px',
-            background:
-              'linear-gradient(to right, transparent, rgba(212,175,55,0.6) 40%, rgba(212,175,55,0.6) 60%, transparent)'
-          }}
-        />
+        <div className="absolute inset-0 team-dot-pattern" />
+        <div className="absolute bottom-0 left-0 right-0 team-divider-line" />
         <img
           src={member.img}
           alt={member.name}

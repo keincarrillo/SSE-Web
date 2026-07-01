@@ -50,7 +50,7 @@ const ANIM_STYLES = `
   }
   .doctor-card-sm:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(212,175,55,0.18);
+    box-shadow: 0 20px 40px rgba(var(--color-gold-team-rgb), 0.18);
   }
 
   @keyframes descSlideDown {
@@ -75,8 +75,8 @@ const ANIM_STYLES = `
     transition: background 0.2s, border-color 0.2s;
   }
   .toggle-btn:hover {
-    background: rgba(212,175,55,0.15);
-    border-color: rgba(212,175,55,0.7);
+    background: rgba(var(--color-gold-team-rgb), 0.15);
+    border-color: rgba(var(--color-gold-team-rgb), 0.7);
   }
 
   @keyframes chevronRotate {
