@@ -35,7 +35,7 @@ const MobileCarousel = () => {
   return (
     <div className="lg:hidden">
       <div className="flex justify-center mb-6">
-        <img src={tooth} alt="Diente" className="w-32 h-32 sm:w-40 sm:h-40 object-contain drop-shadow-2xl" />
+        <img src={tooth} alt="Diente" className="w-24 h-24 sm:w-40 sm:h-40 object-contain drop-shadow-2xl" />
       </div>
 
       <div className="overflow-hidden">
