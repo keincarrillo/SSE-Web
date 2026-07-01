@@ -51,17 +51,15 @@ const Problem = () => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-6"
-      style={{ opacity: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-6 modal-overlay"
+      style={{ opacity: 0 }}
     >
       <div
         ref={cardRef}
-        className="relative z-10 overflow-hidden rounded-3xl"
+        className="relative z-10 overflow-hidden rounded-3xl modal-card"
         style={{
           opacity: 0,
-          background: 'var(--color-green)',
           width: 'min(96vw, 1000px)',
-          boxShadow: '0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,170,101,0.15)'
         }}
       >
         <AmbientEffects />
