@@ -84,7 +84,7 @@ const ServiceSection = ({
                   className="flex items-start gap-4"
                 >
                   <div
-                    className={`mt-1 flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center border ${
+                    className={`mt-1 shrink-0 w-7 h-7 rounded-full flex items-center justify-center border ${
                       isGreen
                         ? 'bg-gold/20 border-gold/50'
                         : 'bg-gold/15 border-gold/40'

@@ -44,7 +44,7 @@ const DescriptionToggle = ({ text }: { text: string }) => {
 
 const DoctorCard = ({ member }: { member: (typeof TEAM)[number] }) => (
   <div className="relative rounded-2xl border border-white/20 overflow-hidden flex flex-col">
-    <div className="relative flex-shrink-0 overflow-hidden" style={{ height: 'clamp(280px, 75vw, 360px)' }}>
+    <div className="relative shrink-0 overflow-hidden" style={{ height: 'clamp(280px, 75vw, 360px)' }}>
       <div className="absolute inset-0 team-card-bg" />
       <div className="absolute inset-0 team-dot-pattern" />
       <div className="absolute bottom-0 left-0 right-0 z-10 team-divider-line" />
@@ -254,7 +254,7 @@ const AnimatedMainCard = () => {
             />
           </div>
           <div className="relative border border-white/25 rounded-br-2xl border-l-2 border-l-green">
-            <div className="absolute top-8 right-8 flex flex-col items-end max-w-[320px] gap-16">
+            <div className="absolute top-8 right-8 flex flex-col items-end max-w-80 gap-16">
               <div>
                 {mainDoctor.phrase && (
                   <p className="text-gold/90 text-right mb-2 font-bold leading-tight display-lg">

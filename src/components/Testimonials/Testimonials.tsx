@@ -74,9 +74,9 @@ const Testimonials = () => {
               <div className="relative flex"
                 style={{ width: `${total * 100}%`, transform: `translateX(-${(current * 100) / total}%)`, transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                 {TESTIMONIALS.map((t, i) => (
-                  <div key={i} className="relative flex-shrink-0" style={{ width: `${100 / total}%` }}>
+                  <div key={i} className="relative shrink-0" style={{ width: `${100 / total}%` }}>
                     <div className="hidden md:flex items-center" style={{ minHeight: '540px', padding: '40px 36px' }}>
-                      <div className="flex-shrink-0 rounded-[20px] overflow-hidden border border-white/20 shadow-card-lg glass-card"
+                      <div className="shrink-0 rounded-[20px] overflow-hidden border border-white/20 shadow-card-lg glass-card"
                         style={{ width: 'clamp(200px, 35%, 360px)', height: 'clamp(260px, 45vw, 480px)' }}>
                         {t.img && <img src={t.img} alt={t.subtitle} className="w-full h-full object-cover object-top block" />}
                       </div>
@@ -86,7 +86,7 @@ const Testimonials = () => {
                         <h3 className="text-white font-bold m-0 leading-[1.1] tracking-[-0.01em] whitespace-nowrap overflow-hidden text-ellipsis"
                           style={{ fontSize: 'clamp(24px, 4vw, 40px)' }}>{t.subtitle}</h3>
                         <Stars count={t.stars} />
-                        <div className="rounded-[16px] border border-white/20 glass-card-subtle" style={{ padding: 'clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 28px)' }}>
+                        <div className="rounded-2xl border border-white/20 glass-card-subtle" style={{ padding: 'clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 28px)' }}>
                           <p className="text-white font-bold leading-[1.5] m-0 mb-3" style={{ fontSize: 'clamp(16px, 2vw, 22px)' }}>"{t.hook}"</p>
                           <p className="text-white/80 leading-[1.7] m-0 mb-3" style={{ fontSize: 'clamp(17px, 1.5vw, 19px)' }}>{t.body}</p>
                           <p className="text-gold font-medium m-0" style={{ fontSize: 'clamp(17px, 1.5vw, 19px)' }}>{t.closing}</p>
@@ -95,14 +95,14 @@ const Testimonials = () => {
                     </div>
 
                     <div className="flex md:hidden flex-col items-center gap-0" style={{ padding: '32px 20px 28px' }}>
-                      <div className="rounded-[16px] overflow-hidden border border-white/20 flex-shrink-0 mb-6 shadow-card glass-card"
+                      <div className="rounded-2xl overflow-hidden border border-white/20 shrink-0 mb-6 shadow-card glass-card"
                         style={{ width: '160px', height: '200px' }}>
                         {t.img && <img src={t.img} alt={t.subtitle} className="w-full h-full object-cover object-top block" />}
                       </div>
                       <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50 m-0 mb-1 text-center">Tratamiento</p>
-                      {t.subtitle && <h3 className="text-[30px] font-bold text-white m-0 leading-[1.1] text-center">{t.subtitle}</h3>}
-                      <div className="flex gap-1 my-2.5 mb-[18px] justify-center">
-                        {Array.from({ length: t.stars }).map((_, i) => (<span key={i} className="text-gold text-[16px]">★</span>))}
+                      {t.subtitle && <h3 className="text-3xl font-bold text-white m-0 leading-[1.1] text-center">{t.subtitle}</h3>}
+                      <div className="flex gap-1 my-2.5 mb-4.5 justify-center">
+                        {Array.from({ length: t.stars }).map((_, i) => (<span key={i} className="text-gold text-base">★</span>))}
                       </div>
                       <div className="w-full rounded-[14px] border border-white/20 glass-card-subtle" style={{ padding: '18px' }}>
                         <p className="text-white font-bold leading-[1.5] m-0 mb-2.5" style={{ fontSize: 'clamp(18px, 5.5vw, 22px)' }}>"{t.hook}"</p>
