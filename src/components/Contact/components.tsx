@@ -32,7 +32,7 @@ const SocialColumn = () => (
     <div className="mt-2 flex flex-col gap-0">
       {[
         { label: 'Email', value: 'smilestudioexperts@outlook.com' },
-        { label: 'Horario', value: '12:00–18:00 de Lun a Sab' }
+        { label: 'Horario', value: '7:00 a 19:00 de Lun a Dom' }
       ].map((item, i) => (
         <div
           key={item.label}
