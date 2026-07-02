@@ -56,6 +56,11 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
     : darkHero
       ? 'text-white/90 hover:text-white'
       : 'text-green/90 hover:text-green'
+  const btnClass = scrolled
+    ? 'bg-green text-white hover:bg-green-mid'
+    : darkHero
+      ? 'bg-gold text-black hover:bg-gold-light'
+      : 'bg-green text-white hover:bg-green-mid'
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -80,7 +85,7 @@ const Navbar = ({ darkHero = true }: { darkHero?: boolean }) => {
           </nav>
 
           <a href="#contacto" onClick={e => handleNavClick(e, 'contacto')}
-            className="hidden md:inline-flex ml-4 px-5 py-2.5 rounded-full bg-green text-white text-sm font-semibold tracking-widest uppercase hover:bg-green-mid transition-colors duration-300">
+            className={'hidden md:inline-flex ml-4 px-5 py-2.5 rounded-full text-sm font-semibold tracking-widest uppercase transition-colors duration-300 ' + btnClass}>
             Agendar cita
           </a>
 
