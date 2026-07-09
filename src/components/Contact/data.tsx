@@ -21,7 +21,7 @@ export const LOCATIONS = [
     email: 'smilestudioexperts@outlook.com',
     horario: '7:00 a 19:00 de Lun a Dom',
     embedUrl:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4452483689947!2d-99.2041844!3d19.4363609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021b854c170f%3A0x1b2db9d3c21f177a!2sAv.%20Homero%201425%2C%20Polanco%2C%20Polanco%20II%20Secc%2C%20Miguel%20Hidalgo%2C%2011530%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1777939435249!5m2!1ses-419!2smx'
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4452483689947!2d-99.2041844!3d19.4363609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d203f2b6a2ddf1%3A0x8968f1746245a39a!2sSmile%20Studio%20Experts%20(Polanco)!5e0!3m2!1ses-419!2smx!4v1783576250138!5m2!1ses-419!2smx'
   }
 ]
 
