@@ -90,10 +90,10 @@ const Problem = () => {
             </h2>
 
             <div ref={bodyRef} style={{ opacity: 0 }} className="mb-12">
-              <p className="text-white/70 leading-loose" style={{ fontSize: 'clamp(1rem, 1.8vw, 1.3rem)' }}>
+              <p className="text-white/70 leading-relaxed md:leading-loose" style={{ fontSize: 'clamp(1rem, 1.8vw, 1.3rem)' }}>
                 El miedo y las malas experiencias hacen que muchas personas lo eviten por mucho tiempo.
                 <br />
-                <span className="uppercase font-semibold text-white/90">Pero eso no tiene por qué seguir así.</span>
+                <span className="block mt-3 uppercase font-semibold text-white/90">Pero eso no tiene por qué seguir así.</span>
               </p>
             </div>
 
