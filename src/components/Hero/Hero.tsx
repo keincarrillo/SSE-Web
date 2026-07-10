@@ -96,7 +96,7 @@ const Hero = () => {
           src={team}
           alt="Nuestro equipo"
           className="hidden md:block w-full h-full object-cover"
-          style={{ marginTop: '6%' }}
+          style={{ marginTop: '8%' }}
         />
       </div>
 
