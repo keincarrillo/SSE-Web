@@ -7,11 +7,23 @@
       "skillPath": "skills/caveman/SKILL.md",
       "computedHash": "1902fa0b569912d0c05736d8d98a72097d9b82719aac88c0c1d03bb546f9176d"
     },
+    "caveman-commit": {
+      "source": "juliusbrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman-commit/SKILL.md",
+      "computedHash": "790a4eeace0be35c6691faf923518ba5bd50f1f1305d1101d09dd4971be94e00"
+    },
     "clean-code": {
       "source": "sickn33/antigravity-awesome-skills",
       "sourceType": "github",
       "skillPath": "skills/clean-code/SKILL.md",
       "computedHash": "74bf6ded4f61ddcb593e7a29beb96c284f888cbe0639ad6e23710447c36ff19a"
+    },
+    "commit": {
+      "source": "getsentry/skills",
+      "sourceType": "github",
+      "skillPath": "skills/commit/SKILL.md",
+      "computedHash": "4fa90a8da375e651dc9d7514ce79ea2c3eaa069a86be366c61b0c4f9d11c97cf"
     },
     "find-docs": {
       "source": "upstash/context7",
