@@ -32,11 +32,11 @@ const Testimonials = () => {
   return (
     <section ref={ref as React.RefObject<HTMLElement>} id="testimonios"
       className="bg-white relative overflow-hidden pt-10 pb-20 max-w-full mx-auto scroll-mt-24">
-      <div className="absolute bottom-0 left-0 right-0 h-[90px] pointer-events-none z-[1] gradient-fade-top"
+      <div className="absolute bottom-0 left-0 right-0 h-22.5 pointer-events-none z-1 gradient-fade-top"
       />
 
-      <div className="max-w-[1152px] mx-auto relative z-[2]">
-        <div className="py-10 text-center flex flex-col gap-4 items-center relative z-[2]">
+      <div className="max-w-288 mx-auto relative z-2">
+          <div className="py-10 text-center flex flex-col gap-4 items-center relative z-2">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10">
             <span className="text-gold text-md font-semibold tracking-[0.2em] uppercase">Testimonios</span>
           </div>
@@ -48,7 +48,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="mx-4 md:mx-14 lg:mx-10 xl:mx-0 relative z-[2]">
+          <div className="mx-4 md:mx-14 lg:mx-10 xl:mx-0 relative z-2">
           <button onClick={() => navigate(current - 1)} aria-label="Anterior"
             className="hidden md:flex absolute items-center justify-center cursor-pointer z-30 text-green bg-white border border-green/35 rounded-full shadow-card-sm"
             style={{ top: '50%', left: '-44px', transform: 'translateY(-50%)', width: '32px', height: '32px' }}>
@@ -61,7 +61,7 @@ const Testimonials = () => {
             <ChevronRight />
           </button>
 
-          <div className="bg-green rounded-[20px] overflow-hidden">
+            <div className="bg-green rounded-5 overflow-hidden">
             <div className="relative overflow-hidden"
               onTouchStart={e => { startXRef.current = e.touches[0].clientX }}
               onTouchEnd={e => {
@@ -76,7 +76,7 @@ const Testimonials = () => {
                 {TESTIMONIALS.map((t, i) => (
                   <div key={i} className="relative shrink-0" style={{ width: `${100 / total}%` }}>
                     <div className="hidden md:flex items-center" style={{ minHeight: '540px', padding: '40px 36px' }}>
-                      <div className="shrink-0 rounded-[20px] overflow-hidden border border-white/20 shadow-card-lg glass-card"
+                      <div className="shrink-0 rounded-5 overflow-hidden border border-white/20 shadow-card-lg glass-card"
                         style={{ width: 'clamp(200px, 35%, 360px)', height: 'clamp(260px, 45vw, 480px)' }}>
                         {t.img && <img src={t.img} alt={t.subtitle} className="w-full h-full object-cover object-top block" />}
                       </div>
@@ -99,12 +99,12 @@ const Testimonials = () => {
                         style={{ width: '160px', height: '200px' }}>
                         {t.img && <img src={t.img} alt={t.subtitle} className="w-full h-full object-cover object-top block" />}
                       </div>
-                      <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50 m-0 mb-1 text-center">Tratamiento</p>
+                        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50 m-0 mb-1 text-center">Tratamiento</p>
                       {t.subtitle && <h3 className="text-3xl font-bold text-white m-0 leading-[1.1] text-center">{t.subtitle}</h3>}
                       <div className="flex gap-1 my-2.5 mb-4.5 justify-center">
                         {Array.from({ length: t.stars }).map((_, i) => (<span key={i} className="text-gold text-base">★</span>))}
                       </div>
-                      <div className="w-full rounded-[14px] border border-white/20 glass-card-subtle" style={{ padding: '18px' }}>
+                        <div className="w-full rounded-3.5 border border-white/20 glass-card-subtle" style={{ padding: '18px' }}>
                         <p className="text-white font-bold leading-[1.5] m-0 mb-2.5" style={{ fontSize: 'clamp(18px, 5.5vw, 22px)' }}>"{t.hook}"</p>
                         <p className="text-white/80 leading-[1.7] m-0 mb-2.5" style={{ fontSize: 'clamp(13px, 3.5vw, 15px)' }}>{t.body}</p>
                         <p className="text-gold font-medium m-0" style={{ fontSize: 'clamp(13px, 3.5vw, 15px)' }}>{t.closing}</p>
