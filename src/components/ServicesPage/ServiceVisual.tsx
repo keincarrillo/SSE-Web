@@ -40,7 +40,7 @@ const ServiceVisual = ({
 
   return (
     <div
-      className={`relative rounded-2xl overflow-hidden border h-[550px] md:h-[650px] lg:h-[700px] ${
+      className={`relative rounded-2xl overflow-hidden border h-137.5 md:h-162.5 lg:h-175 ${
         isGreen ? 'border-white/10' : 'border-green/10'
       }`}
       onMouseEnter={() => {

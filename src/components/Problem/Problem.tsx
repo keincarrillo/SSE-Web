@@ -51,7 +51,7 @@ const Problem = () => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-6 modal-overlay"
+      className="fixed inset-0 z-100 flex items-center justify-center p-6 modal-overlay"
       style={{ opacity: 0 }}
     >
       <div

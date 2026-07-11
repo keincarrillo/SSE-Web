@@ -2,8 +2,8 @@ import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 
 const ORBS = [
-  { style: '-top-32 -left-32', size: 'w-[500px] h-[500px]', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.22) 0%, rgba(var(--color-gold-light-rgb),0.06) 45%, transparent 70%)' },
-  { style: 'bottom-0 -right-32', size: 'w-[400px] h-[400px]', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.18) 0%, rgba(var(--color-gold-light-rgb),0.05) 45%, transparent 70%)' },
+  { style: '-top-32 -left-32', size: 'w-125 h-125', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.22) 0%, rgba(var(--color-gold-light-rgb),0.06) 45%, transparent 70%)' },
+  { style: 'bottom-0 -right-32', size: 'w-100 h-100', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.18) 0%, rgba(var(--color-gold-light-rgb),0.05) 45%, transparent 70%)' },
   { style: 'top-1/4 right-[12%]', size: 'w-40 h-40', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.28) 0%, transparent 65%)' },
   { style: 'bottom-1/3 left-[8%]', size: 'w-28 h-28', bg: 'radial-gradient(circle, rgba(var(--color-gold-light-rgb),0.24) 0%, transparent 65%)' }
 ]
